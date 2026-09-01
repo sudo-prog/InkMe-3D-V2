@@ -31,7 +31,7 @@ const upload = multer({
     storage: storage
 })
 
-// Chỉ admin mới được upload images cho home banner
+//Only admins are allowed to upload images for the home banner
 router.post(`/upload`, requireAuth, checkUserStatus, requireAdmin, upload.array("images"), async (req, res) => {
 
     imagesArray = [];
@@ -77,7 +77,7 @@ router.get(`/`, async (req, res) => {
         const totalPages = Math.ceil(totalPosts / perPage);
 
         if (page > totalPages) {
-            return res.status(404).json({ message: "Không có dữ liệu" });
+            return res.status(404).json({ message: "No data" });
         }
 
         const HomeBannerList = await HomeBanner.find()
@@ -102,7 +102,7 @@ router.get(`/`, async (req, res) => {
 
 
 
-// Chỉ admin mới được tạo home banner
+//Only admins are allowed to create a home banner
 router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     // const images_array = [];
@@ -133,7 +133,7 @@ router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, r
 
 });
 
-// Chỉ admin mới được xóa image
+//Only admins are allowed to delete images
 router.delete(`/deleteImage`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const imgUrl = req.query.img;
@@ -152,7 +152,7 @@ router.delete(`/deleteImage`, requireAuth, checkUserStatus, requireAdmin, async 
 
 });
 
-// Chỉ admin mới được xóa home banner
+//Only admins are allowed to delete the home banner
 router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const homeBanner = await HomeBanner.findById(req.params.id);
@@ -184,7 +184,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, re
     });
 });
 
-// Chỉ admin mới được cập nhật home banner
+//Only admins are allowed to update the home banner
 router.put("/:id", requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const homeBanner = await HomeBanner.findByIdAndUpdate(
