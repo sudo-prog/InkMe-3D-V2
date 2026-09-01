@@ -13,27 +13,27 @@ const menus = [
     },
     {
         id: 2,
-        title: 'Cửa hàng',
+        title: 'Store',
         link: '/shop',
     },
     {
         id: 3,
-        title: 'Giới thiệu',
+        title: 'About',
         link: '/about',
     },
     {
         id: 3,
-        title: 'Dịch vụ',
+        title: 'Services',
         link: '#',
         submenu: [
             {
                 id: 31,
-                title: 'Dịch vụ',
+                title: 'Services',
                 link: '/service',
             },
             {
                 id: 32,
-                title: 'Chi tiết dịch vụ',
+                title: 'Service details',
                 link: '/service-details/Sticker-printing'
             }
         ]
@@ -58,7 +58,7 @@ const menus = [
     },
     {
         id: 5,
-        title: 'Liên hệ',
+        title: 'Contact',
         link: '/contact',
     }
 

@@ -9,14 +9,14 @@ const Inkme3DPreview = ({ inkmeFile, onClose }) => {
 
     useEffect(() => {
         if (!inkmeFile?.url) {
-            setError('Không có file .inkme để load');
+            setError('No file.inkme to load');
             return;
         }
 
         // Google Analytics tracking - View 3D Preview
         trackView3DPreview({
             sceneName: inkmeFile.sceneName || 'untitled',
-            userId: 'anonymous' // Có thể lấy từ context nếu cần
+            userId: 'anonymous' //Can be retrieved from context if needed
         });
 
         loadInkmeFile();
@@ -27,18 +27,18 @@ const Inkme3DPreview = ({ inkmeFile, onClose }) => {
             setIsLoading(true);
             setError(null);
 
-            // Fetch file .inkme từ Cloudinary
+            //Fetch file.inkme from Cloudinary
             const response = await fetch(inkmeFile.url);
             if (!response.ok) {
-                throw new Error('Không thể tải file .inkme');
+                throw new Error('Unable to load file.inkme');
             }
 
             const inkmeData = await response.json();
 
-            // Đợi iframe load xong
+            //Waiting for iframe to finish loading
             const waitForIframe = () => {
                 if (iframeRef.current && iframeRef.current.contentWindow) {
-                    // Gửi dữ liệu đến iframe để load
+                    //Sending data to iframe to load
                     iframeRef.current.contentWindow.postMessage({
                         type: 'LOAD_INKME_FILE',
                         data: inkmeData
@@ -52,7 +52,7 @@ const Inkme3DPreview = ({ inkmeFile, onClose }) => {
 
         } catch (err) {
             console.error('Error loading inkme file:', err);
-            setError('Lỗi khi tải file .inkme: ' + err.message);
+            setError('Error loading file.inkme:' + err.message);
         } finally {
             setIsLoading(false);
         }
@@ -63,7 +63,7 @@ const Inkme3DPreview = ({ inkmeFile, onClose }) => {
     };
 
     const handleIframeError = () => {
-        setError('Lỗi khi load iframe 3D');
+        setError('Error loading 3D iframe');
         setIsLoading(false);
     };
 
@@ -81,7 +81,7 @@ const Inkme3DPreview = ({ inkmeFile, onClose }) => {
                     {isLoading && (
                         <div className="loading-container">
                             <div className="spinner"></div>
-                            <p>Đang tải model 3D...</p>
+                            <p>Loading 3D model.</p>
                         </div>
                     )}
 
@@ -126,7 +126,7 @@ const Inkme3DPreview = ({ inkmeFile, onClose }) => {
                             <span>{inkmeFile?.color}</span>
                         </div>
                         <div className="info-item">
-                            <span className="label">Màu nền:</span>
+                            <span className="label">Background color:</span>
                             <div
                                 className="color-preview"
                                 style={{ backgroundColor: inkmeFile?.bgColor }}
