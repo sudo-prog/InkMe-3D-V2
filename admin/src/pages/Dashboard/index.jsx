@@ -69,28 +69,28 @@ const Dashboard = () => {
     context.setIsHideSidebarAndHeader(false);
     window.scrollTo(0, 0);
 
-    // Kiểm tra URL parameters cho token và user data từ client login
+    //Check URL parameters for token and user data from client login
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const userData = urlParams.get('user');
 
     if (token && userData) {
       try {
-        // Lưu token và user data vào localStorage của admin
+        //Save token and user data to admin localStorage
         localStorage.setItem('token', token);
         localStorage.setItem('user', userData);
         localStorage.setItem('themeMode', 'light');
 
-        // Decode user data để hiển thị thông báo
+        //Decode user data to display notification
         const decodedUser = JSON.parse(decodeURIComponent(userData));
 
         context.setAlterBox({
           open: true,
           error: false,
-          message: `Chào mừng ${decodedUser.name} đến với Admin Dashboard!`
+          message: `Welcome ${decodedUser.name} to the Admin Dashboard!`
         });
 
-        // Cập nhật context user
+        //Update user context
         context.setUser({
           name: decodedUser.name,
           email: decodedUser.email,
@@ -99,99 +99,99 @@ const Dashboard = () => {
 
         context.setIsLogin(true);
 
-        // Xóa parameters khỏi URL để tránh reload lại
+        //Remove parameters from URL to avoid reloading
         window.history.replaceState({}, document.title, window.location.pathname);
 
       } catch (error) {
         console.error('Error processing login data:', error);
         context.setAlterBox({
-          open: true,
-          error: true,
-          message: "Có lỗi xảy ra khi xử lý đăng nhập"
-        });
-      }
-    }
+       <div className="">
+ <div className="">
+ <div className="">
+ <DashboardBox color={['', '']} icon={<FaUserCircle />}
+ Grow={true} />
+ <DashboardBox color={['', '']} icon={<IoMdCart />} />
+ <DashboardBox color={['', '']} icon={<MdShoppingBag />} />
+ <DashboardBox color={['', '']} icon={<GiStarsStack />} />
+ </div>
+ </div>
 
-    context.setProgress(40);
-    fetchDataFromApi('/api/products').then((res) => {
-      setProductList(res);
-      context.setProgress(100);
-    })
-  }, []);
+ <div className="">
+ <div className="">
+ <div className=''>
+ <h4 className=''>Revenue</h4>
+ <div className="">
+ <Button className='' onClick={handleClick}><HiDotsVertical /></Button>
+ </div>
 
+ <Menu
+ ClassName=''
+ MenuListProps={{
+ '': '',
+ }}
+ AnchorEl={anchorEl}
+ Open={open}
+ OnClose={handleClose}
+ PaperProps={{
+ Style: {
+ MaxHeight: ITEM_HEIGHT * 4.5,
+ Width: '',
+ },
+ }}
+ >
 
-  const deleteProduct = (id) => {
-    context.setProgress(40);
-    deleteData(`/api/products/${id}`).then((res) => {
-      context.setProgress(100);
-      context.setAlterBox({
-        open: true,
-        error: false,
-        message: "Xóa sản phẩm thành công"
-      })
-      fetchDataFromApi('/api/products').then((res) => {
-        setProductList(res);
-      })
-    })
-  }
+ <MenuItem onClick={handleClose}>
+ <IoIosTimer /> Yesterday
+ </MenuItem>
+ <MenuItem onClick={handleClose}>
+ <IoIosTimer /> Last Week
+ </MenuItem>
+ <MenuItem onClick={handleClose}>
+ <IoIosTimer /> Last Month
+ </MenuItem>
+ <MenuItem onClick={handleClose}>
+ <IoIosTimer /> Last Year
+ </MenuItem>
 
-  return (
-    <>
-      <div className="right-content w-100">
-        {/* <div className="row dashboardBoxWrapperRow">
-          <div className="col-md-8">
-            <div className="dashboardBoxWrapper d-flex">
-              <DashboardBox color={['#1da256', '#48d483']} icon={<FaUserCircle />}
-                grow={true} />
-              <DashboardBox color={['#c012e2', '#eb64fe']} icon={<IoMdCart />} />
-              <DashboardBox color={['#2c78e5', '#60aff5']} icon={<MdShoppingBag />} />
-              <DashboardBox color={['#e1950e', '#f3cd29']} icon={<GiStarsStack />} />
-            </div>
-          </div>
+ </Menu>
 
-          <div className="col-md-4 pl-0">
-            <div className="box graphBox">
-              <div className='d-flex align-items-center justify-content-between w-100 bottomEle'>
-                <h4 className='text-white mb-0 mt-0'>Doanh thu</h4>
-                <div className="ml-auto">
-                  <Button className='ml-auto toggleIcon' onClick={handleClick}><HiDotsVertical /></Button>
-                </div>
+ </div>
 
-                <Menu
-                  className='dropdownMenu'
-                  MenuListProps={{
-                    'aria-labelledby': 'long-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                  PaperProps={{
-                    style: {
-                      maxHeight: ITEM_HEIGHT * 4.5,
+ <h3 className=''> 10.000.000.000</h3>
+ <p>10.000.000 last month</p>
+
+ <Chart
+ ChartType=""
+ Width=""
+ Height=""
+ Data={data}
+ Options={options}
+ />
+
+ </div>
+ </div>
+
+ </div>              maxHeight: ITEM_HEIGHT * 4.5,
                       width: '20ch',
                     },
                   }}
                 >
 
                   <MenuItem onClick={handleClose}>
-                    <IoIosTimer />  Hôm Trước
-                  </MenuItem>
+                    <IoIosTimer />Yesterday</MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <IoIosTimer /> Tuần Trước
-                  </MenuItem>
+                    <IoIosTimer />Last Week</MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <IoIosTimer /> Tháng Trước
-                  </MenuItem>
+                    <IoIosTimer />Last Month</MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <IoIosTimer /> Năm Trước
-                  </MenuItem>
+                    <IoIosTimer />Last Year</MenuItem>
 
                 </Menu>
 
               </div>
 
               <h3 className='text-white font-weight-bold'> 10.000.000.000</h3>
-              <p>10.000.000 trong tháng trước</p>
+              <p>10,000,000 last month</p>
 
               <Chart
                 chartType="PieChart"
@@ -208,16 +208,16 @@ const Dashboard = () => {
 
         {/* Looker Studio Report Section */}
         <div className='card shadow border-0 p-3 mb-4'>
-          <h3 className='hd mb-3'>Báo cáo chi tiết</h3>
+          <h3 className='hd mb-3'>Detailed report</h3>
           <LookerStudioReport />
         </div>
 
         <div className='card shadow border-0 p-3'>
-          <h3 className='hd'>Sản phẩm bán chạy</h3>
+          <h3 className='hd'>Best selling products</h3>
 
           <div className="row cardFilters mt-3">
             <div className="col-md-3">
-              <h4>Sắp xếp theo</h4>
+              <h4>Sort by</h4>
               <FormControl size='small' className='w-100'>
                 <Select
                   value={showBy}
@@ -228,14 +228,14 @@ const Dashboard = () => {
                   className='w-100'
                 >
                   <MenuItem value=""><em>None</em></MenuItem>
-                  <MenuItem value={10}>Tảng</MenuItem>
+                  <MenuItem value={10}>Platform</MenuItem>
                   <MenuItem value={20}>Giá</MenuItem>
                 </Select>
               </FormControl>
             </div>
 
             <div className="col-md-3">
-              <h4>Danh Mục</h4>
+              <h4>Category</h4>
               <FormControl size='small' className='w-100'>
                 <Select
                   value={showBysetCatBy}
@@ -271,15 +271,15 @@ const Dashboard = () => {
               <thead className='thead-dark'>
                 <tr>
                   <th>#ID</th>
-                  <th style={{ width: '250px' }}>Sản Phẩm</th>
-                  <th>Danh Mục</th>
-                  <th>Nhãn hiệu</th>
+                  <th style={{ width: '250px' }}>Product</th>
+                  <th>Category</th>
+                  <th>Brand</th>
                   <th>Giá bán</th>
-                  <th>Số lượng</th>
-                  <th>Đánh giá</th>
-                  <th>Đặt hàng</th>
-                  <th>Giảm giá</th>
-                  <th>Hành động</th>
+                  <th>Quantity</th>
+                  <th>Review</th>
+                  <th>Order</th>
+                  <th>Discount</th>
+                  <th>Action</th>
                 </tr>
               </thead>
 
