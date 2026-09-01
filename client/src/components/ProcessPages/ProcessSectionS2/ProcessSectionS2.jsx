@@ -10,8 +10,7 @@ const ProcessSectionS2 = () => {
             <div className="container">
                 <div className="section-title text-center">
                     {/* <h6 className="bg-2 wow fadeInUp">Digital printing Service</h6> */}
-                    <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                        Cách chúng tôi hoạt động và xử lý <br />
+                    <h2 className="wow fadeInUp" data-wow-delay=".3s">How we operate and process<br />
                         cho khách hàng
                     </h2>
                 </div>
@@ -23,10 +22,8 @@ const ProcessSectionS2 = () => {
                                     <img src={Wp1} alt="img" />
                                 </div>
                                 <div className="content">
-                                    <h3>Chọn sản phẩm</h3>
-                                    <p>
-                                        Chọn sản phẩm phù hợp với nhu cầu của khách hàng
-                                    </p>
+                                    <h3>Select product</h3>
+                                    <p>Select products that fit the customer's needs</p>
                                 </div>
                                 <div className="number">
                                     01
@@ -39,10 +36,8 @@ const ProcessSectionS2 = () => {
                                     <img src={Wp2} alt="img" />
                                 </div>
                                 <div className="content">
-                                    <h3>Thiết kế & review</h3>
-                                    <p>
-                                        Thiết kế sản phẩm theo yêu cầu của khách hàng và review để đảm bảo chất lượng
-                                    </p>
+                                    <h3>Design & review</h3>
+                                    <p>Design products according to customer requirements and review to ensure quality</p>
                                 </div>
                                 <div className="number">
                                     02
@@ -56,9 +51,7 @@ const ProcessSectionS2 = () => {
                                 </div>
                                 <div className="content">
                                     <h3>Giao hàng</h3>
-                                    <p>
-                                        Giao hàng sản phẩm đến khách hàng theo đúng thời gian và địa chỉ
-                                    </p>
+                                    <p>Deliver products to customers at the correct time and address</p>
                                 </div>
                                 <div className="number">
                                     03
