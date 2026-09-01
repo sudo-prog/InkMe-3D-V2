@@ -77,8 +77,8 @@ const Orders = () => {
                     setOrders([]);
                 }
             }).catch((error) => {
-                console.error("Lỗi tải đơn hàng:", error);
-                setError("Không thể tải danh sách đơn hàng. Vui lòng thử lại.");
+                console.error("Order load error:", error);
+                setError("Unable to load order list. Please try again.");
             }).finally(() => {
                 setOrdersLoading(false);
             });
@@ -98,20 +98,20 @@ const Orders = () => {
         switch (status?.toLowerCase()) {
             case "pending":
             case "unpaid":
-                return { color: "#ffc107", bg: "#fff3cd", label: "Chờ thanh toán" };
+                return { color: "#ffc107", bg: "#fff3cd", label: "Pending payment" };
             case "paid":
             case "success":
-                return { color: "#28a745", bg: "#d4edda", label: "Đã thanh toán" };
+                return { color: "#28a745", bg: "#d4edda", label: "Paid" };
             case "failed":
-                return { color: "#dc3545", bg: "#f8d7da", label: "Thất bại" };
+                return { color: "#dc3545", bg: "#f8d7da", label: "Failed" };
             case "processing":
-                return { color: "#17a2b8", bg: "#d1ecf1", label: "Đang xử lý" };
+                return { color: "#17a2b8", bg: "#d1ecf1", label: "Processing" };
             case "shipped":
-                return { color: "#6f42c1", bg: "#e2d9f3", label: "Đã giao hàng" };
+                return { color: "#6f42c1", bg: "#e2d9f3", label: "Delivered" };
             case "cancelled":
-                return { color: "#6c757d", bg: "#e2e3e5", label: "Đã hủy" };
+                return { color: "#6c757d", bg: "#e2e3e5", label: "Cancelled" };
             default:
-                return { color: "#6c757d", bg: "#e2e3e5", label: "Không xác định" };
+                return { color: "#6c757d", bg: "#e2e3e5", label: "Undefined" };
         }
     };
 
@@ -128,7 +128,7 @@ const Orders = () => {
             await editData(`/api/orders/${orderId}`, updatedOrder);
             fetchOrders(); // Refresh orders list
         } catch (error) {
-            console.error("Lỗi cập nhật trạng thái:", error);
+            console.error("Status update error:", error);
         } finally {
             setLoading(prev => ({ ...prev, [orderId]: false }));
         }
@@ -193,7 +193,7 @@ const Orders = () => {
             setEditingOrder(null);
             fetchOrders(); // Refresh the list
         } catch (error) {
-            console.error("Lỗi cập nhật đơn hàng:", error);
+            console.error("Order update error:", error);
         }
     };
 
@@ -213,7 +213,7 @@ const Orders = () => {
             setDeletingOrder(null);
             fetchOrders(); // Refresh the list
         } catch (error) {
-            console.error("Lỗi xóa đơn hàng:", error);
+            console.error("Error deleting order:", error);
         }
     };
 
@@ -223,20 +223,20 @@ const Orders = () => {
             await editData(`/api/orders/${order._id}/toggle-visibility`, {});
             fetchOrders(); // Refresh the list
         } catch (error) {
-            console.error("Lỗi ẩn/hiện đơn hàng:", error);
+            console.error("Error hiding/showing orders:", error);
         }
     };
 
     return (
         <div className="right-content w-100">
             <div className="card shadow border-0 w-100 flex-row p-4">
-                <h5 className='mb-0 d-flex align-items-center'>Quản lý đơn hàng</h5>
+                <h5 className='mb-0 d-flex align-items-center'>Order management</h5>
                 <div className="ml-auto d-flex align-items-center">
                     <Breadcrumbs aria-label='breadcrumb' className='ml-auto breadcrumbs_'>
                         <StyledBreadcrumb
                             component="a"
                             href='#'
-                            label="Đơn hàng"
+                            label="Order"
                             icon={<FaCartArrowDown fontSize="small" />}
                             deleteIcon={<ExpandMoreIcon />}
                         />
@@ -256,9 +256,7 @@ const Orders = () => {
                                     size="small"
                                     onClick={() => setShowHiddenOrders(!showHiddenOrders)}
                                     startIcon={<i className={`fas ${showHiddenOrders ? 'fa-eye-slash' : 'fa-eye'}`}></i>}
-                                >
-                                    {showHiddenOrders ? 'Ẩn đơn hàng đã ẩn' : 'Hiện đơn hàng đã ẩn'}
-                                </Button>
+                                >{showHiddenOrders? 'Hide hidden orders': 'Show hidden orders'}</Button>
 
                                 <Select
                                     value={statusFilter}
@@ -266,18 +264,18 @@ const Orders = () => {
                                     size="small"
                                     style={{ minWidth: '150px' }}
                                 >
-                                    <MenuItem value="all">Tất cả trạng thái</MenuItem>
-                                    <MenuItem value="Unpaid">Chờ thanh toán</MenuItem>
-                                    <MenuItem value="Paid">Đã thanh toán</MenuItem>
-                                    <MenuItem value="processing">Đang xử lý</MenuItem>
-                                    <MenuItem value="shipped">Đã giao hàng</MenuItem>
-                                    <MenuItem value="failed">Thất bại</MenuItem>
-                                    <MenuItem value="cancelled">Đã hủy</MenuItem>
+                                    <MenuItem value="all">All statuses</MenuItem>
+                                    <MenuItem value="Unpaid">Pending payment</MenuItem>
+                                    <MenuItem value="Paid">Paid</MenuItem>
+                                    <MenuItem value="processing">Processing</MenuItem>
+                                    <MenuItem value="shipped">Delivered</MenuItem>
+                                    <MenuItem value="failed">Failed</MenuItem>
+                                    <MenuItem value="cancelled">Cancelled</MenuItem>
                                 </Select>
 
                                 <input
                                     type="text"
-                                    placeholder="Tìm kiếm theo mã đơn hàng, tên khách hàng..."
+                                    placeholder="Search by order code, customer name."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     style={{
@@ -304,7 +302,7 @@ const Orders = () => {
                         {/* Bottom Row - Date Range and Sort */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <div className="date-filters" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                                <span style={{ fontSize: '14px', color: '#666' }}>Từ ngày:</span>
+                                <span style={{ fontSize: '14px', color: '#666' }}>From date:</span>
                                 <input
                                     type="date"
                                     value={dateRange.start}
@@ -316,7 +314,7 @@ const Orders = () => {
                                     }}
                                 />
 
-                                <span style={{ fontSize: '14px', color: '#666' }}>Đến ngày:</span>
+                                <span style={{ fontSize: '14px', color: '#666' }}>To date:</span>
                                 <input
                                     type="date"
                                     value={dateRange.end}
@@ -333,23 +331,21 @@ const Orders = () => {
                                     size="small"
                                     onClick={clearFilters}
                                     startIcon={<i className="fas fa-times"></i>}
-                                >
-                                    Xóa bộ lọc
-                                </Button>
+                                >Clear filter</Button>
                             </div>
 
                             <div className="sort-controls" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                                <span style={{ fontSize: '14px', color: '#666' }}>Sắp xếp theo:</span>
+                                <span style={{ fontSize: '14px', color: '#666' }}>Sort by:</span>
                                 <Select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
                                     size="small"
                                     style={{ minWidth: '120px' }}
                                 >
-                                    <MenuItem value="dateCreated">Ngày tạo</MenuItem>
-                                    <MenuItem value="orderId">Mã đơn hàng</MenuItem>
-                                    <MenuItem value="amount">Tổng tiền</MenuItem>
-                                    <MenuItem value="status">Trạng thái</MenuItem>
+                                    <MenuItem value="dateCreated">Created date</MenuItem>
+                                    <MenuItem value="orderId">Order code</MenuItem>
+                                    <MenuItem value="amount">Total amount</MenuItem>
+                                    <MenuItem value="status">Status</MenuItem>
                                 </Select>
 
                                 <Button
@@ -357,9 +353,7 @@ const Orders = () => {
                                     size="small"
                                     onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
                                     startIcon={<i className={`fas fa-sort-${sortOrder === 'asc' ? 'up' : 'down'}`}></i>}
-                                >
-                                    {sortOrder === 'asc' ? 'Tăng dần' : 'Giảm dần'}
-                                </Button>
+                                >{sortOrder === 'asc'? 'Ascending': 'Descending'}   </Button>
                             </div>
                         </div>
                     </div>
@@ -372,12 +366,12 @@ const Orders = () => {
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th>Mã đơn hàng</th>
+                                                    <th>Order code</th>
                                                     <th>Khách hàng</th>
-                                                    <th>Sản phẩm</th>
-                                                    <th>Tổng tiền</th>
-                                                    <th>Trạng thái</th>
-                                                    <th>Ngày tạo</th>
+                                                    <th>Product</th>
+                                                    <th>Total amount</th>
+                                                    <th>Status</th>
+                                                    <th>Date created</th>
                                                     <th>Thao tác</th>
                                                 </tr>
                                             </thead>
@@ -387,7 +381,7 @@ const Orders = () => {
                                                         <td colSpan="7" className="text-center py-4">
                                                             <div className="loading-orders">
                                                                 <i className="fas fa-spinner fa-spin fa-2x text-primary mb-3"></i>
-                                                                <h5>Đang tải đơn hàng...</h5>
+                                                                <h5>Loading orders.</h5>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -396,14 +390,12 @@ const Orders = () => {
                                                         <td colSpan="7" className="text-center py-4">
                                                             <div className="error-orders">
                                                                 <i className="fas fa-exclamation-triangle fa-2x text-danger mb-3"></i>
-                                                                <h5>Lỗi tải dữ liệu</h5>
+                                                                <h5>Data loading error</h5>
                                                                 <p className="text-muted">{error}</p>
                                                                 <button
                                                                     className="btn btn-primary btn-sm"
                                                                     onClick={fetchOrders}
-                                                                >
-                                                                    Thử lại
-                                                                </button>
+                                                                >Retry</button>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -448,9 +440,7 @@ const Orders = () => {
                                                                             className="products-count-btn"
                                                                             onClick={() => handleOpenProducts(order.products)}
                                                                         >
-                                                                            <i className="fas fa-box"></i>
-                                                                            {order.products?.length || 0} sản phẩm
-                                                                        </button>
+                                                                            <i className="fas fa-box"></i>{order.products.length || 0} products</button>
                                                                     </td>
 
                                                                     <td className="order-item-amount">
@@ -474,12 +464,12 @@ const Orders = () => {
                                                                                 },
                                                                             }}
                                                                         >
-                                                                            <MenuItem value="Unpaid">Chờ thanh toán</MenuItem>
-                                                                            <MenuItem value="Paid">Đã thanh toán</MenuItem>
-                                                                            <MenuItem value="processing">Đang xử lý</MenuItem>
-                                                                            <MenuItem value="shipped">Đã giao hàng</MenuItem>
-                                                                            <MenuItem value="failed">Thất bại</MenuItem>
-                                                                            <MenuItem value="cancelled">Đã hủy</MenuItem>
+                                                                            <MenuItem value="Unpaid">Pending payment</MenuItem>
+                                                                            <MenuItem value="Paid">Paid</MenuItem>
+                                                                            <MenuItem value="processing">Processing</MenuItem>
+                                                                            <MenuItem value="shipped">Delivered</MenuItem>
+                                                                            <MenuItem value="failed">Failed</MenuItem>
+                                                                            <MenuItem value="cancelled">Cancelled</MenuItem>
                                                                         </Select>
                                                                     </td>
 
@@ -492,28 +482,28 @@ const Orders = () => {
                                                                             <button
                                                                                 className="action-btn view-btn"
                                                                                 onClick={() => handleOpenProducts(order.products)}
-                                                                                title="Xem chi tiết sản phẩm"
+                                                                                title="View product details"
                                                                             >
                                                                                 <i className="fas fa-eye"></i>
                                                                             </button>
                                                                             <button
                                                                                 className="action-btn edit-btn"
                                                                                 onClick={() => handleEditOrder(order)}
-                                                                                title="Chỉnh sửa đơn hàng"
+                                                                                title="Edit order"
                                                                             >
                                                                                 <i className="fas fa-edit"></i>
                                                                             </button>
                                                                             <button
                                                                                 className={`action-btn ${order.isHidden ? 'show-btn' : 'hide-btn'}`}
                                                                                 onClick={() => handleToggleOrderVisibility(order)}
-                                                                                title={order.isHidden ? "Hiện đơn hàng" : "Ẩn đơn hàng"}
+                                                                                title={order.isHidden ? "Show order" : "Hide order"}
                                                                             >
                                                                                 <i className={`fas ${order.isHidden ? 'fa-eye' : 'fa-eye-slash'}`}></i>
                                                                             </button>
                                                                             <button
                                                                                 className="action-btn delete-btn"
                                                                                 onClick={() => handleDeleteOrder(order)}
-                                                                                title="Xóa đơn hàng"
+                                                                                title="Delete order"
                                                                             >
                                                                                 <i className="fas fa-trash"></i>
                                                                             </button>
@@ -527,8 +517,8 @@ const Orders = () => {
                                                         <td colSpan="7" className="text-center py-4">
                                                             <div className="empty-orders">
                                                                 <i className="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
-                                                                <h5>Chưa có đơn hàng</h5>
-                                                                <p className="text-muted">Các đơn hàng sẽ xuất hiện ở đây khi có khách hàng đặt hàng</p>
+                                                                <h5>No orders yet</h5>
+                                                                <p className="text-muted">Orders will appear here when customers place them</p>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -542,19 +532,17 @@ const Orders = () => {
                                         {ordersLoading ? (
                                             <div className="loading-orders">
                                                 <i className="fas fa-spinner fa-spin fa-2x text-primary mb-3"></i>
-                                                <h5>Đang tải đơn hàng...</h5>
+                                                <h5>Loading orders.</h5>
                                             </div>
                                         ) : error ? (
                                             <div className="error-orders">
                                                 <i className="fas fa-exclamation-triangle fa-2x text-danger mb-3"></i>
-                                                <h5>Lỗi tải dữ liệu</h5>
+                                                <h5>Data loading error</h5>
                                                 <p className="text-muted">{error}</p>
                                                 <button
                                                     className="btn btn-primary btn-sm"
                                                     onClick={fetchOrders}
-                                                >
-                                                    Thử lại
-                                                </button>
+                                                >Retry</button>
                                             </div>
                                         ) : orders.length > 0 ? (
                                             orders
@@ -598,7 +586,7 @@ const Orders = () => {
 
                                                             <div className="order-item-card-details">
                                                                 <div className="order-detail-group">
-                                                                    <span className="order-detail-label">Sản phẩm</span>
+                                                                    <span className="order-detail-label">Product</span>
                                                                     <button
                                                                         className="products-count-btn mobile"
                                                                         onClick={() => handleOpenProducts(order.products)}
@@ -612,7 +600,7 @@ const Orders = () => {
                                                                     </button>
                                                                 </div>
                                                                 <div className="order-detail-group">
-                                                                    <span className="order-detail-label">Trạng thái</span>
+                                                                    <span className="order-detail-label">Status</span>
                                                                     <Select
                                                                         value={order.status}
                                                                         onChange={(e) => handleChangeStatus(order._id, e.target.value)}
@@ -626,39 +614,32 @@ const Orders = () => {
                                                                             fontSize: "12px"
                                                                         }}
                                                                     >
-                                                                        <MenuItem value="Unpaid">Chờ thanh toán</MenuItem>
-                                                                        <MenuItem value="Paid">Đã thanh toán</MenuItem>
-                                                                        <MenuItem value="processing">Đang xử lý</MenuItem>
-                                                                        <MenuItem value="shipped">Đã giao hàng</MenuItem>
-                                                                        <MenuItem value="failed">Thất bại</MenuItem>
-                                                                        <MenuItem value="cancelled">Đã hủy</MenuItem>
+                                                                        <MenuItem value="Unpaid">Pending payment</MenuItem>
+                                                                        <MenuItem value="Paid">Paid</MenuItem>
+                                                                        <MenuItem value="processing">Processing</MenuItem>
+                                                                        <MenuItem value="shipped">Delivered</MenuItem>
+                                                                        <MenuItem value="failed">Failed</MenuItem>
+                                                                        <MenuItem value="cancelled">Cancelled</MenuItem>
                                                                     </Select>
                                                                 </div>
                                                             </div>
 
-                                                            <div className="order-item-card-actions">
-                                                                <div className="action-buttons-mobile">
+                                                            <div className="orderDialog displays the product list                                                 <div className="action-buttons-mobile">
                                                                     <button
                                                                         className="action-btn view-btn mobile"
                                                                         onClick={() => handleOpenProducts(order.products)}
                                                                     >
-                                                                        <i className="fas fa-eye"></i>
-                                                                        Xem chi tiết
-                                                                    </button>
+                                                                        <i className="fas fa-eye"></i>View details</button>
                                                                     <button
                                                                         className="action-btn edit-btn mobile"
                                                                         onClick={() => handleEditOrder(order)}
                                                                     >
-                                                                        <i className="fas fa-edit"></i>
-                                                                        Chỉnh sửa
-                                                                    </button>
+                                                                        <i className="fas fa-edit"></i>Edit</button>
                                                                     <button
                                                                         className={`action-btn mobile ${order.isHidden ? 'show-btn' : 'hide-btn'}`}
                                                                         onClick={() => handleToggleOrderVisibility(order)}
                                                                     >
-                                                                        <i className={`fas ${order.isHidden ? 'fa-eye' : 'fa-eye-slash'}`}></i>
-                                                                        {order.isHidden ? 'Hiện' : 'Ẩn'}
-                                                                    </button>
+                                                                        <i className={`fas ${order.isHidden ? 'fa-eye' : 'fa-eye-slash'}`}></i>{order.isHidden? 'Show': 'Hide'}  </button>
                                                                     <button
                                                                         className="action-btn delete-btn mobile"
                                                                         onClick={() => handleDeleteOrder(order)}
@@ -674,8 +655,8 @@ const Orders = () => {
                                         ) : (
                                             <div className="empty-orders">
                                                 <i className="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
-                                                <h5>Chưa có đơn hàng</h5>
-                                                <p className="text-muted">Các đơn hàng sẽ xuất hiện ở đây khi có khách hàng đặt hàng</p>
+                                                <h5>No orders yet</h5>
+                                                <p className="text-muted">Orders will appear here when customers place orders</p>
                                             </div>
                                         )}
                                     </div>
@@ -683,13 +664,10 @@ const Orders = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {/* Dialog hiển thị danh sách sản phẩm */}
-                <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+                </div>{/* Dialog displaying the list of products */}<Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
                     <DialogTitle>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <span>Chi tiết sản phẩm trong đơn hàng</span>
+                            <span>Product details in order</span>
                             {selectedProducts.length > 0 && (
                                 <span style={{
                                     backgroundColor: '#e9ecef',
@@ -778,7 +756,7 @@ const Orders = () => {
                                                                 fontWeight: 500,
                                                                 marginTop: '4px'
                                                             }}>
-                                                                <div>✨ Thiết kế 3D: {product.inkmeFile.sceneName || 'Custom Design'}</div>
+                                                                <div>✨ 3D Design: {product.inkmeFile.sceneName || 'Custom Design'}</div>
                                                                 {product.inkmeFile.color && (
                                                                     <div>Màu: {product.inkmeFile.color}</div>
                                                                 )}
@@ -802,20 +780,16 @@ const Orders = () => {
                                                 }
                                                 secondary={
                                                     <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
-                                                        <div>Số lượng: {product.quantity}</div>
+                                                        <div>Quantity: {product.quantity}</div>
                                                         {product.price && (
                                                             <div>Giá: {formatCurrency(product.price)}</div>
                                                         )}
                                                         {product.subTotal && (
-                                                            <div style={{ fontWeight: 600, color: '#28a745' }}>
-                                                                Tổng: {formatCurrency(product.subTotal)}
-                                                            </div>
+                                                            <div style={{ fontWeight: 600, color: '#28a745' }}>Total: {formatCurrency(product.subTotal)}</div>
                                                         )}
                                                         {product.classifications && product.classifications.length > 0 && (
                                                             <div style={{ marginTop: '8px' }}>
-                                                                <div style={{ fontSize: '12px', fontWeight: 600, color: '#666' }}>
-                                                                    Chi tiết:
-                                                                </div>
+                                                                <div style={{ fontSize: '12px', fontWeight: 600, color: '#666' }}>Details:</div>
                                                                 {product.classifications.map((cls, clsIndex) => (
                                                                     <div key={clsIndex} style={{
                                                                         fontSize: '11px',
@@ -848,26 +822,24 @@ const Orders = () => {
 
                 {/* Edit Order Dialog */}
                 <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)} maxWidth="md" fullWidth>
-                    <DialogTitle>Chỉnh sửa đơn hàng #{editingOrder?.orderId}</DialogTitle>
+                    <DialogTitle>Edit order #{editingOrder.orderId}</DialogTitle>
                     <DialogContent>
                         {editingOrder && (
                             <div style={{ padding: '20px 0' }}>
                                 <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>
-                                        Trạng thái đơn hàng:
-                                    </label>
+                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Order status:</label>
                                     <Select
                                         value={editingOrder.status}
                                         onChange={(e) => setEditingOrder({ ...editingOrder, status: e.target.value })}
                                         fullWidth
                                         size="small"
                                     >
-                                        <MenuItem value="Unpaid">Chờ thanh toán</MenuItem>
-                                        <MenuItem value="Paid">Đã thanh toán</MenuItem>
-                                        <MenuItem value="processing">Đang xử lý</MenuItem>
-                                        <MenuItem value="shipped">Đã giao hàng</MenuItem>
-                                        <MenuItem value="failed">Thất bại</MenuItem>
-                                        <MenuItem value="cancelled">Đã hủy</MenuItem>
+                                        <MenuItem value="Unpaid">Pending payment</MenuItem>
+                                        <MenuItem value="Paid">Paid</MenuItem>
+                                        <MenuItem value="processing">Processing</MenuItem>
+                                        <MenuItem value="shipped">Delivered</MenuItem>
+                                        <MenuItem value="failed">Failed</MenuItem>
+                                        <MenuItem value="cancelled">Cancelled</MenuItem>
                                     </Select>
                                 </div>
 
@@ -886,14 +858,12 @@ const Orders = () => {
                                             borderRadius: '4px',
                                             resize: 'vertical'
                                         }}
-                                        placeholder="Thêm ghi chú cho đơn hàng..."
+                                        placeholder="Add a note to the order."
                                     />
                                 </div>
 
                                 <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>
-                                        Tổng tiền:
-                                    </label>
+                                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Total amount:</label>
                                     <input
                                         type="number"
                                         value={editingOrder.amount}
@@ -919,36 +889,32 @@ const Orders = () => {
                                     }}>
                                         <div><strong>Tên:</strong> {editingOrder.userId?.name || 'N/A'}</div>
                                         <div><strong>Email:</strong> {editingOrder.userId?.email || 'N/A'}</div>
-                                        <div><strong>Số điện thoại:</strong> {editingOrder.userId?.phone || 'N/A'}</div>
+                                        <div><strong>Phone number:</strong> {editingOrder.userId?.phone || 'N/A'}</div>
                                     </div>
                                 </div>
                             </div>
                         )}
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setEditDialogOpen(false)}>Hủy</Button>
+                        <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
                         <Button
                             onClick={() => handleSaveOrder(editingOrder)}
                             color="primary"
                             variant="contained"
-                        >
-                            Lưu thay đổi
-                        </Button>
+                        >Save changes</Button>
                     </DialogActions>
                 </Dialog>
 
                 {/* Delete Confirmation Dialog */}
                 <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
-                    <DialogTitle>Xác nhận xóa đơn hàng</DialogTitle>
+                    <DialogTitle>Confirm order deletion</DialogTitle>
                     <DialogContent>
-                        <p>Bạn có chắc chắn muốn xóa đơn hàng #{deletingOrder?.orderId}?</p>
+                        <p>Are you sure you want to delete order #{deletingOrder.orderId}?</p>
                         <p style={{ color: '#dc3545', fontSize: '14px' }}>
-                            <i className="fas fa-exclamation-triangle"></i>
-                            Hành động này không thể hoàn tác!
-                        </p>
+                            <i className="fas fa-exclamation-triangle"></i>This action cannot be undone!</p>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setDeleteDialogOpen(false)}>Hủy</Button>
+                        <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
                         <Button
                             onClick={handleConfirmDelete}
                             color="error"
