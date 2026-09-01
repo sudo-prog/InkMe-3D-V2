@@ -10,7 +10,7 @@ function authJwt() {
       return true;
     }
 
-    // Auth routes - không cần JWT
+    //Auth routes - no JWT required
     if (
       req.path === "/api/user/login" ||
       req.path === "/api/user/signup" ||
@@ -31,7 +31,7 @@ function authJwt() {
       return true;
     }
 
-    // Public GET routes - không cần JWT
+    //Public GET routes - no JWT required
     if (
       req.method === "GET" &&
       (req.path.startsWith("/api/products") ||
@@ -51,7 +51,7 @@ function authJwt() {
       return true;
     }
 
-    // AI routes - không cần JWT
+    //AI routes - no JWT required
     if (
       req.path === "/api/ai/moderate-content" ||
       req.path === "/api/ai/chat"
@@ -59,7 +59,7 @@ function authJwt() {
       return true;
     }
 
-    // Tất cả routes khác cần JWT
+    //All other routes require JWT
     return false;
   });
 }

@@ -9,7 +9,7 @@ const path = require("path");
 
 const corsOptions = {
     origin: true, // Allow all origins
-    credentials: true, // để an toàn cho login/cookie (nếu không dùng cookie vẫn OK)
+    credentials: true, //to allow for login/cookie (it is still OK if cookies are not used)
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
 };

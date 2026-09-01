@@ -1,10 +1,10 @@
 // Google Analytics Utility for InkMe
-// Quản lý các sự kiện theo dõi Google Analytics
+//Manage Google Analytics tracking events
 // 
-// GA đã được khởi tạo trong index.html với ID: G-7ZCPCVX6F7
-// File này chứa các utility functions để track events
+//GA has been initialized in index.html with ID: G-7ZCPCVX6F7
+//This file contains utility functions to track events
 
-// Helper function để gửi event
+//Helper function to send events
 const sendEvent = (eventName, parameters = {}) => {
     if (typeof window !== 'undefined' && window.gtag) {
         window.gtag('event', eventName, {
@@ -18,7 +18,7 @@ const sendEvent = (eventName, parameters = {}) => {
 
 // ========== ECOMMERCE EVENTS ==========
 
-// Sự kiện thêm vào giỏ hàng
+//Add to cart event
 export const trackAddToCart = (productData) => {
     const eventData = {
         event_category: 'ecommerce',
@@ -46,7 +46,7 @@ export const trackAddToCart = (productData) => {
     }
 };
 
-// Sự kiện xem sản phẩm
+//Product view event
 export const trackViewProduct = (productData) => {
     const eventData = {
         event_category: 'ecommerce',
@@ -74,7 +74,7 @@ export const trackViewProduct = (productData) => {
     }
 };
 
-// Sự kiện bắt đầu checkout
+//Checkout start event
 export const trackBeginCheckout = (cartData, totalValue) => {
     const items = cartData.map(item => ({
         item_id: item.productId || item.id,
@@ -104,7 +104,7 @@ export const trackBeginCheckout = (cartData, totalValue) => {
     }
 };
 
-// Sự kiện hoàn thành mua hàng
+//Purchase completion event
 export const trackPurchase = (orderData) => {
     const items = orderData.products?.map(item => ({
         item_id: item.productId,
@@ -120,7 +120,7 @@ export const trackPurchase = (orderData) => {
         transaction_id: orderData.orderId || orderData._id,
         currency: 'VND',
         value: orderData.amount || 0,
-        shipping: 0, // Miễn phí vận chuyển
+        shipping: 0, //Free shipping
         tax: 0,
         items: items
     };
@@ -140,7 +140,7 @@ export const trackPurchase = (orderData) => {
 
 // ========== 3D DESIGN EVENTS ==========
 
-// Sự kiện bắt đầu thiết kế 3D
+//Start 3D design event
 export const trackStart3DDesign = (designData = {}) => {
     sendEvent('start_3d_design', {
         event_category: '3d_design',
@@ -150,7 +150,7 @@ export const trackStart3DDesign = (designData = {}) => {
     });
 };
 
-// Sự kiện hoàn thành thiết kế 3D
+//3D design completion event
 export const trackComplete3DDesign = (designData) => {
     sendEvent('complete_3d_design', {
         event_category: '3d_design',
@@ -161,7 +161,7 @@ export const trackComplete3DDesign = (designData) => {
     });
 };
 
-// Sự kiện tải file .inkme
+//Download .inkme file event
 export const trackDownloadInkmeFile = (fileData) => {
     sendEvent('download_inkme_file', {
         event_category: '3d_design',
@@ -171,7 +171,7 @@ export const trackDownloadInkmeFile = (fileData) => {
     });
 };
 
-// Sự kiện xem preview 3D
+//3D preview view event
 export const trackView3DPreview = (previewData) => {
     sendEvent('view_3d_preview', {
         event_category: '3d_design',
@@ -183,7 +183,7 @@ export const trackView3DPreview = (previewData) => {
 
 // ========== USER EVENTS ==========
 
-// Sự kiện đăng ký tài khoản
+//Account registration event
 export const trackSignUp = (userData) => {
     sendEvent('sign_up', {
         event_category: 'user',
@@ -193,7 +193,7 @@ export const trackSignUp = (userData) => {
     });
 };
 
-// Sự kiện đăng nhập
+//Login event
 export const trackLogin = (userData) => {
     sendEvent('login', {
         event_category: 'user',
@@ -205,7 +205,7 @@ export const trackLogin = (userData) => {
 
 // ========== ENGAGEMENT EVENTS ==========
 
-// Sự kiện tìm kiếm sản phẩm
+//Product search event
 export const trackSearch = (searchTerm, category = '') => {
     sendEvent('search', {
         event_category: 'engagement',
@@ -215,7 +215,7 @@ export const trackSearch = (searchTerm, category = '') => {
     });
 };
 
-// Sự kiện thêm vào wishlist
+//Add to wishlist event
 export const trackAddToWishlist = (productData) => {
     sendEvent('add_to_wishlist', {
         event_category: 'engagement',
@@ -225,7 +225,7 @@ export const trackAddToWishlist = (productData) => {
     });
 };
 
-// Sự kiện chia sẻ sản phẩm
+//Product share event
 export const trackShareProduct = (productData, method) => {
     sendEvent('share', {
         event_category: 'engagement',
@@ -238,7 +238,7 @@ export const trackShareProduct = (productData, method) => {
 
 // ========== NAVIGATION EVENTS ==========
 
-// Sự kiện xem trang
+//Page view event
 export const trackPageView = (pageName, additionalData = {}) => {
     if (window.gtag) {
         window.gtag('config', window.GA_MEASUREMENT_ID || 'GA_MEASUREMENT_ID', {
@@ -256,7 +256,7 @@ export const trackPageView = (pageName, additionalData = {}) => {
     });
 };
 
-// Sự kiện click button CTA
+//CTA button click event
 export const trackCTAClick = (buttonName, location) => {
     sendEvent('cta_click', {
         event_category: 'engagement',
@@ -268,7 +268,7 @@ export const trackCTAClick = (buttonName, location) => {
 
 // ========== ERROR TRACKING ==========
 
-// Sự kiện lỗi
+//Error event
 export const trackError = (errorType, errorMessage, location = '') => {
     sendEvent('error_occurred', {
         event_category: 'error',
@@ -279,7 +279,7 @@ export const trackError = (errorType, errorMessage, location = '') => {
     });
 };
 
-// Export default object với tất cả functions
+//Export default object with all functions
 export default {
     trackAddToCart,
     trackViewProduct,
