@@ -469,7 +469,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handle cancel button click
     cancelBtn.addEventListener('click', () => {
         hideColorWarning();
-        if (confirm('Bạn có muốn tải lại trang không?')) {
+        if (confirm('Do you want to reload the page?')) {
             window.location.reload();
         }
     });
@@ -491,9 +491,9 @@ window.addEventListener('message', (event) => {
         localStorage.setItem('productId', productId);
     }
 
-    // Lưu authorization vào localStorage hoặc biến toàn cục
+    //Save authorization to localStorage or global variable
     if (authorization) {
         localStorage.setItem('authorization', authorization);
-        // hoặc window.AUTHORIZATION = authorization;
+        //Or window.AUTHORIZATION = authorization;
     }
 });

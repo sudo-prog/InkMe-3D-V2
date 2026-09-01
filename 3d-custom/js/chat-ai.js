@@ -213,6 +213,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add initial greeting message
     setTimeout(() => {
-        addMessage("Xin chào! Tôi có thể giúp gì cho bạn?", "received");
+        addMessage("User Safety: safe", "received");
     }, 500);
 });
