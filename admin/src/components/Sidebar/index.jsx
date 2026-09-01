@@ -100,9 +100,7 @@ const Sidebar = () => {
                     <li>
                         <Link to="/homeBanner">
                             <Button className={`w-100 ${activeTab === 4 ? 'active' : ''}`} onClick={() => isOpenSubmenu(4)}>
-                                <span className="icon"><MdMessage /></span>
-                                Ảnh Banner
-                                <span className="arrow"><FaAngleRight /></span>
+                                <span className="icon"><MdMessage /></span>Banner Image===SPLIT===Order Management===SPLIT===Subcategory List===SPLIT===Category List===SPLIT===Classification===SPLIT===Add Product Size===SPLIT===Add Product Rams===SPLIT===Add Product===SPLIT===View Product===SPLIT===Product List===SPLIT===<li><Link to="">Add Product Rams</Link></li> <li><Link to="">Add Product Size</Link></li>===SPLIT===<li><Link to="">View Product</Link></li>===SPLIT===Product===SPLIT===Management===SPLIT===Only redirect to login if no token and no URL parameters<span className="arrow"><FaAngleRight /></span>
                             </Button>
                         </Link>
                     </li>
