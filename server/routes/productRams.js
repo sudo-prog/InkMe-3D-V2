@@ -30,7 +30,7 @@ router.get(`/:id`, async (req, res) => {
     res.status(200).send(item);
 });
 
-// Chỉ admin mới được tạo product rams
+//Only admins are allowed to create product rams
 router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     let productRams = new ProductRams({
@@ -50,7 +50,7 @@ router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, r
 
 });
 
-// Chỉ admin mới được xóa product rams
+//Only admins are allowed to delete product rams
 router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const deletedItem = await ProductRams.findByIdAndDelete(req.params.id);
@@ -67,7 +67,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, re
     });
 });
 
-// Chỉ admin mới được cập nhật product rams
+//Only admins are allowed to update product rams
 router.put(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const item = await ProductRams.findByIdAndUpdate(

@@ -30,7 +30,7 @@ router.get(`/:id`, async (req, res) => {
     res.status(200).send(item);
 });
 
-// Chỉ admin mới được tạo product size
+//Only admins can create product size
 router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     let productSize = new ProductSize({
@@ -50,7 +50,7 @@ router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, r
 
 });
 
-// Chỉ admin mới được xóa product size
+//Only admins can delete product size
 router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const deletedItem = await ProductSize.findByIdAndDelete(req.params.id);
@@ -67,7 +67,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, re
     });
 });
 
-// Chỉ admin mới được cập nhật product size
+//Only admins can update product size
 router.put(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const item = await ProductSize.findByIdAndUpdate(
