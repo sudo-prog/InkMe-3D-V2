@@ -355,10 +355,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Content Moderation API - Gọi qua server để bảo mật API key
+//Content Moderation API - Call via server to secure the API key
 async function checkInappropriateContent(base64ImageData) {
   try {
-    // Gọi API endpoint của server thay vì gọi trực tiếp OpenAI
+    //Call the server API endpoint instead of calling OpenAI directly
     const response = await fetch('http://localhost:4000/api/ai/moderate-content', {
       method: 'POST',
       headers: {
@@ -371,7 +371,7 @@ async function checkInappropriateContent(base64ImageData) {
 
     if (!response.ok) {
       console.error('Server API request failed:', response.statusText);
-      // Trả về "an toàn" để không chặn người dùng khi API có lỗi
+      //Return "all" to not block users when the API has an error
       return {
         isInappropriate: false,
         reason: `API Error: ${response.statusText}`
@@ -386,8 +386,8 @@ async function checkInappropriateContent(base64ImageData) {
     };
 
   } catch (error) {
-    console.error('Lỗi khi kiểm tra nội dung:', error);
-    // Trả về "an toàn" để không chặn người dùng nếu có lỗi
+    console.error('Content check error:', error);
+    //Return "all" to not block users if there is an error
     return {
       isInappropriate: false,
       reason: "An error occurred during check."
@@ -423,11 +423,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const overlay = document.getElementById('shareModalOverlay');
   const modalBody = document.getElementById('shareModalBody');
 
-  const shareTitle = 'Xem thiết kế 3D tuyệt vời của tôi!';
-  const shareDescription = 'Tôi vừa tạo một thiết kế 3D tuyệt vời trên InkMe. Hãy xem và tạo thiết kế riêng của bạn!';
+  const shareTitle = 'Check out my amazing 3D design!';
+  const shareDescription = 'I just created an amazing 3D design on InkMe. Check it out and create your own design!';
 
   modalBody.innerHTML = `
-    <p><strong>Link chia sẻ của bạn:</strong></p>
+    <p><strong>Your share link:u:</strong></p>
     <div class="share-link-container">
       <a href="${shareableLink}" target="_blank" id="shareLink">
         ${shareableLink}
@@ -438,27 +438,24 @@ document.addEventListener('DOMContentLoaded', function () {
       <button class="share-button copy" onclick="copyShareLink('${shareableLink}')">
         📋 Copy Link
       </button>
-      <button class="share-button open" onclick="openShareLink('${shareableLink}')">
-        🔗 Mở Link
-      </button>
+      <button class="share-button open" onclick="openShareLink('${shareableLink}')">🔗 Open Link  </button>
       <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareableLink)}" 
          target="_blank" class="share-button facebook">
         📘 Facebook
       </a>
       <a href="https://www.instagram.com/" 
          target="_blank" class="share-button instagram" 
-         onclick="copyShareLink('${shareableLink}'); alert('Link đã copy! Hãy paste vào Instagram Story hoặc Post của bạn.');">
+         onclick="copyShareLink('${shareableLink}'); alert('Link copied! Please paste it into your Instagram Story or Post.');">
         📸 Instagram
       </a>
       <a href="https://zalo.me/pc" 
          target="_blank" class="share-button zalo"
-         onclick="copyShareLink('${shareableLink}'); alert('Link đã copy! Hãy paste vào Zalo để chia sẻ.');">
+         onclick="copyShareLink('${shareableLink}'); alert('Link copied! Please paste it into Zalo to share.');">
         💬 Zalo
       </a>
     </div>
     
-    <div class="share-modal-note">
-      💡 Chia sẻ link này để người khác có thể xem thiết kế 3D của bạn!
+    <div class="share-modal-note">💡 Share this link so others can view your 3D design!
     </div>
   `;
 
@@ -483,7 +480,7 @@ function copyShareLink(link) {
     // Show success feedback
     const copyBtn = event.target;
     const originalText = copyBtn.innerHTML;
-    copyBtn.innerHTML = '✅ Đã copy!';
+    copyBtn.innerHTML = '✅ Copied!';
     copyBtn.style.background = '#4CAF50';
 
     setTimeout(() => {
@@ -499,9 +496,9 @@ function copyShareLink(link) {
     textArea.select();
     try {
       document.execCommand('copy');
-      alert('✅ Link đã được copy!');
+      alert('✅ Link copied!');
     } catch (err) {
-      alert('❌ Không thể copy link');
+      alert('❌ Unable to copy link');
     }
     document.body.removeChild(textArea);
   });

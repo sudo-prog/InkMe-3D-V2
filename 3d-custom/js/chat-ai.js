@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateImagePreviews();
 
         const typingId = "ai-typing";
-        addMessage("Đang nhập...", "received", [], typingId);
+        addMessage("Typing.", "received", [], typingId);
 
         try {
             const response = await fetch(API_URL, {
@@ -115,8 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const decoder = new TextDecoder("utf-8");
             let buffer = "";
 
-            // Xóa "Đang nhập..." sau khi nhận được phản hồi đầu tiên
-            let isFirstResponse = true;
+            //Clear "Typing..." after receiving the first response        let isFirstResponse = true;
 
             while (true) {
                 const { done, value } = await reader.read();
@@ -138,8 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         if (delta) {
                             if (isFirstResponse) {
-                                // Xóa tin nhắn "Đang nhập..."
-                                const typing = document.querySelector(`[data-id="${typingId}"]`);
+                                //"Typing..." message                            const typing = document.querySelector(`[data-id="${typingId}"]`);
                                 if (typing) typing.remove();
                                 isFirstResponse = false;
                             }
@@ -150,13 +148,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         } catch (err) {
-            console.error("Lỗi khi gọi API:", err);
+            console.error("API call error:", err);
             const typing = document.querySelector(`[data-id="${typingId}"]`);
-            if (typing) typing.textContent = "Đã xảy ra lỗi khi gọi AI.";
+            if (typing) typing.textContent = "An error occurred while calling the AI.";
         }
     }
 
-    // Hiển thị delta dần dần
+    //Display delta gradually
     let currentBotMsg;
     function appendDelta(text) {
         if (!currentBotMsg) {
@@ -166,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         currentBotMsg.textContent += text;
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        // Khi kết thúc 1 run, reset
+        //Reset when a run ends
         if (text.endsWith("\n") || text.endsWith(".")) currentBotMsg = null;
     }
 
@@ -178,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (text) {
             const textDiv = document.createElement("div");
-            if (text === "Đang nhập...") {
+            if (text === "Typing.") {
                 textDiv.className = "typing-indicator";
                 textDiv.innerHTML = '<span></span><span></span><span></span>';
             } else {
@@ -213,6 +211,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add initial greeting message
     setTimeout(() => {
-        addMessage("Xin chào! Tôi có thể giúp gì cho bạn?", "received");
+        addMessage("Hello! How can I help you?", "received");
     }, 500);
 });

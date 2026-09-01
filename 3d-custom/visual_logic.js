@@ -11697,7 +11697,7 @@ function createPL(v3d = window.v3d) {
               textToolsNode.className = "cf_block cf_text";
               textToolsNode.innerHTML = `
 
-                  <button class="cf_button cf_text-add">Thêm chữ</button>
+                  <button class="cf_button cf_text-add">Add textt</button>
 
                     <input type="color" class="cf_text-color" data-stage="${stageId}"/>
                     <label class="cf_label cf_label-color"></label>
@@ -11976,20 +11976,20 @@ function createPL(v3d = window.v3d) {
                 });
             }
 
-            // Thêm chức năng sticker nếu được bật
+            //Add sticker function if enabled
             if (extensions.add_sticker_mode) {
-              // Danh sách stickers với các file thực tế có trong folder
+              //List of stickers with actual files present in the folder
               const stickerList = [];
 
               // SVG Icons
               const svgStickers = [
                 { name: "heart", file: "heart.svg", title: "Trái tim" },
                 { name: "star", file: "star.svg", title: "Ngôi sao" },
-                { name: "smiley", file: "smiley.svg", title: "Mặt cười" },
+                { name: "smiley", file: "smiley.svg", title: "Smiley face" },
                 { name: "flower", file: "flower.svg", title: "Hoa" },
                 { name: "peace", file: "peace.svg", title: "Hòa bình" },
-                { name: "lightning", file: "lightning.svg", title: "Tia chớp" },
-                { name: "diamond", file: "diamond.svg", title: "Kim cương" },
+                { name: "lightning", file: "lightning.svg", title: "Lightning bolt" },
+                { name: "diamond", file: "diamond.svg", title: "Diamond" },
               ];
 
               // Thêm SVG stickers
@@ -11997,7 +11997,7 @@ function createPL(v3d = window.v3d) {
                 stickerList.push({ ...sticker, type: "svg" });
               });
 
-              // Danh sách ảnh thực tế trong folder
+              //List of actual photos in the folder
               const imageFiles = [
                 // JPEG files (1-3, 14-35)
                 "1.jpeg",
@@ -12052,7 +12052,7 @@ function createPL(v3d = window.v3d) {
                 });
               });
 
-              // Tạo block cho sticker
+              //Create block for sticker
               let stickerBlock = document.createElement("div");
               stickerBlock.className = "cf_block cf_sticker";
               stickerBlock.innerHTML = `
@@ -12062,7 +12062,7 @@ function createPL(v3d = window.v3d) {
               `;
               stickerBlock = toolsWrapper.appendChild(stickerBlock);
 
-              // Tạo modal sticker
+              //Create sticker modal
               let stickerModal = document.createElement("div");
               stickerModal.className = "cf_sticker-modal";
               stickerModal.style.cssText = `
@@ -12080,7 +12080,7 @@ function createPL(v3d = window.v3d) {
                     display: flex; justify-content: space-between; align-items: center;
                     padding: 20px 30px 15px; border-bottom: 1px solid #eee;
                   ">
-                    <h3 style="margin: 0; color: #333; font-size: 20px;">🎨 Chọn Sticker</h3>
+                    <h3 style="margin: 0; color: #333; font-size: 20px;">🎨 Select Stickerer</h3>
                     <button class="cf_sticker-modal-close" style="
                       background: none; border: none; font-size: 24px; cursor: pointer;
                       color: #666; padding: 0; width: 30px; height: 30px; display: flex;
@@ -12132,7 +12132,7 @@ function createPL(v3d = window.v3d) {
                       border-top: 4px solid #4d97e7; border-radius: 50%;
                       animation: spin 1s linear infinite;
                     "></div>
-                    <div style="color: #666; font-size: 16px;">Đang tải stickers...</div>
+                    <div style="color: #666; font-size: 16px;">Loading Download stickers...</div>
                   </div>
                 `;
 
@@ -12155,7 +12155,7 @@ function createPL(v3d = window.v3d) {
                     img.src = `./stickers/${sticker.file}`;
                     img.alt = sticker.title;
 
-                    // Khác biệt style cho SVG và ảnh
+                    //Style difference for SVG and images
                     if (sticker.type === "svg") {
                       img.style.cssText = `
                         width: 100%; height: 100%; object-fit: contain; pointer-events: none;
@@ -12167,7 +12167,7 @@ function createPL(v3d = window.v3d) {
                       `;
                     }
 
-                    // Thêm badge để phân biệt loại sticker
+                    //Add a badge to distinguish the sticker type
                     const badge = document.createElement("div");
                     badge.style.cssText = `
                       position: absolute; top: 2px; right: 2px; 
@@ -12187,7 +12187,7 @@ function createPL(v3d = window.v3d) {
                         btoa(`
                         <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
                           <rect width="60" height="60" fill="#f0f0f0" stroke="#ddd"/>
-                          <text x="30" y="30" font-family="Arial" font-size="8" text-anchor="middle" fill="#999">Lỗi</text>
+                          <text x="30" y="30" font-family="Arial" font-size="8" text-anchor="middle" Fill="#999">Error</text>
                           <text x="30" y="40" font-family="Arial" font-size="6" text-anchor="middle" fill="#999">${sticker.file}</text>
                         </svg>
                       `);
@@ -12214,7 +12214,7 @@ function createPL(v3d = window.v3d) {
 
                     // Click handler to add sticker
                     stickerItem.addEventListener("click", function () {
-                      // Hiệu ứng click
+                      //Click effect
                       this.style.transform = "scale(0.95)";
                       setTimeout(() => {
                         this.style.transform = "scale(1.05)";
@@ -12252,15 +12252,15 @@ function createPL(v3d = window.v3d) {
                 imageObj.crossOrigin = "anonymous";
 
                 imageObj.onload = function () {
-                  // Tính toán kích thước khác nhau cho SVG và ảnh
+                  //Calculate different sizes for SVGs and images
                   let defaultWidth, defaultHeight;
 
                   if (stickerType === "svg") {
-                    // SVG thường có kích thước nhỏ hơn và clean hơn
+                    //SVGs are usually smaller and cleaner
                     defaultWidth = 80;
                     defaultHeight = 80;
                   } else {
-                    // Ảnh thường cần kích thước phù hợp với aspect ratio
+                    //Images usually require sizes that fit the aspect ratio
                     const aspectRatio =
                       imageObj.naturalWidth / imageObj.naturalHeight;
                     if (aspectRatio > 1) {
@@ -12285,8 +12285,8 @@ function createPL(v3d = window.v3d) {
                     name: `sticker_${stickerType}_${Date.now()}`,
                   });
 
-                  // Không áp dụng styling đặc biệt để tránh conflict với Konva.js version
-                  // Cả SVG và ảnh sẽ có appearance giống nhau
+                  //Do not apply special styling to avoid conflicts with the Konva.js version
+                  //Both SVG and images will have the same appearance
 
                   // Add event listeners
                   stickerImage.on("dragmove transform", function () {
@@ -12315,7 +12315,7 @@ function createPL(v3d = window.v3d) {
                 imageObj.onerror = function () {
                   console.error("Failed to load sticker:", stickerPath);
                   alert(
-                    `Lỗi: Không thể tải ${stickerType} sticker. Vui lòng thử lại.`
+                    `Error: Unable to load ${stickerType} sticker. Please try again.`
                   );
                 };
 
@@ -12349,10 +12349,10 @@ function createPL(v3d = window.v3d) {
               contextMenuNode.className = "cf_context-menu";
               contextMenuNode.style.display = "none";
               contextMenuNode.innerHTML = `
-                    <div class="cf_button cf_context-menu__button" data-action="up">Lớp trên</div>
-                    <div class="cf_button cf_context-menu__button" data-action="down">Lớp dưới</div>
+                    <div class="cf_button cf_context-menu__button" data-action="up">Top layer</div>
+                    <div class="cf_button cf_context-menu__button" data-action="down">Bottom layerom</div>
                     <div class="cf_button cf_context-menu__button" data-action="remove">Xóa</div>
-                    <div class="cf_button cf_context-menu__button" data-action="remove-bg" id="open-remove-bg" style="color: #4d97e7;">Xóa nền ảnh</div>
+                    <div class="cf_button cf_context-menu__button" data-action="remove-bg" id="open-remove-bg" style="color: #4d97e7;">Remove image backgroundund ảnh</div>
                     `;
               contextMenuNode = wrapper.appendChild(contextMenuNode);
               stage.cfTransforming = {
@@ -12387,7 +12387,7 @@ function createPL(v3d = window.v3d) {
                       //hide menu after action
                       stage.cfTransforming.menuNode.style.display = "none";
                     } else if (action == "remove-bg") {
-                      // Xóa nền trực tiếp từ ảnh hiện tại
+                      //Remove background directly from current image
                       removeBackgroundFromCurrentImage(
                         stage.cfTransforming.currentShape
                       );
@@ -12475,7 +12475,7 @@ function createPL(v3d = window.v3d) {
             // Function to remove background from current selected image
             async function removeBackgroundFromCurrentImage(imageNode) {
               if (!imageNode || imageNode.getClassName() !== "Image") {
-                alert("Vui lòng chọn một ảnh để xóa nền!");
+                alert("Please select an image to remove the background!");
                 return;
               }
 
@@ -12488,8 +12488,8 @@ function createPL(v3d = window.v3d) {
               `;
               loadingOverlay.innerHTML = `
                 <div style="text-align: center; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 10px;">
-                  <div style="margin-bottom: 15px;">🎨 Đang xóa nền ảnh...</div>
-                  <div style="font-size: 14px; opacity: 0.8;">Vui lòng chờ trong giây lát</div>
+                  <div style="margin-bottom: 15px;">🎨 Removing image background. ảnh...</div>
+                  <div style="font-size: 14px; opacity: 0.8;">Please wait a momentt</div>
                 </div>
               `;
               document.body.appendChild(loadingOverlay);
@@ -12498,7 +12498,7 @@ function createPL(v3d = window.v3d) {
                 // Get image data from Konva Image
                 const originalImageElement = imageNode.image();
                 if (!originalImageElement) {
-                  throw new Error("Không thể lấy dữ liệu ảnh");
+                  throw new Error("Unable to retrieve image data");
                 }
 
                 // Convert image to canvas to get clean data
@@ -12518,7 +12518,7 @@ function createPL(v3d = window.v3d) {
                 });
 
                 if (!blob) {
-                  throw new Error("Không thể chuyển đổi ảnh");
+                  throw new Error("Unable to convert image");
                 }
 
                 // Create FormData for Remove.bg API
@@ -12600,7 +12600,7 @@ function createPL(v3d = window.v3d) {
                     };
 
                     finalImg.onerror = function () {
-                      throw new Error("Không thể load ảnh base64 đã xử lý");
+                      throw new Error("Unable to load processed base64 image");
                     };
 
                     // Set base64 data URL instead of blob URL
@@ -12618,18 +12618,18 @@ function createPL(v3d = window.v3d) {
                 };
 
                 newImg.onerror = function () {
-                  throw new Error("Không thể load ảnh đã xử lý");
+                  throw new Error("Unable to load processed image");
                 };
 
                 newImg.src = processedImageUrl;
               } catch (error) {
                 console.error("❌ Error removing background:", error);
                 document.body.removeChild(loadingOverlay);
-                alert(`Lỗi xóa nền: ${error.message}\nVui lòng thử lại sau.`);
+                alert(`Background removal error: ${error.message}\nPlease try again later.`);
               }
             }
 
-            // Hàm kiểm tra kích thước file
+            //File size check function
             function checkFileSize(file, maxSizeMB = 10) {
               const maxSizeBytes = maxSizeMB * 1024 * 1024;
               if (file.size > maxSizeBytes) {
@@ -12639,17 +12639,17 @@ function createPL(v3d = window.v3d) {
               return true;
             }
 
-            // Hàm kiểm tra tỷ lệ khung hình
+            //Aspect ratio check function
             function checkAspectRatio(img) {
               const ratio = img.naturalWidth / img.naturalHeight;
-              const isValid = ratio >= 0.1 && ratio <= 10; // Chấp nhận tỷ lệ từ 1:10 đến 10:1
+              const isValid = ratio >= 0.1 && ratio <= 10; //Accept ratios from 1:10 to 10:1
               if (!isValid) {
                 console.error(`Invalid aspect ratio: ${ratio}`);
               }
               return isValid;
             }
 
-            // Hàm kiểm tra độ nét cải tiến
+            //Improved sharpness check function
             function checkSharpnessOpenCV(imgElement) {
               return new Promise((resolve) => {
                 const src = cv.imread(imgElement);
@@ -12660,10 +12660,10 @@ function createPL(v3d = window.v3d) {
                 const stddev = new cv.Mat();
 
                 try {
-                  // Chuyển sang grayscale
+                  //Convert to grayscale
                   cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
 
-                  // Tạo ảnh mờ bằng Gaussian Blur
+                  //Create a blurred image using Gaussian Blur
                   cv.GaussianBlur(
                     gray,
                     blur,
@@ -12673,10 +12673,10 @@ function createPL(v3d = window.v3d) {
                     cv.BORDER_DEFAULT
                   );
 
-                  // Tính sự khác biệt giữa ảnh gốc và ảnh mờ
+                  //Calculate the difference between the original image and the blurred image
                   cv.absdiff(gray, blur, diff);
 
-                  // Tính độ lệch chuẩn của sự khác biệt
+                  //Calculate the standard deviation of the difference
                   cv.meanStdDev(diff, mean, stddev);
                   const sharpness = stddev.doubleAt(0, 0);
 
@@ -12692,9 +12692,9 @@ function createPL(v3d = window.v3d) {
                   resolve(sharpness);
                 } catch (error) {
                   console.error("Error in sharpness detection:", error);
-                  resolve(0); // Trả về 0 nếu có lỗi
+                  resolve(0); //Return 0 if there is an error
                 } finally {
-                  // Giải phóng bộ nhớ
+                  //Free memory
                   src.delete();
                   gray.delete();
                   blur.delete();
@@ -12705,34 +12705,32 @@ function createPL(v3d = window.v3d) {
               });
             }
 
-            // Tạo container cho tools
+            //Create container for tools
             let toolsFlexContainer = document.createElement("div");
             toolsFlexContainer.style.display = "flex";
             toolsFlexContainer.style.flexDirection = "row";
             toolsWrapper.appendChild(toolsFlexContainer);
 
-            // Thêm chức năng upload ảnh nếu được bật
+            //Add image upload functionality if enabled
             if (extensions.add_image_upload_mode) {
-              // Tạo block cho upload ảnh
+              //Create block for image upload
               let imageBlock = document.createElement("div");
               imageBlock.className = "cf_block cf_image";
               imageBlock.innerHTML = `
-<label class="cf_button cf_image-wrapper">
-Thêm Ảnh
-</label>
+<label class="cf_button cf_image-wrapper">Add Image</label>
 `;
               imageBlock = toolsFlexContainer.appendChild(imageBlock);
 
-              // Tạo input file
+              //Create file input
               let imageSource = document.createElement("input");
               imageSource.type = "file";
               imageSource.className = "cf_image-source";
-              imageSource.accept = "image/*"; // Chỉ chấp nhận file ảnh
+              imageSource.accept = "image/*"; //Only image files are accepted
               imageSource = imageBlock
                 .querySelector(".cf_image-wrapper")
                 .appendChild(imageSource);
 
-              // Xử lý sự kiện khi chọn file
+              //Handle file selection event
               imageSource.onchange = (eim) => {
                 const file = eim.target.files[0];
 
@@ -12742,14 +12740,14 @@ Thêm Ảnh
                 }
 
                 if (!file.type.startsWith("image/")) {
-                  alert("Vui lòng chọn file ảnh hợp lệ!");
+                  alert("Please select a valid image file!");
                   eim.target.value = "";
                   return;
                 }
 
                 if (!checkFileSize(file, 10)) {
                   alert(
-                    `Kích thước file quá lớn. Vui lòng chọn ảnh nhỏ hơn 10MB.`
+                    `File size is too large. Please choose an image smaller than 10MB.`
                   );
                   eim.target.value = "";
                   return;
@@ -12772,49 +12770,49 @@ Thêm Ảnh
                     document.body.appendChild(loadingMsg);
 
                     try {
-                      // 1. Kiểm tra tỷ lệ khung hình
+                      //1. Check aspect ratio
                       if (!checkAspectRatio(img)) {
                         alert(
-                          "Tỷ lệ khung hình của ảnh không phù hợp. Vui lòng chọn ảnh khác."
+                          "The image aspect ratio is inappropriate. Please choose another image."
                         );
                         eim.target.value = "";
                         document.body.removeChild(loadingMsg);
                         return;
                       }
 
-                      // 2. Kiểm tra nội dung bằng OpenAI
+                      //2. Check content using OpenAI
                       loadingMsg.innerHTML =
-                        "Đang phân tích nội dung ảnh...<br/>Vui lòng chờ.";
+                        "Analyzing image content.<br/>Please wait.";
                       console.log(
-                        "🔍 Đang kiểm tra nội dung ảnh với OpenAI..."
+                        "🔍 Checking image content with OpenAI."
                       );
                       const contentCheck = await checkInappropriateContent(
                         fr.result
-                      ); // Sử dụng base64 data
+                      ); //Use base64 data
 
                       if (contentCheck.isInappropriate) {
                         alert(
-                          `❗ Phát hiện nội dung không phù hợp!\n\nLý do: ${contentCheck.reason}\n\nVui lòng không sử dụng hình ảnh bạo lực, khiêu dâm, hoặc phản cảm.`
+                          `❗ Inappropriate content detected!\n\nReason: ${contentCheck.reason}\n\nPlease do not use violent, pornographic, or offensive images.`
                         );
                         eim.target.value = "";
                         document.body.removeChild(loadingMsg);
                         return;
                       }
                       console.log(
-                        `✅ Nội dung ảnh phù hợp. Lý do: ${contentCheck.reason}`
+                        `✅ Image content is appropriate. Reason: ${contentCheck.reason}`
                       );
 
-                      // 3. Kiểm tra OpenCV đã sẵn sàng chưa
+                      //3. Check if OpenCV is ready
                       if (!window.opencvReady) {
-                        alert("Đang tải OpenCV, vui lòng chờ giây lát...");
+                        alert("Loading OpenCV, please wait a moment.");
                         eim.target.value = "";
                         document.body.removeChild(loadingMsg);
                         return;
                       }
 
-                      // 4. Kiểm tra độ nét bằng OpenCV
-                      loadingMsg.textContent = "Đang kiểm tra độ nét ảnh...";
-                      console.log("🔍 Đang kiểm tra độ nét ảnh...");
+                      //4. Check sharpness using OpenCV
+                      loadingMsg.textContent = "Checking image sharpness.";
+                      console.log("🔍 Checking image sharpness.");
                       const sharpness = await checkSharpnessOpenCV(img);
                       const threshold = 5.0;
                       const isBlurry = sharpness < threshold;
@@ -12826,11 +12824,11 @@ Thêm Ảnh
                       );
 
                       if (isBlurry) {
-                        document.body.removeChild(loadingMsg); // Xóa loading trước khi hiện confirm
+                        document.body.removeChild(loadingMsg); //Loading before showing confirm
                         const proceed = confirm(
-                          `⚠️ Ảnh có vẻ bị mờ (độ nét = ${sharpness.toFixed(
+                          `⚠️ Ảnh có Appearance Suffering from Blurry (degree nét = ${sharpness.toFixed(
                             2
-                          )}).\n` + `Bạn vẫn muốn sử dụng ảnh này không?`
+                          )}).\n` + `You Still Want Use Use ảnh này không?`
                         );
 
                         if (!proceed) {
@@ -12838,21 +12836,21 @@ Thêm Ảnh
                           return;
                         }
                       } else {
-                        console.log("✅ Ảnh có độ nét tốt.");
+                        console.log("✅ Image has good sharpness.");
                       }
 
                       if (document.body.contains(loadingMsg)) {
                         document.body.removeChild(loadingMsg);
                       }
 
-                      // 5. Thêm ảnh vào canvas nếu OK
+                      //5. Add image to canvas if OK
                       stopDrawing();
 
                       Konva.Image.fromURL(fr.result, function (image) {
                         let width = image.width();
                         let height = image.height();
 
-                        // Tính toán tỷ lệ scale để ảnh vừa với container
+                        //Calculate scale ratio to fit image to container
                         const scale = Math.min(
                           (container_width * 0.9) / width,
                           (container_height * 0.9) / height
@@ -12861,7 +12859,7 @@ Thêm Ảnh
                         width *= scale;
                         height *= scale;
 
-                        // Thiết lập thuộc tính cho ảnh
+                        //Set image properties
                         image.setAttrs({
                           width: width,
                           height: height,
@@ -12871,18 +12869,18 @@ Thêm Ảnh
                           draggable: true,
                         });
 
-                        // Xử lý sự kiện drag và transform
+                        //Handle drag and transform events
                         image.on("dragmove transform", () => {
                           stopDrawing();
                           layer.draw();
                           updateTexture(stage);
                         });
 
-                        // Xử lý sự kiện mouse
+                        //Handle mouse events
                         image.on("mousedown", stopDrawing);
                         image.on("mouseup", () => window.saveStateToHistory());
 
-                        // Thêm ảnh vào layer
+                        //Add image to layer
                         layer.add(image);
                         layer.draw();
                         window.saveStateToHistory();
@@ -12891,36 +12889,36 @@ Thêm Ảnh
                         // Reset input file
                         eim.target.value = "";
 
-                        console.log("✅ Ảnh đã được thêm thành công");
+                        console.log("✅ Image added successfully");
                       });
                     } catch (error) {
                       if (document.body.contains(loadingMsg)) {
                         document.body.removeChild(loadingMsg);
                       }
                       console.error("Error processing image:", error);
-                      alert("Có lỗi xảy ra khi xử lý ảnh. Vui lòng thử lại!");
+                      alert("An error occurred while processing the image. Please try again!");
                       eim.target.value = "";
                     }
                   };
 
-                  // Xử lý lỗi khi load ảnh
+                  //Handle image loading error
                   img.onerror = function () {
                     if (document.body.contains(loadingMsg)) {
                       document.body.removeChild(loadingMsg);
                     }
                     console.error("Error loading image");
-                    alert("Không thể tải ảnh. Vui lòng thử lại!");
+                    alert("Unable to load image. Please try again!");
                     eim.target.value = "";
                   };
                 };
 
-                // Xử lý lỗi khi đọc file
+                //Handle file reading error
                 fr.onerror = function () {
                   if (document.body.contains(loadingMsg)) {
                     document.body.removeChild(loadingMsg);
                   }
                   console.error("Error reading file");
-                  alert("Không thể đọc file. Vui lòng thử lại!");
+                  alert("Unable to read file. Please try again!");
                   eim.target.value = "";
                 };
               };
@@ -13000,7 +12998,7 @@ Thêm Ảnh
               undoRedo.className = "cf_block cf_state-controls";
 
               undoRedo.innerHTML = `
-                    <button class="cf_button cf_state-reset">Xóa thiết kế</button>`;
+                    <button class="cf_button cf_state-reset">Design layoutext</button>`;
               toolsFlexContainer.append(undoRedo);
 
               //undo redo next
@@ -13628,7 +13626,7 @@ Thêm Ảnh
         setHTMLElemAttribute("className", "cf_button", "exportButton", false);
         setHTMLElemAttribute(
           "innerHTML",
-          "Lưu thiết kế",
+          "Save design",
           "exportButton",
           false
         );
@@ -13636,8 +13634,8 @@ Thêm Ảnh
           export_layout_to_file();
         });
         eventHTMLElem("click", "cart_button", false, function (event) {
-          event.preventDefault(); // Ngăn page refresh
-          event.stopPropagation(); // Ngăn event bubbling
+          event.preventDefault(); //Prevent page refresh
+          event.stopPropagation(); //Prevent event bubbling
           upload_layout_to_server();
         });
         addHTMLElement(
@@ -13648,7 +13646,7 @@ Thêm Ảnh
           false
         );
         setHTMLElemAttribute("className", "cf_button", "importButton", false);
-        setHTMLElemAttribute("innerHTML", "Mở thiết kế", "importButton", false);
+        setHTMLElemAttribute("innerHTML", "Open design", "importButton", false);
         eventHTMLElem("click", "importButton", false, function (event) {
           import_layout_from_file();
         });
@@ -14298,19 +14296,19 @@ Thêm Ảnh
       const dots = document.getElementById("urlLoadingDots");
 
       if (overlay) {
-        // Reset về trạng thái loading
+        //Reset to loading state
         spinner.style.display = "block";
         icon.style.display = "none";
         progress.style.display = "block";
         dots.style.display = "flex";
 
-        // Cập nhật text
-        text.textContent = title || "Đang tải...";
+        //Update text
+        text.textContent = title || "Loading.";
         text.className = "url-loading-text";
-        subtitleEl.textContent = subtitle || "Vui lòng chờ trong giây lát";
+        subtitleEl.textContent = subtitle || "Please wait a moment";
         subtitleEl.className = "url-loading-subtitle";
 
-        // Hiển thị overlay
+        //Show overlay
         overlay.style.display = "flex";
 
         console.log("🔄 Loading overlay displayed");
@@ -14322,8 +14320,8 @@ Thêm Ảnh
       const subtitleEl = document.getElementById("urlLoadingSubtitle");
 
       if (text && subtitleEl) {
-        text.textContent = title || "Đang xử lý...";
-        subtitleEl.textContent = subtitle || "Vui lòng chờ...";
+        text.textContent = title || "Processing.";
+        subtitleEl.textContent = subtitle || "Please wait.";
         console.log("📝 Loading progress updated:", title);
       }
     }
@@ -14338,20 +14336,20 @@ Thêm Ảnh
       const dots = document.getElementById("urlLoadingDots");
 
       if (spinner && icon && text) {
-        // Ẩn loading elements
+        //Hide loading elements
         spinner.style.display = "none";
         progress.style.display = "none";
         dots.style.display = "none";
 
-        // Hiển thị success
+        //Show success
         icon.style.display = "flex";
         icon.className = "url-loading-icon success";
         iconText.textContent = "✓";
 
-        // Cập nhật text
+        //Update text
         text.textContent = title || "Thành công!";
         text.className = "url-loading-text url-loading-success";
-        subtitleEl.textContent = subtitle || "Đã hoàn thành";
+        subtitleEl.textContent = subtitle || "Completed";
         subtitleEl.className = "url-loading-subtitle url-loading-success";
 
         console.log("✅ Success state displayed");
@@ -14368,20 +14366,20 @@ Thêm Ảnh
       const dots = document.getElementById("urlLoadingDots");
 
       if (spinner && icon && text) {
-        // Ẩn loading elements
+        //Hide loading elements
         spinner.style.display = "none";
         progress.style.display = "none";
         dots.style.display = "none";
 
-        // Hiển thị error
+        //Show error
         icon.style.display = "flex";
         icon.className = "url-loading-icon error";
         iconText.textContent = "✕";
 
-        // Cập nhật text
-        text.textContent = title || "Lỗi!";
+        //Update text
+        text.textContent = title || "Error!";
         text.className = "url-loading-text url-loading-error";
-        subtitleEl.textContent = subtitle || "Có lỗi xảy ra";
+        subtitleEl.textContent = subtitle || "An error occurred";
         subtitleEl.className = "url-loading-subtitle url-loading-error";
 
         console.log("❌ Error state displayed");
@@ -14398,14 +14396,14 @@ Thêm Ảnh
 
     function load_layout_from_url(url) {
       if (!url) {
-        console.error("URL không hợp lệ");
+        console.error("Invalid URL");
         return;
       }
 
       console.log("🔗 Loading layout from URL:", url);
       showUrlLoadingOverlay(
-        "Đang tải thiết kế...",
-        "Vui lòng chờ trong giây lát"
+        "Loading design.",
+        "Please wait a moment"
       );
 
       loadFile(
@@ -14442,7 +14440,7 @@ Thêm Ảnh
               } catch(e) {
                 console.error('❌ Parse error:', e);
                 alert(alertMsg);
-                showUrlLoadingError('Lỗi dữ liệu', 'Không thể đọc thiết kế');
+                ShowUrlLoadingError('Errora error', 'Unable to read design');
                 return;
               }
     
@@ -14475,7 +14473,7 @@ Thêm Ảnh
               } else {
                 console.log('🎨 No images to load, creating canvas drawer...');
                 PROC.create_canvas_drawer(true);
-                showUrlLoadingSuccess('Tải thành công', 'Thiết kế đã được áp dụng');
+                ShowUrlLoadingSuccess('Downloadnloaded successfully', 'Design has been applied');
                 
                 // Debug: Check if stickers are restored
                 setTimeout(function() {
@@ -14537,7 +14535,7 @@ Thêm Ảnh
                 if (ready) {
                   console.log('✅ All images loaded, creating canvas drawer...');
                   PROC.create_canvas_drawer(true);
-                  showUrlLoadingSuccess('Tải thành công', 'Thiết kế đã được áp dụng');
+                  showUrlLoadingSuccess('Downloaded successfully', 'Design has been applied');
                   
                   // Debug: Check if stickers are restored
                   setTimeout(function() {
@@ -14586,20 +14584,20 @@ Thêm Ảnh
             console.log("✅ Layout loaded successfully from URL");
           } catch (error) {
             console.error("❌ Error in processing loaded data:", error);
-            showUrlLoadingError("Lỗi xử lý", "Không thể khôi phục thiết kế");
+            showUrlLoadingError("Processing error", "Unable to restore design");
             setTimeout(hideUrlLoadingOverlay, 1500);
           }
         },
         function () {
           console.error("❌ Failed to load layout from URL");
-          showUrlLoadingError("Lỗi kết nối", "Không thể tải file từ link");
+          showUrlLoadingError("Connection error", "Unable to download file from link");
           setTimeout(hideUrlLoadingOverlay, 1500);
         },
         false
       );
     }
 
-    // Function để tự động load layout khi có URL parameter
+    //Function to automatically load layout when there is a URL parameter
     function auto_load_from_url_params() {
       const urlParams = new URLSearchParams(window.location.search);
       const layoutUrl = urlParams.get("layout");
@@ -14617,7 +14615,7 @@ Thêm Ảnh
       }
     }
 
-    // Hoặc nếu app đã load rồi
+    //Or if the app has already loaded
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", auto_load_from_url_params);
     } else {
@@ -14639,7 +14637,7 @@ Thêm Ảnh
         `
         const state = VARS.currentSceneState;
     
-        // Xử lý layer ảnh
+        //Process image layerr ảnh
         if (VARS.myDrawer2) {
           const stageId = VARS.myDrawer2.dataset.stage;
           const layer = Konva.ids[stageId].children[0];
@@ -14659,20 +14657,20 @@ Thêm Ảnh
           }
         }
     
-        // Gán thông tin thiết kế
+        //Assign design informationlan
         state.sceneName = app._loadSceneURL.replace('.gltf.xz', '');
         state.color = VARS.color;
         state.bgColor = VARS.bgColor;
         state.acidWash = VARS.acidWash;
         state.puffPrint = VARS.puffPrint;
     
-        // Tạo blob JSON từ state
+        //Create JSON blob from statestate
         const blob = new Blob([JSON.stringify(state)], { type: 'application/json' });
         const filename = state.sceneName + '_layout_' + Date.now() + '.sav';
         
         const formData = new FormData();
         
-        // Lấy token
+        //Get token
         let authorization = '';
         const token = localStorage.getItem('token') || 
                      localStorage.getItem('authorization') || 
@@ -14705,32 +14703,31 @@ Thêm Ảnh
     
           console.log('✅ Uploaded layout file:', fileUrl);
     
-          // TẠO SHAREABLE LINK
+          //CREATE SHAREABLE LINKINK
           const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
           const currentUrl = isDevelopment ? 'http://0.0.0.0:3000/3d-custom/tshirt-sizingtest.html' : 'https://inkme-3d.pages.dev/tshirt-sizingtest.html';
           const shareableLink = \`\${currentUrl}?layout=\${encodeURIComponent(fileUrl)}\`;
           
           console.log('🔗 Shareable link created:', shareableLink);
     
-         // HIỂN THỊ MODAL CHIA SẺ
-console.log('🎉 Hiển thị modal chia sẻ với link:', shareableLink);
+         //DISPLAY SHARE MODALCHIA SHARE
+console.log('🎉 Display share modal with link:', shareableLink);
   
-// Sử dụng function showShareModal có sẵn
+//Use the existing showShareModal functiondy
 if (typeof showShareModal === 'function') {
   showShareModal(shareableLink);
 } else {
-  // Fallback nếu function chưa load
+  //Fallback if function has not loadedad
   setTimeout(() => {
     if (typeof showShareModal === 'function') {
       showShareModal(shareableLink);
     } else {
-      // Fallback cuối cùng với alert
-      alert('🎉 Thiết kế đã được lưu thành công!\\n\\nLink chia sẻ:\\n' + shareableLink);
+      //Final fallback with alert      alert('🎉 Design Plan đã can / able to Save thành công!\\n\\nLink chia Share:\\n' + shareableLink);
     }
   }, 500);
 }
     
-          // Thêm vào giỏ hàng với link
+          //Add to cart with linkk
           const cartItem = {
             productTitle: state.sceneName || 'InkMe Custom',
             images: [''],
@@ -14778,14 +14775,14 @@ if (typeof showShareModal === 'function') {
             throw new Error(\`Lỗi thêm giỏ hàng: \${res.status} \${res.statusText} - \${errorText}\`);
           }
           const result = await res.json();
-          console.log('🛒 Đã thêm vào giỏ hàng:', result);
+          console.log('🛒 Added to cart:', result);
         })
         .catch(err => {
-          console.error('❌ Lỗi toàn trình:', err);
-          alert('❌ Lỗi: ' + err.message);
+          console.error('❌ Full stack error:', err);
+          alert('❌ Error:' + err.message);
         });
     
-        // Reset lại state
+        //Reset statete
         state.savedImages = {};
         state.savedLayers = {};
         `
