@@ -14,11 +14,11 @@ import { MyProvider } from "./context/MyContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
-// Google Analytics đã được setup trong index.html với ID: G-7ZCPCVX6F7
-// Chỉ cần set window.GA_MEASUREMENT_ID để analytics.js sử dụng
+//Google Analytics has been set up in index.html with ID: G-7ZCPCVX6F7
+//Just set window.GA_MEASUREMENT_ID for analytics.js to use
 window.GA_MEASUREMENT_ID = "G-7ZCPCVX6F7";
 
-// Đảm bảo gtag function có sẵn cho analytics utilities
+//Ensure the gtag function is available for analytics utilities
 window.gtag = window.gtag || function () {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(arguments);
