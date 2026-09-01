@@ -4,10 +4,10 @@ const { Address } = require("../models/address");
 const { User } = require("../models/user");
 const { checkUserStatus, requireAuth, requireAdmin } = require("../helper/authorization");
 
-// Get all addresses of a user - Admin hoặc chính user đó mới được xem
+//Get all addresses of user - Only Admin or the user themselves can view
 router.get(`/user/:userId`, requireAuth, checkUserStatus, async (req, res) => {
     try {
-        // Kiểm tra quyền truy cập
+        //Check access permissions
         if (!req.user.isAdmin && req.params.userId !== req.auth.id) {
             return res.status(403).json({
                 error: true,
@@ -26,12 +26,12 @@ router.get(`/user/:userId`, requireAuth, checkUserStatus, async (req, res) => {
     }
 });
 
-// Add new address - User đã login có thể thêm địa chỉ cho mình
+//Add new address - Logged-in users can add an address for themselves
 router.post(`/`, requireAuth, checkUserStatus, async (req, res) => {
     try {
         const { userId, city, details, moreInfo } = req.body;
 
-        // Kiểm tra quyền truy cập - User chỉ có thể thêm địa chỉ cho chính mình
+        //Check access permissions - User can only add an address for themselves
         if (!req.user.isAdmin && userId !== req.auth.id) {
             return res.status(403).json({
                 error: true,
@@ -71,18 +71,18 @@ router.post(`/`, requireAuth, checkUserStatus, async (req, res) => {
     }
 });
 
-// Update address - User chỉ có thể cập nhật địa chỉ của mình
+//Update address - User can only update their own address
 router.put(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
     try {
         const { city, details, moreInfo } = req.body;
 
-        // Kiểm tra địa chỉ có tồn tại không
+        //Check if the address exists
         const existingAddress = await Address.findById(req.params.id);
         if (!existingAddress) {
             return res.status(404).json({ error: true, message: "Address not found" });
         }
 
-        // Kiểm tra quyền truy cập - User chỉ có thể cập nhật địa chỉ của mình
+        //Check access permissions - User can only update their own address
         if (!req.user.isAdmin && existingAddress.userId.toString() !== req.auth.id) {
             return res.status(403).json({
                 error: true,
@@ -113,7 +113,7 @@ router.put(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
     }
 });
 
-// Delete address - User chỉ có thể xóa địa chỉ của mình
+//Delete address - User can only delete their own address
 router.delete(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
     try {
         const address = await Address.findById(req.params.id);
@@ -121,7 +121,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
             return res.status(404).json({ error: true, message: "Address not found" });
         }
 
-        // Kiểm tra quyền truy cập - User chỉ có thể xóa địa chỉ của mình
+        //Check access permissions - User can only delete their own address
         if (!req.user.isAdmin && address.userId.toString() !== req.auth.id) {
             return res.status(403).json({
                 error: true,
@@ -155,7 +155,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
     }
 });
 
-// Set address as default - User chỉ có thể set default cho địa chỉ của mình
+//Set address as default - User can only set their own address as default
 router.put(`/:id/set-default`, requireAuth, checkUserStatus, async (req, res) => {
     try {
         const address = await Address.findById(req.params.id);
@@ -163,7 +163,7 @@ router.put(`/:id/set-default`, requireAuth, checkUserStatus, async (req, res) =>
             return res.status(404).json({ error: true, message: "Address not found" });
         }
 
-        // Kiểm tra quyền truy cập - User chỉ có thể set default cho địa chỉ của mình
+        //Check access permissions - User can only set their own address as default
         if (!req.user.isAdmin && address.userId.toString() !== req.auth.id) {
             return res.status(403).json({
                 error: true,

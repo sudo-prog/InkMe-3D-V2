@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const { checkUserStatus, requireAuth, requireAdmin, requireAdminOrOwner } = require("../helper/authorization");
 
-// Chỉ admin có thể xem tất cả orders
+//Only admin can view all orders
 router.get(`/`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
@@ -62,10 +62,10 @@ router.post(`/create`, requireAuth, checkUserStatus, async (req, res) => {
             });
         }
 
-        // Debug: Kiểm tra products data nhận được
-        console.log('🔍 Products nhận được từ client:', JSON.stringify(products, null, 2));
+        //Debug: Check received products data
+        console.log('🔍 Products received from client:', JSON.stringify(products, null, 2));
 
-        // Debug: Kiểm tra riêng inkmeFile trong products
+        //Debug: Separately check inkmeFile in products
         products.forEach((product, index) => {
             if (product.inkmeFile) {
                 console.log(`✨ Product ${index} có inkmeFile:`, {
@@ -75,7 +75,7 @@ router.post(`/create`, requireAuth, checkUserStatus, async (req, res) => {
             }
         });
 
-        // Tạo order mới
+        //Create new order
         const order = new Orders({
             address,
             note,
@@ -90,10 +90,10 @@ router.post(`/create`, requireAuth, checkUserStatus, async (req, res) => {
 
         const savedOrder = await order.save();
 
-        // Debug: Kiểm tra order đã lưu
-        console.log('💾 Order đã lưu vào database:', JSON.stringify(savedOrder, null, 2));
+        //Debug: Check saved order
+        console.log('💾 Order saved to database:', JSON.stringify(savedOrder, null, 2));
 
-        // Debug: Kiểm tra riêng inkmeFile trong saved order
+        //Debug: Separately check inkmeFile in saved order
         savedOrder.products.forEach((product, index) => {
             if (product.inkmeFile) {
                 console.log(`✅ Saved Product ${index} có inkmeFile:`, {
@@ -114,7 +114,7 @@ router.post(`/create`, requireAuth, checkUserStatus, async (req, res) => {
     }
 });
 
-// Admin hoặc owner có thể xem order chi tiết
+//Admin or owner can view order details
 router.get(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
     try {
         const order = await Orders.findById(req.params.id)
@@ -124,7 +124,7 @@ router.get(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
             return res.status(404).json({ success: false, message: "Order ID not found" });
         }
 
-        // Admin có thể xem tất cả orders, user chỉ xem order của mình
+        //Admin can view all orders, users can only view their own orders
         if (!req.user.isAdmin && order.userId.toString() !== req.auth.id) {
             return res.status(403).json({
                 success: false,
@@ -366,14 +366,14 @@ router.put("/:id/cancel", requireAuth, checkUserStatus, async (req, res) => {
     }
 });
 
-// Admin hoặc chính user đó có thể xem orders của user
+//Admin or the user themselves can view the user's orders
 router.get(`/user/:userId`, requireAuth, checkUserStatus, async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.userId)) {
             return res.status(400).json({ success: false, message: "Invalid userId" });
         }
 
-        // Admin có thể xem orders của bất kỳ user nào, user chỉ xem orders của mình
+        //Admin can view orders of any user, users can only view their own orders
         if (!req.user.isAdmin && req.params.userId !== req.auth.id) {
             return res.status(403).json({
                 success: false,

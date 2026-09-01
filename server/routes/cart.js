@@ -11,12 +11,12 @@ cloudinary.config({
     secure: true
 });
 
-// Admin có thể xem tất cả cart, user chỉ xem cart của mình
+//Admin can view all carts, users can only view their own cart
 router.get(`/`, requireAuth, checkUserStatus, async (req, res) => {
     try {
         let query = req.query;
 
-        // Nếu không phải admin, chỉ cho phép xem cart của chính mình
+        //If not an admin, only allow viewing one's own cart
         if (!req.user.isAdmin) {
             query = { ...req.query, userId: req.auth.id };
         }
@@ -76,7 +76,7 @@ router.post('/add', async (req, res) => {
             res.status(201).json(cartList);
         } else {
             return res.status(409).json({
-                message: "Sản phẩm với màu sắc và kích thước này đã có trong giỏ hàng",
+                message: "Product with this color and size is already in the cart",
                 status: false
             });
         }
@@ -122,7 +122,7 @@ router.post('/', async (req, res) => {
             res.status(201).json(cartList);
         } else {
             return res.status(409).json({
-                message: "Sản phẩm với màu sắc và kích thước này đã có trong giỏ hàng",
+                message: "Product with this color and size is already in the cart",
                 status: false
             });
         }
@@ -136,7 +136,7 @@ router.post('/', async (req, res) => {
 
 router.delete(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
     try {
-        // Kiểm tra ownership - chỉ cho phép xóa cart của chính mình
+        //Check ownership - only allow deleting one's own cart
         const cartItem = await Cart.findById(req.params.id);
         if (!cartItem) {
             return res.status(404).json({
@@ -145,7 +145,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
             });
         }
 
-        // Admin có thể xóa bất kỳ cart nào, user chỉ xóa cart của mình
+        //Admin can delete any cart, users can only delete their own cart
         if (!req.user.isAdmin && cartItem.userId !== req.auth.id) {
             return res.status(403).json({
                 message: "Access denied. You can only delete your own cart items",
@@ -165,7 +165,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
 
 router.put("/:id", requireAuth, checkUserStatus, async (req, res) => {
     try {
-        // Kiểm tra ownership trước khi cập nhật
+        //Check ownership before updating
         const existingCart = await Cart.findById(req.params.id);
         if (!existingCart) {
             return res.status(404).json({
@@ -174,7 +174,7 @@ router.put("/:id", requireAuth, checkUserStatus, async (req, res) => {
             });
         }
 
-        // Admin có thể cập nhật bất kỳ cart nào, user chỉ cập nhật cart của mình
+        //Admin can update any cart, users can only update their own cart
         if (!req.user.isAdmin && existingCart.userId !== req.auth.id) {
             return res.status(403).json({
                 message: "Access denied. You can only update your own cart items",

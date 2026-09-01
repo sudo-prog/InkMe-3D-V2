@@ -31,12 +31,12 @@ const upload = multer({
     storage: storage
 })
 
-// Chỉ admin mới được upload images cho category
+//Only admins are allowed to upload images for categories
 router.post(`/upload`, requireAuth, checkUserStatus, requireAdmin, upload.array("images"), async (req, res) => {
 
     imagesArray = [];
-    console.log("Received files:", req.files); // Kiểm tra req.files
-    console.log("Request body:", req.body); // Kiểm tra req.body
+    console.log("Received files:", req.files); //Check req.files
+    console.log("Request body:", req.body); //Check req.body
 
 
     try {
@@ -80,7 +80,7 @@ router.get(`/`, async (req, res) => {
         const totalPages = Math.ceil(totalPosts / perPage);
 
         if (page > totalPages) {
-            return res.status(404).json({ message: "Không có dữ liệu" });
+            return res.status(404).json({ message: "No data available" });
         }
 
         const categoryList = await Category.find()
@@ -115,7 +115,7 @@ router.get(`/:id`, async (req, res) => {
 });
 
 
-// Chỉ admin mới được tạo category mới
+//Only admins are allowed to create new categories
 router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const images_array = [];
@@ -148,7 +148,7 @@ router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, r
 
 });
 
-// Chỉ admin mới được xóa image category
+//Only admins are allowed to delete category images
 router.delete(`/deleteImage`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const imgUrl = req.query.img;
@@ -167,7 +167,7 @@ router.delete(`/deleteImage`, requireAuth, checkUserStatus, requireAdmin, async 
 
 });
 
-// Chỉ admin mới được xóa category
+//Only admins are allowed to delete categories
 router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const category = await Category.findById(req.params.id);
@@ -200,7 +200,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, re
     });
 });
 
-// Chỉ admin mới được cập nhật category
+//Only admins are allowed to update categories
 router.put("/:id", requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const category = await Category.findByIdAndUpdate(

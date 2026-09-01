@@ -37,7 +37,7 @@ router.get(`/:id`, async (req, res) => {
     res.status(200).send(review);
 });
 
-// User đã login có thể thêm review
+//Logged-in users can add reviews
 router.post(`/add`, requireAuth, checkUserStatus, async (req, res) => {
 
     let review = new ProductReviews({
