@@ -13,32 +13,32 @@ const CheckoutSection = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [createdOrder, setCreatedOrder] = useState(null);
-    // Kiểm tra xem có đủ thông tin để thanh toán không
+    //Check if there is enough information for payment
     const isReadyForPayment = () => {
         return user?.name && user?.phone && user?.email && context.selectedAddressId;
     };
     const cartItems = context.cartData || [];
 
-    console.log('🛒 Cart Items trước khi tạo order:', cartItems);
+    console.log('🛒 Cart Items before creating order:', cartItems);
 
     const handlePaymentClick = async () => {
         if (!isReadyForPayment()) return;
         setLoading(true);
         setError('');
         try {
-            // Lấy thông tin địa chỉ đã chọn
+            //Get selected address information
             const addressObj = context.selectedAddressId;
-            // Lấy thông tin cart (giả sử context.cartData)
+            //Get cart information (assuming context.cartData)
             const cartItems = context.cartData || [];
             const totalValue = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
             // Google Analytics tracking - Begin Checkout
             trackBeginCheckout(cartItems, totalValue);
 
-            // Debug: Kiểm tra cart items trước khi tạo order
-            console.log('🛒 Cart Items trước khi tạo order:', cartItems);
+            //Debug: Check cart items before creating order
+            console.log('🛒 Cart Items before creating order:', cartItems);
 
-            // Tạo dữ liệu order
+            //Create order data
             const orderData = {
                 fullname: user.name,
                 email: user.email,
@@ -59,21 +59,21 @@ const CheckoutSection = () => {
                 orderId: String(Date.now()),
                 userId: user.userId,
                 orderType: 'QRCode',
-                orderDescription: 'Đơn hàng thanh toán qua QR',
+                orderDescription: 'Order paid via QR',
                 status: 'Unpaid',
             };
 
-            // Debug: Kiểm tra order data trước khi gửi
-            console.log('📦 Order Data sẽ gửi:', orderData);
+            //Debug: Check order data before sending
+            console.log('📦 Order Data to be sent:', orderData);
             const res = await postData('/api/orders/create', orderData);
             if (res && !res.error && res._id) {
                 setCreatedOrder(res);
                 setShowQR(true);
             } else {
-                setError(res?.message || 'Tạo đơn hàng thất bại');
+                setError(res?.message || 'Order creation failed');
             }
         } catch (err) {
-            setError('Có lỗi khi tạo đơn hàng');
+            setError('An error occurred while creating the order');
         } finally {
             setLoading(false);
         }
@@ -88,7 +88,7 @@ const CheckoutSection = () => {
                             {/* Payment Method Selection */}
                             <div className="col-md-5 col-lg-4 col-xl-3">
                                 <div className="checkout-radio">
-                                    <p className="primary-text">Chọn phương thức thanh toán</p>
+                                    <p className="primary-text">Select payment method</p>
                                     <div className="checkout-radio-wrapper">
                                         <div className="checkout-radio-single">
                                             <input type="radio" className="form-check-input" id="cCard" name="pay-method" value="Credit/Debit Cards" required checked readOnly />
@@ -96,11 +96,10 @@ const CheckoutSection = () => {
                                         </div>
                                         <div className="checkout-radio-single" style={{ opacity: 0.5, cursor: 'not-allowed' }}>
                                             <input type="radio" className="form-check-input" id="cCard2" name="pay-method" value="Credit/Debit Cards" required disabled />
-                                            <label htmlFor="cCard2">Thẻ tín dụng/thẻ ghi nợ</label>
+                                            <label htmlFor="cCard2">Credit/Debit card</label>
                                         </div>
-                                        <div className="checkout-radio-single" style={{ opacity: 0.5, cursor: 'not-allowed' }}>
-                                            <input type="radio" className="form-check-input" id="paypal" name="pay-method" value="PayPal" required disabled />
-                                            <label htmlFor="paypal">PayPal (Chưa hỗ trợ)</label>
+                                        <div className="checkout-radio-single" style={{ opacity: 0.5, cursor: 'nManage address                                           <input type="radio" className="form-check-input" id="paypal" name="pay-method" value="PayPal" required disabled />
+                                            <label htmlFor="paypal">PayPal (Not supported)</label>
                                         </div>
                                     </div>
                                 </div>
@@ -124,9 +123,7 @@ const CheckoutSection = () => {
                                                 style={{ minWidth: 180, padding: '10px 30px', fontSize: 18, opacity: isReadyForPayment() ? 1 : 0.6 }}
                                                 disabled={!isReadyForPayment() || loading}
                                                 onClick={handlePaymentClick}
-                                            >
-                                                {loading ? 'Đang xử lý...' : 'Thanh toán'}
-                                            </button>
+                                            >{loading? 'Processing.': 'Payment'}button>
                                         ) : (
                                             <>
                                                 <h4 style={{ textAlign: 'center' }}>Mã QR Thanh toán</h4>
