@@ -18,7 +18,7 @@ const InkMeFile = ({ inkmeFile }) => {
             // Google Analytics tracking - Preview Inkme File
             trackDownloadInkmeFile({
                 sceneName: inkmeFile.sceneName || 'untitled',
-                fileSize: 0 // File size không có sẵn
+                fileSize: 0 //File size is not available
             });
 
             // Create shareable link

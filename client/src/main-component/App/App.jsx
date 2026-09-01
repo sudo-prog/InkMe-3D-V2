@@ -22,7 +22,7 @@ const AppContent = () => {
         if (payload.exp < currentTime) {
           console.log('🔒 Token expired, clearing...');
           localStorage.clear();
-          alert('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
+          alert('Your session has expired. Please log in again.');
           window.location.href = '/login';
         }
       } catch (error) {
