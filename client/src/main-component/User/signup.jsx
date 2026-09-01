@@ -707,44 +707,44 @@ const Signup = () => {
 
     // Name validation
     if (!formfields.name.trim()) {
-      newErrors.name = "Họ và tên không được để trống";
+      newErrors.name = "Full name cannot be left blank";
     } else if (formfields.name.trim().length < 2) {
-      newErrors.name = "Họ và tên phải có ít nhất 2 ký tự";
+      newErrors.name = "Full name must be at least 2 characters";
     } else if (formfields.name.trim().length > 50) {
-      newErrors.name = "Họ và tên không được vượt quá 50 ký tự";
+      newErrors.name = "Full name cannot exceed 50 characters";
     }
 
     // Email validation
     if (!formfields.email.trim()) {
-      newErrors.email = "Email không được để trống";
+      newErrors.email = "Email cannot be left blank";
     } else if (!validateEmail(formfields.email)) {
-      newErrors.email = "Email không đúng định dạng";
+      newErrors.email = "Email format is incorrect";
     }
 
     // Phone validation
     if (!formfields.phone.trim()) {
-      newErrors.phone = "Số điện thoại không được để trống";
+      newErrors.phone = "Phone number cannot be left blank";
     } else if (!validatePhone(formfields.phone)) {
-      newErrors.phone = "Số điện thoại phải có 10-11 chữ số";
+      newErrors.phone = "Phone number must be 10-11 digits";
     }
 
     // Password validation
     if (!formfields.password) {
-      newErrors.password = "Mật khẩu không được để trống";
+      newErrors.password = "Password cannot be left blank";
     } else if (formfields.password.length < 8) {
-      newErrors.password = "Mật khẩu phải có ít nhất 8 ký tự";
+      newErrors.password = "Password must be at least 8 characters";
     } 
 
     // Confirm password validation
     if (!formfields.confirmPassword) {
-      newErrors.confirmPassword = "Xác nhận mật khẩu không được để trống";
+      newErrors.confirmPassword = "Password confirmation cannot be left blank";
     } else if (formfields.password !== formfields.confirmPassword) {
-      newErrors.confirmPassword = "Xác nhận mật khẩu không khớp";
+      newErrors.confirmPassword = "Password confirmation does not match";
     }
 
     // Terms and conditions validation
     if (!isChecked) {
-      newErrors.terms = "Bạn phải đồng ý với điều khoản và dịch vụ";
+      newErrors.terms = "You must agree to the terms and services";
     }
 
     setErrors(newErrors);
@@ -773,7 +773,7 @@ const Signup = () => {
         context.setAlterBox({
           open: true,
           error: false,
-          message: res.message || "Đăng ký thành công! Vui lòng kiểm tra email để xác minh tài khoản.",
+          message: res.message || "Registration successful! Please check your email to verify your account.",
         });
 
         // Reset form
@@ -796,7 +796,7 @@ const Signup = () => {
         context.setAlterBox({
           open: true,
           error: true,
-          message: res.message || "Đăng ký thất bại. Vui lòng thử lại.",
+          message: res.message || "Registration failed. Please try again.",
         });
         setLoading(false);
       }
@@ -805,7 +805,7 @@ const Signup = () => {
       context.setAlterBox({
         open: true,
         error: true,
-        message: "Có lỗi xảy ra. Vui lòng thử lại sau.",
+        message: "An error occurred. Please try again later.",
       });
       setLoading(false);
     }
@@ -825,13 +825,9 @@ const Signup = () => {
                     className="img-fluid mb-4"
                     style={{ maxWidth: "400px" }}
                   />
-                  <h1 className="display-4 fw-bold mb-4">
-                    Chào mừng đến với InkMe 3D
-                  </h1>
-                  <p className="lead mb-4">
-                    Nền tảng thiết kế và in ấn 3D hàng đầu Việt Nam.
-                    Tạo ra những sản phẩm độc đáo theo phong cách riêng của bạn.
-                  </p>
+                  <h1 className="display-4 fw-bold mb-4">Welcome to InkMe 3D</h1>
+                  <p className="lead mb-4">Vietnam's leading 3D design and printing platform.
+ Create unique products in your own style.</p>
                   <img
                     src={hero1}
                     alt="hero-img"
@@ -843,8 +839,7 @@ const Signup = () => {
                 <div className="mt-4">
                   <Link to={"/"}>
                     <Button className="btn-outline-light btn-lg px-4 py-2" style={{ color: "white" }} >
-                      <IoMdHome className="me-2" /> Về trang chủ
-                    </Button>
+                      <IoMdHome className="me-2" />Back to home page</Button>
                   </Link>
                 </div>
               </div>
@@ -856,8 +851,8 @@ const Signup = () => {
                   <div className="d-flex justify-content-center mb-3">
                     <img src={logo} alt="logo" style={{ maxWidth: "120px", height: "auto" }} />
                   </div>
-                  <h2 className="signup-title">Tạo tài khoản mới</h2>
-                  <p className="signup-subtitle">Tham gia cùng chúng tôi để khám phá thế giới in 3D</p>
+                  <h2 className="signup-title">Create new account</h2>
+                  <p className="signup-subtitle">Join us to explore the world of 3D printing</p>
                 </div>
 
                 <div className="signup-form">
@@ -872,7 +867,7 @@ const Signup = () => {
                       <input
                         type="text"
                         className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                        placeholder="Họ và tên"
+                        placeholder="Full name"
                         onFocus={() => focusInput(0)}
                         onBlur={() => setInputIndex(null)}
                         autoFocus
@@ -913,7 +908,7 @@ const Signup = () => {
                       <input
                         type="tel"
                         className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
-                        placeholder="Số điện thoại"
+                        placeholder="Phone number"
                         onFocus={() => focusInput(2)}
                         onBlur={() => setInputIndex(null)}
                         name="phone"
@@ -933,7 +928,7 @@ const Signup = () => {
                       <input
                         type={`${isShowPassword === true ? "text" : "password"}`}
                         className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                        placeholder="Mật khẩu"
+                        placeholder="Password"
                         onFocus={() => focusInput(3)}
                         onBlur={() => setInputIndex(null)}
                         name="password"
@@ -961,7 +956,7 @@ const Signup = () => {
                         type={`${isShowConfirmPassword === true ? "text" : "password"
                           }`}
                         className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-                        placeholder="Xác nhận mật khẩu"
+                        placeholder="Confirm password"
                         onFocus={() => focusInput(4)}
                         onBlur={() => setInputIndex(null)}
                         name="confirmPassword"
@@ -976,13 +971,14 @@ const Signup = () => {
                         }
                       >
                         {isShowConfirmPassword === true ? (
-                          <IoMdEyeOff />
-                        ) : (
-                          <IoMdEye />
-                        )}
-                      </span>
-                      {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}
-                    </div>
+               <Button
+ Type=""
+ Variant=""
+ ClassName=""
+ >
+ <img src={GoogleIcons} width="" alt="" /> Sign in
+ With Google
+ </Button>                   </div>
 
                     <div className="form-group">
                       <FormControlLabel
@@ -1006,7 +1002,7 @@ const Signup = () => {
                             }}
                           />
                         }
-                        label="Tôi đồng ý với điều khoản & dịch vụ"
+                        label="I agree to the terms & services"
                         sx={{
                           '& .MuiFormControlLabel-label': {
                             color: errors.terms ? '#dc3545' : 'rgb(255, 255, 255)',
@@ -1027,17 +1023,15 @@ const Signup = () => {
                           <>
                             <CircularProgress size={20} color="inherit" className="me-2" />
                             Đang xử lý...
-                          </>
-                        ) : (
-                          "Tạo tài khoản"
-                        )}
-                      </Button>
+                          </>): (
+ "Create account"
+ )} </Button>
                     </div>
 
                     <div className="form-group text-center mt-3">
                       <div className="d-flex align-items-center justify-content-center or mt-3 mb-3">
                         <span className="line"></span>
-                        <span className="txt">hoặc</span>
+                        <span className="txt">Or</span>
                         <span className="line"></span>
                       </div>
 
@@ -1053,9 +1047,7 @@ const Signup = () => {
                   </form>
 
                   <div className="text-center mt-4">
-                    <span className="login-text">
-                      Đã có tài khoản?{" "}
-                      <Link to={"/login"} className="login-link">
+                    <span className="login-text">Already have an account?{" "}<Link to={"/login"} className="login-link">
                         Đăng nhập ngay
                       </Link>
                     </span>

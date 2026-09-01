@@ -737,14 +737,14 @@ const LoginScreen = () => {
 
     // Email or Phone validation
     if (!formfields.emailOrPhone.trim()) {
-      newErrors.emailOrPhone = "Email hoặc số điện thoại không được để trống";
+      newErrors.emailOrPhone = "Email or phone number cannot be left blank";
     } else if (!validateEmail(formfields.emailOrPhone) && !validatePhone(formfields.emailOrPhone)) {
-      newErrors.emailOrPhone = "Vui lòng nhập email hoặc số điện thoại hợp lệ";
+      newErrors.emailOrPhone = "Please enter a valid email or phone number";
     }
 
     // Password validation
     if (!formfields.password) {
-      newErrors.password = "Mật khẩu không được để trống";
+      newErrors.password = "Password cannot be left blank";
     }
 
     setErrors(newErrors);
@@ -768,7 +768,7 @@ const LoginScreen = () => {
         context.setAlterBox({
           open: true,
           error: true,
-          message: res.message || "Đăng nhập thất bại",
+          message: res.message || "Login failed",
         });
         return;
       }
@@ -778,7 +778,7 @@ const LoginScreen = () => {
         context.setAlterBox({
           open: true,
           error: true,
-          message: "Phản hồi không hợp lệ từ máy chủ",
+          message: "Invalid response from server",
         });
         return;
       }
@@ -804,14 +804,14 @@ const LoginScreen = () => {
       context.setAlterBox({
         open: true,
         error: false,
-        message: res.message || "Đăng nhập thành công",
+        message: res.message || "Login successful",
       });
 
       setTimeout(() => {
         setLoading(false);
-        // Chuyển hướng dựa trên role admin
+        //Redirect based on admin role
         if (res.user.isAdmin === true) {
-          // Encode user data để truyền qua URL
+          //Encode user data for URL transmission
           const userData = encodeURIComponent(JSON.stringify({
             id: res.user.id,
             name: res.user.name,
@@ -829,7 +829,7 @@ const LoginScreen = () => {
       context.setAlterBox({
         open: true,
         error: true,
-        message: "Có lỗi xảy ra. Vui lòng thử lại sau.",
+        message: "An error occurred. Please try again later.",
       });
       setLoading(false);
     }
@@ -850,7 +850,7 @@ const LoginScreen = () => {
       setLoading(true);
       localStorage.setItem("token", res.token);
 
-      // Lưu thông tin user vào localStorage
+      //Save user information to localStorage
       const user = {
         name: res.user.name,
         phone: res.user.phone,
@@ -873,9 +873,9 @@ const LoginScreen = () => {
       });
       setTimeout(() => {
         setLoading(false);
-        // Chuyển hướng dựa trên role admin
+        //Redirect based on admin role
         if (res.user.isAdmin === true) {
-          // Encode user data để truyền qua URL
+          //Encode user data for URL transmission
           const userData = encodeURIComponent(JSON.stringify({
             id: res.user.id,
             name: res.user.name,
@@ -912,8 +912,8 @@ const LoginScreen = () => {
                   <Link to={"/"} className="d-inline-block mb-3">
                     <img src={Logo} alt="logo" style={{ maxWidth: "140px", height: "auto" }} />
                   </Link>
-                  <h2 className="login-title">Chào mừng trở lại</h2>
-                  <p className="login-subtitle">Đăng nhập để khám phá thế giới in 3D</p>
+                  <h2 className="login-title">Welcome back</h2>
+                  <p className="login-subtitle">Log in to explore the world of 3D printing</p>
                 </div>
 
                 <div className="wrapper">
@@ -925,7 +925,7 @@ const LoginScreen = () => {
                       <input
                         type="text"
                         className={`form-control ${errors.emailOrPhone ? 'is-invalid' : ''}`}
-                        placeholder="Email hoặc số điện thoại"
+                        placeholder="Email or phone number"
                         onFocus={() => focusInput(0)}
                         onBlur={() => setInputIndex(null)}
                         autoFocus
@@ -946,7 +946,7 @@ const LoginScreen = () => {
                       <input
                         type={`${isShowPassword === true ? "text" : "password"}`}
                         className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                        placeholder="Mật khẩu"
+                        placeholder="Password"
                         onFocus={() => focusInput(1)}
                         onBlur={() => setInputIndex(null)}
                         name="password"
@@ -961,21 +961,20 @@ const LoginScreen = () => {
                         onClick={() => setIsShowPassword(!isShowPassword)}
                       >
                         {isShowPassword === true ? <IoMdEyeOff /> : <IoMdEye />}
-                      </span>
-                      {errors.password && <div className="invalid-feedback">{errors.password}</div>}
-                    </div>
-
-                    <div className="form-group">
-                      <Button type="submit" className="btn-blue btn-big w-100" disabled={loading} style={{ color: "white" }}>
+                      <<Button
+ Variant=""
+ ClassName=""
+ >
+ <img src={GoogleIcons} width="" alt="" /> Log in with
+ Google
+ </Button>n type="submit" className="btn-blue btn-big w-100" disabled={loading} style={{ color: "white" }}>
                         {loading ? (
                           <>
                             <CircularProgress size={20} color="inherit" className="me-2" />
                             Đang đăng nhập...
-                          </>
-                        ) : (
-                          "Đăng nhập"
-                        )}
-                      </Button>
+                          </>): (
+ "Log in"
+ )}utton>
                     </div>
 
                     <div className="form-group text-center mt-3">
@@ -984,7 +983,7 @@ const LoginScreen = () => {
                       </Link>
                       <div className="d-flex align-items-center justify-content-center or mt-3 mb-3">
                         <span className="line"></span>
-                        <span className="txt">hoặc</span>
+                        <span className="txt">Or</span>
                         <span className="line"></span>
                       </div>
 
@@ -1007,9 +1006,7 @@ const LoginScreen = () => {
                 </div>
 
                 <div className="text-center mt-4">
-                  <span className="signup-text">
-                    Bạn chưa có tài khoản?{" "}
-                    <Link to={"/signup"} className="signup-link">
+                  <span className="signup-text">Don't have an account?{" "}<Link to={"/signup"} className="signup-link">
                       Đăng ký ngay
                     </Link>
                   </span>

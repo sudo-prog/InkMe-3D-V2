@@ -237,8 +237,8 @@ const ResetPassword = () => {
               <div className="reset-password-box modern-card">
                 <div className="logo text-center mb-4">
                   <img src={Logo} alt="logo" width="80px" />
-                  <h2 className="reset-title">Đặt lại mật khẩu</h2>
-                  <p className="reset-subtitle">Tạo mật khẩu mới cho tài khoản của bạn</p>
+                  <h2 className="reset-title">Reset password</h2>
+                  <p className="reset-subtitle">Create a new password for your account</p>
                 </div>
 
                 <div className="wrapper">
@@ -253,7 +253,7 @@ const ResetPassword = () => {
                       <input
                         type={showPassword ? "text" : "password"}
                         className="form-control"
-                        placeholder="Mật khẩu mới"
+                        placeholder="New password"
                         onFocus={() => focusInput(0)}
                         onBlur={() => setInputIndex(null)}
                         name="password"
@@ -279,7 +279,7 @@ const ResetPassword = () => {
                       <input
                         type={showConfirmPassword ? "text" : "password"}
                         className="form-control"
-                        placeholder="Xác nhận mật khẩu mới"
+                        placeholder="Confirm new password"
                         onFocus={() => focusInput(1)}
                         onBlur={() => setInputIndex(null)}
                         name="confirmPassword"
@@ -297,7 +297,7 @@ const ResetPassword = () => {
 
                     <div className="form-group">
                       <Button type="submit" className="btn-blue btn-big w-100">
-                        {loading ? <CircularProgress /> : "Đặt lại mật khẩu"}
+                        {loading ? <CircularProgress /> : "Reset password"}
                       </Button>
                     </div>
                   </form>
