@@ -33,7 +33,7 @@ const About = () => {
         e.preventDefault();
 
         // Google Analytics tracking - CTA Click
-        trackCTAClick('Trải nghiệm ngay', 'About Section');
+        trackCTAClick('Experience it now', 'About Section');
 
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('user');
@@ -42,7 +42,7 @@ const About = () => {
             setAlterBox({
                 open: true,
                 error: true,
-                message: "Bạn cần đăng nhập để sử dụng tính năng thiết kế 3D"
+                message: "You need to log in to use the 3D design feature"
             });
 
             setTimeout(() => {
@@ -86,10 +86,8 @@ const About = () => {
                         <div className="col-lg-5">
                             <div className="about-content">
                                 <div className="section-title">
-                                    <h6 className="wow fadeInUp">Về chúng tôi</h6>
-                                    <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                                        Biến ý tưởng của bạn
-                                        <span> thành hiện thực <img src={Abimg9} alt="img" /></span>
+                                    <h6 className="wow fadeInUp">About us</h6>
+                                    <h2 className="wow fadeInUp" data-wow-delay=".3s">Turn your ideas<span>Become a reality<img src={Abimg9} alt="img" /></span>
                                     </h2>
                                 </div>
                                 <p className="mt-3 mt-md-0 wow fadeInUp" data-wow-delay=".5s">
@@ -113,11 +111,9 @@ const About = () => {
                                                 <div className="icon">
                                                     <img src={Abimg10} alt="img" />
                                                 </div>
-                                                <h6>Tự Động Hoá Quy Trình</h6>
+                                                <h6>Process Automation</h6>
                                             </div>
-                                            <span>
-                                                Từ thiết kế đến đặt in – mọi thao tác đều được tối ưu hoá
-                                            </span>
+                                            <span>From design to ordering – every step is optimized</span>
                                         </div>
                                     </div>
                                     <div className="col-xl-6 col-md-6 col-lg-12 wow fadeInUp" data-wow-delay=".5s">
@@ -126,11 +122,9 @@ const About = () => {
                                                 <div className="icon bg-2">
                                                     <img src={Abimg13} alt="" />
                                                 </div>
-                                                <h6>Công Cụ Xây Dựng Thương Hiệu </h6>
+                                                <h6>Brand Building Tools</h6>
                                             </div>
-                                            <span>
-                                                Dễ dàng thêm logo, slogan, hoặc cá nhân hoá từng chi tiết trên áo
-                                            </span>
+                                            <span>Easily add logos, slogans, or personalize every detail on the shirt</span>
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +141,7 @@ const About = () => {
                                     <div className="author-image wow fadeInUp" data-wow-delay=".5s">
                                         <img src={Abimg11} alt="img" />
                                         <div className="content">
-                                            <span>Đội ngũ nhân viên chuyên nghiệp <img src={Abimg12} alt="img" /></span>
+                                            <span>Professional staff team<img src={Abimg12} alt="img" /></span>
                                         </div>
                                     </div>
                                 </div>

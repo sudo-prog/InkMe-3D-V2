@@ -10,24 +10,24 @@ const Accordion = () => {
 
     const accordionData = [
         {
-            title: 'Làm thế nào để thiết kế áo bằng InkMe?',
+            title: 'How do I design a shirt using InkMe?',
             content:
-                'Bạn chỉ cần truy cập trình thiết kế 3D, chọn mẫu áo yêu thích và bắt đầu thêm hình ảnh, văn bản hoặc màu sắc theo ý muốn. Giao diện đơn giản, dễ dùng cho cả người mới bắt đầu.',
+                'Simply access the 3D designer, choose your favorite shirt template, and start adding images, text, or colors as desired. The interface is simple and easy to use, even for beginners.',
         },
         {
-            title: 'Tôi có thể sử dụng lại thiết kế đã tạo không?',
+            title: 'Can I reuse a design I have already created?',
             content:
-                'Hoàn toàn có thể. Bạn có thể lưu file thiết kế (.inkme) để mở lại, chỉnh sửa hoặc thêm vào giỏ hàng bất kỳ lúc nào.',
+                'Absolutely. You can save the design file (.inkme) to reopen, edit, or add to your cart at any time.',
         },
         {
-            title: 'Tại sao thiết kế của tôi không hiển thị rõ trên áo?',
+            title: 'Why is my design not displaying clearly on the shirt?',
             content:
-                'Có thể hình ảnh bạn sử dụng có độ phân giải thấp. InkMe sử dụng AI để kiểm tra chất lượng hình ảnh – nếu mờ, hệ thống sẽ cảnh báo để bạn thay thế trước khi in.',
+                'The images you are using may have a low resolution. InkMe uses AI to check image quality – if it is blurry, the system will warn you to replace it before printing.',
         },
         {
-            title: 'File .inkme là gì và có công dụng ra sao?',
+            title: 'What is a .inkme file and what is it used for?',
             content:
-                'File .inkme là định dạng chứa toàn bộ bố cục thiết kế 3D của bạn (ảnh, văn bản, vị trí...). File này có thể tải về, chia sẻ, hoặc dùng lại sau này để tiếp tục chỉnh sửa và in.',
+                'The .inkme file is a format that contains your entire 3D design layout (images, text, positions, etc.). This file can be downloaded, shared, or reused later for further editing and printing.',
         }
     ];
 

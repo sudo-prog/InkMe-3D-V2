@@ -28,11 +28,8 @@ const CtaSection = () => {
                         <img src={Ct4} alt="img" />
                     </div>
                     <div className="section-title">
-                        <h6 className="wow fadeInUp">Dịch vụ in ấn</h6>
-                        <h2 className="wow fadeInUp" data-wow-delay=".3s">
-                            Sẵn sàng tạo ra  <br />
-                            những sản phẩm độc đáo?
-                        </h2>
+                        <h6 className="wow fadeInUp">Printing services</h6>
+                        <h2 className="wow fadeInUp" data-wow-delay=".3s">Ready to create<br />Unique products?</h2>
                     </div>
                     <Link onClick={ClickHandler} to="/about" className="theme-btn mt-3 mt-md-0 wow fadeInUp" data-wow-delay=".5s">more about us</Link>
                 </div>

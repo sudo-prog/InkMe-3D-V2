@@ -38,8 +38,7 @@ const About2 = (props) => {
                                 </div>
                                 <div className="shape-4">
                                     <img src={abImg4} alt="img" />
-                                </div>
-                                <div className="shape-5">
+                     <h6 className="">About us</h6>              <div className="shape-5">
                                     <img src={abImg5} alt="img" />
                                 </div>
                             </div>
@@ -48,9 +47,7 @@ const About2 = (props) => {
                             <div className="about-content">
                                 <div className="section-title">
                                     {/* <h6 className="wow fadeInUp">Về chúng tôi</h6> */}
-                                    <h2 className="wow fadeInUp">
-                                        Tạo thiết riêng
-                                        <span> cho thương hiệu của bạn <img src={Line} alt="img" /></span>
+                                    <h2 className="wow fadeInUp">Create custom designs<span>For your brand<img src={Line} alt="img" /></span>
                                     </h2>
                                 </div>
 
@@ -61,17 +58,11 @@ const About2 = (props) => {
 
                                 <ul className="about-list wow fadeInUp">
                                     <li>
-                                        <i className="fa-solid fa-check"></i>
-                                        Nhiều lựa chọn mẫu áo, chất liệu đa dạng & thiết kế in độc đáo
-                                    </li>
+                                        <i className="fa-solid fa-check"></i>Many shirt template options, diverse materials & unique print designs</li>
                                     <li>
-                                        <i className="fa-solid fa-check"></i>
-                                        Quy trình thiết kế - in ấn linh hoạt, phù hợp theo từng nhu cầu
-                                    </li>
+                                        <i className="fa-solid fa-check"></i>Flexible design and printing process, tailored to each need</li>
                                     <li>
-                                        <i className="fa-solid fa-check"></i>
-                                        Khách hàng tự đặt áo & kết nối liền mạch với cửa hàng của bạn
-                                    </li>
+                                        <i className="fa-solid fa-check"></i>Customers order shirts themselves & connect seamlessly with your store</li>
                                 </ul>
 
                                 <div className="about-author">
@@ -79,7 +70,7 @@ const About2 = (props) => {
                                     <div className="author-image wow fadeInUp" >
                                         <img src={author} alt="author-img" />
                                         <div className="content">
-                                            <span>100+ Khách hàng tin tưởng <img src={Line2} alt="img" /></span>
+                                            <span>100+ Trusted Customers<img src={Line2} alt="img" /></span>
                                         </div>
                                     </div>
                                 </div>
