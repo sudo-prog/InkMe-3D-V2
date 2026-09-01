@@ -29,10 +29,7 @@ const FooterS3 = () => {
                         <div className="icon">
                             <img src={Shape3} alt="img" />
                         </div>
-                        <h2>
-                            Nhận tin tức mới nhất <br />
-                            & Cập nhật
-                        </h2>
+                        <h2>Get the latest news<br />& Update</h2>
                     </div>
                     <div className="newsletter-input wow fadeInUp" data-wow-delay=".5s">
                         <input type="email" id="email22" placeholder="Email" />
@@ -51,9 +48,7 @@ const FooterS3 = () => {
                                     </Link>
                                 </div>
                                 <div className="footer-content">
-                                    <p className="text-white">
-                                        InkMe là một công ty in ấn 3D đầu tiên tại Việt Nam, cung cấp các dịch vụ in ấn 3D chất lượng cao với giá cả cạnh tranh.
-                                    </p>
+                                    <p className="text-white">InkMe is the first 3D printing company in Vietnam, providing high-quality 3D printing services at competitive prices.</p>
                                     <div className="social-icon d-flex align-items-center">
                                         <Link onClick={ClickHandler} to="#"><i className="fab fa-facebook-f"></i></Link>
                                         <Link onClick={ClickHandler} to="#"><i className="fab fa-twitter"></i></Link>
@@ -66,7 +61,7 @@ const FooterS3 = () => {
                         <div className="col-xl-3 ps-lg-5 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".4s">
                             <div className="single-footer-widget">
                                 <div className="widget-head">
-                                    <h3>Liên kết</h3>
+                                    <h3>Links</h3>
                                 </div>
                                 <ul className="list-items">
                                     {Services.slice(0, 5).map((service, sitem) => (
@@ -82,7 +77,7 @@ const FooterS3 = () => {
                         <div className="col-xl-3 ps-lg-4 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".6s">
                             <div className="single-footer-widget">
                                 <div className="widget-head">
-                                    <h3>Cộng đồng</h3>
+                                    <h3>Community</h3>
                                 </div>
                                 <ul className="list-items">
                                     <li>
@@ -116,7 +111,7 @@ const FooterS3 = () => {
                         <div className="col-xl-3 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".8s">
                             <div className="single-footer-widget">
                                 <div className="widget-head">
-                                    <h3>Liên hệ</h3>
+                                    <h3>Contact</h3>
                                 </div>
                                 <div className="footer-content">
                                     <p className="text-white">

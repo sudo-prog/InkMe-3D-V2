@@ -46,7 +46,7 @@ const CtaVideoSection = () => {
             </div>
             <div className="brand-wrapper-4 bg-cover" style={{ backgroundImage: `url(${BG1})` }}>
                 <div className="container">
-                    <h4 className="text-center">Chúng tôi được phục vụ bởi các  <span>thương hiệu lớn</span></h4>
+                    <h4 className="text-center">We are served by the<span>big brands</span></h4>
                     <div className="brand-items">
                         <div className="brand-logo">
                             <img src={Logo1} alt="img" />
