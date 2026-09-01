@@ -56,90 +56,90 @@ const ColorSizeSelector = ({ item, onUpdate, loading, type }) => {
 
         // Extended color mapping with variations
         const colorMap = {
-            // Tiếng Việt - Xanh dương variants
-            'xanh dương': '#3b82f6',
-            'xanh dương đậm': '#1d4ed8',
-            'xanh dương nhạt': '#60a5fa',
-            'xanh dương sáng': '#3b82f6',
-            'xanh dương tối': '#1e40af',
-            'xanh dương navy': '#1e3a8a',
-            'xanh dương royal': '#2563eb',
+            //Vietnamese - Blue variants
+            'blue': '#3b82f6',
+            'dark blue': '#1d4ed8',
+            'light blue': '#60a5fa',
+            'light blue': '#3b82f6',
+            'dark blue': '#1e40af',
+            'navy blue': '#1e3a8a',
+            'royal blue': '#2563eb',
 
-            // Tiếng Việt - Xanh lá variants  
+            //Vietnamese - Green variants
             'xanh lá': '#22c55e',
-            'xanh lá đậm': '#16a34a',
+            'dark green': '#16a34a',
             'xanh lá nhạt': '#4ade80',
             'xanh lá sáng': '#22c55e',
             'xanh lá tối': '#166534',
             'xanh lá olive': '#84cc16',
             'xanh lá cây': '#22c55e',
 
-            // Tiếng Việt - Xanh lam variants
+            //Vietnamese - Blue variants
             'xanh lam': '#06b6d4',
-            'xanh lam đậm': '#0891b2',
+            'dark blue': '#0891b2',
             'xanh lam nhạt': '#22d3ee',
             'xanh lam sáng': '#06b6d4',
             'xanh lam tối': '#164e63',
-            'xanh ngọc': '#14b8a6',
-            'xanh biển': '#0ea5e9',
+            'turquoise': '#14b8a6',
+            'sea blue': '#0ea5e9',
 
-            // Tiếng Việt - Đỏ variants
-            'đỏ': '#ef4444',
-            'đỏ đậm': '#dc2626',
-            'đỏ nhạt': '#f87171',
-            'đỏ sáng': '#ef4444',
-            'đỏ tối': '#991b1b',
-            'đỏ cherry': '#dc2626',
-            'đỏ hồng': '#f43f5e',
-            'đỏ cam': '#f97316',
+            //Vietnamese - Red variants
+            'red': '#ef4444',
+            'dark red': '#dc2626',
+            'light red': '#f87171',
+            'bright red': '#ef4444',
+            'dark red': '#991b1b',
+            'cherry red': '#dc2626',
+            'pinkish red': '#f43f5e',
+            'red-orange': '#f97316',
 
-            // Tiếng Việt - Vàng variants
+            //Vietnamese - Yellow variants
             'vàng': '#fbbf24',
-            'vàng đậm': '#f59e0b',
-            'vàng nhạt': '#fde047',
+            'deep yellow': '#f59e0b',
+            'light yellow': '#fde047',
             'vàng sáng': '#fbbf24',
-            'vàng tối': '#d97706',
+            'dark yellow': '#d97706',
             'vàng chanh': '#eab308',
             'vàng cam': '#f59e0b',
             'vàng gold': '#fbbf24',
 
-            // Tiếng Việt - Tím variants
+            //Vietnamese - Purple variants
             'tím': '#a855f7',
-            'tím đậm': '#9333ea',
-            'tím nhạt': '#c084fc',
+            'deep purple': '#9333ea',
+            'light purple': '#c084fc',
             'tím sáng': '#a855f7',
-            'tím tối': '#7c3aed',
+            'dark purple': '#7c3aed',
             'tím violet': '#8b5cf6',
             'tím lavender': '#c084fc',
 
-            // Tiếng Việt - Hồng variants
-            'hồng': '#ec4899',
-            'hồng đậm': '#db2777',
-            'hồng nhạt': '#f472b6',
-            'hồng sáng': '#ec4899',
-            'hồng tối': '#be185d',
-            'hồng rose': '#f43f5e',
+            //Vietnamese - Pink variants
+            'pink': '#ec4899',
+            'dark pink': '#db2777',
+            'Pale pink': '#f472b6',
+            'Bright pink': '#ec4899',
+            'Dark pink': '#be185d',
+            'Rose pink': '#f43f5e',
             'hồng pastel': '#f9a8d4',
 
-            // Tiếng Việt - Cam variants
+            //Vietnamese - Orange variants
             'cam': '#f97316',
-            'cam đậm': '#ea580c',
-            'cam nhạt': '#fb923c',
+            'Deep orange': '#ea580c',
+            'Light orange': '#fb923c',
             'cam sáng': '#f97316',
-            'cam tối': '#c2410c',
-            'cam đỏ': '#dc2626',
+            'Dark orange': '#c2410c',
+            'Red-orange': '#dc2626',
 
-            // Tiếng Việt - Basic colors
-            'đen': '#1f2937',
-            'trắng': '#ffffff',
+            //Vietnamese - Basic colors
+            'Black': '#1f2937',
+            'White': '#ffffff',
             'xám': '#9ca3af',
-            'xám đậm': '#6b7280',
-            'xám nhạt': '#d1d5db',
-            'xám tối': '#374151',
+            'Deep gray': '#6b7280',
+            'Light gray': '#d1d5db',
+            'Dark gray': '#374151',
             'nâu': '#a3a3a3',
-            'nâu đậm': '#78716c',
-            'nâu nhạt': '#d6d3d1',
-            'bạc': '#e5e7eb',
+            'Dark brown': '#78716c',
+            'Light brown': '#d6d3d1',
+            'Silver': '#e5e7eb',
 
             // English variants
             'blue': '#3b82f6',
@@ -222,7 +222,7 @@ const ColorSizeSelector = ({ item, onUpdate, loading, type }) => {
             { pattern: /(xanh|green).*?(lá|lime|forest)/, color: '#22c55e' },
             { pattern: /(xanh|cyan|turquoise).*?(lam|biển)/, color: '#06b6d4' },
 
-            // Đỏ patterns  
+            //Red patterns
             { pattern: /(đỏ|red).*?(đậm|dark|cherry)/, color: '#dc2626' },
             { pattern: /(đỏ|red).*?(nhạt|light|pink)/, color: '#f87171' },
 
@@ -244,10 +244,10 @@ const ColorSizeSelector = ({ item, onUpdate, loading, type }) => {
                 if (color) return color;
 
                 // Apply modifier to base color
-                if (modifier && name.includes('xanh dương')) {
+                if (modifier && name.includes('Blue')) {
                     return modifier === 'darken' ? '#1d4ed8' : '#60a5fa';
                 }
-                if (modifier && name.includes('đỏ')) {
+                if (modifier && name.includes('red')) {
                     return modifier === 'darken' ? '#dc2626' : '#f87171';
                 }
                 // Add more modifier logic as needed
@@ -255,7 +255,7 @@ const ColorSizeSelector = ({ item, onUpdate, loading, type }) => {
         }
 
         // Color name extraction
-        const colorKeywords = ['xanh', 'đỏ', 'vàng', 'tím', 'hồng', 'cam', 'đen', 'trắng', 'xám', 'nâu',
+        const colorKeywords = ['xanh', 'red', 'vàng', 'tím', 'Pink', 'cam', 'black', 'White', 'xám', 'nâu',
             'blue', 'red', 'yellow', 'purple', 'pink', 'orange', 'black', 'white', 'gray', 'brown'];
 
         for (const keyword of colorKeywords) {
@@ -274,10 +274,8 @@ const ColorSizeSelector = ({ item, onUpdate, loading, type }) => {
     }
 
     return (
-        <div className="color-size-selector">
-            {type === 'color' ? (
-                // Chỉ hiển thị màu mà không có dropdown
-                <div className="d-flex align-items-center">
+        <div className="color-size-selector">{type === 'color'? (
+ // Only display color without dropdown<div className="d-flex align-items-center">
                     {currentValue && (
                         <>
                             <div
@@ -295,7 +293,7 @@ const ColorSizeSelector = ({ item, onUpdate, loading, type }) => {
                             >
                                 {/* White border for light colors */}
                                 {(() => {
-                                    const lightColors = ['trắng', 'white', 'vàng', 'yellow', 'vàng nhạt', 'light yellow', 'vàng sáng', 'cream', 'beige'];
+                                    const lightColors = ['White', 'white', 'vàng', 'yellow', 'Light yellow', 'light yellow', 'vàng sáng', 'cream', 'beige'];
                                     const colorLower = currentValue.toLowerCase();
                                     const isLightColor = lightColors.some(lightColor => colorLower.includes(lightColor));
                                     return isLightColor && (
@@ -316,19 +314,15 @@ const ColorSizeSelector = ({ item, onUpdate, loading, type }) => {
                     {!currentValue && (
                         <span style={{ fontSize: '14px', color: '#999' }}>Không có màu</span>
                     )}
-                </div>
-            ) : (
-                // Hiển thị dropdown cho size
-                <select
+                </div>): (
+ // Display dropdown for size<select
                     value={currentValue}
                     onChange={(e) => handleChange(e.target.value)}
                     disabled={loading}
                     className="form-select form-select-sm size-selector"
                     style={{ fontSize: '14px', padding: '4px 8px' }}
                 >
-                    <option value="" >
-                        Chọn size
-                    </option>
+                    <option value="" >Select size</option>
                     {options.map((option, index) => (
                         <option key={index} value={option}>
                             {option}
