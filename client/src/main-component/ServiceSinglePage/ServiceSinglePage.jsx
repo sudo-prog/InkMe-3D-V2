@@ -45,10 +45,10 @@ const ServiceSinglePage = (props) => {
                                         Với công nghệ mô hình hóa và giao diện đơn giản, việc tạo ra một thiết kế mang dấu ấn cá nhân chưa bao giờ dễ dàng đến thế.
                                     </p>
 
-                                    <h3 className="mt-5 split-text right">Vì sao thiết kế cá nhân hóa lại quan trọng?</h3>
+                                    <h3 className="mt-5 split-text right">Why is personalized design important?</h3>
                                     <p className="mt-3">
                                         Trong thời đại mà ai cũng muốn thể hiện cái tôi riêng biệt, việc sở hữu một chiếc áo mang dấu ấn cá nhân giúp tạo ấn tượng mạnh mẽ, từ đó tăng sự tự tin và kết nối cộng đồng.
-                                        InkMe cho phép bạn "mặc" ý tưởng của chính mình – từ cá nhân, đội nhóm cho đến doanh nghiệp.
+                                        InkMe cho phép bạn "Wear" ý tưởng của chính mình – từ cá nhân, đội nhóm cho đến doanh nghiệp.
                                     </p>
 
                                     <div className="service-details-video">
@@ -63,23 +63,17 @@ const ServiceSinglePage = (props) => {
                                             </div>
                                             <div className="col-lg-6">
                                                 <div className="details-video-content">
-                                                    <h3 className="mb-3 split-text right">Tại sao nên dùng InkMe?</h3>
+                                                    <h3 className="mb-3 split-text right">Why use InkMe?</h3>
                                                     <p>
                                                         InkMe không chỉ là một công cụ thiết kế – mà còn là nền tảng sáng tạo mở, hỗ trợ mọi người hiện thực hóa ý tưởng một cách trực quan nhất.
                                                     </p>
                                                     <ul>
                                                         <li>
-                                                            <i className="fa-solid fa-circle-check"></i>
-                                                            Xem trước sản phẩm 3D như thật trước khi in
-                                                        </li>
+                                                            <i className="fa-solid fa-circle-check"></i>Realistic 3D product preview before printing</li>
                                                         <li>
-                                                            <i className="fa-solid fa-circle-check"></i>
-                                                            Cá nhân hóa toàn bộ thiết kế – màu sắc, hình ảnh, văn bản
-                                                        </li>
+                                                            <i className="fa-solid fa-circle-check"></i>Personalize the entire design – colors, images, text</li>
                                                         <li>
-                                                            <i className="fa-solid fa-circle-check"></i>
-                                                            Hỗ trợ xuất file thiết kế để chia sẻ hoặc in ấn
-                                                        </li>
+                                                            <i className="fa-solid fa-circle-check"></i>Support exporting design files for sharing or printing</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -92,32 +86,30 @@ const ServiceSinglePage = (props) => {
                                     </p>
 
                                     <div className="highlight-text">
-                                        <h5>
-                                            “Phong cách là vĩnh cửu – và giờ đây, bạn có thể tạo phong cách của chính mình chỉ trong vài phút.”
-                                        </h5>
+                                        <h5>“Style is eternal – and now, you can create your own style in just a few minutes.”</h5>
                                     </div>
 
                                     <div className="service-image-item">
                                         <div className="row g-4">
-                                            <h3>Hình ảnh thực tế:</h3>
+                                            <h3>Actual images:</h3>
                                             <div className="col-lg-7">
                                                 <div className="service-box-image">
-                                                    <img src={simg1} alt="ảnh thiết kế 1" />
+                                                    <img src={simg1} alt="design image 1" />
                                                 </div>
                                             </div>
                                             <div className="col-lg-5">
                                                 <div className="service-box-image">
-                                                    <img src={simg2} alt="ảnh thiết kế 2" />
+                                                    <img src={simg2} alt="design image 2" />
                                                 </div>
                                             </div>
                                             <div className="col-lg-5">
                                                 <div className="service-box-image">
-                                                    <img src={simg3} alt="ảnh thiết kế 3" />
+                                                    <img src={simg3} alt="design image 3" />
                                                 </div>
                                             </div>
                                             <div className="col-lg-7">
                                                 <div className="service-box-image">
-                                                    <img src={simg4} alt="ảnh thiết kế 4" />
+                                                    <img src={simg4} alt="design image 4" />
                                                 </div>
                                             </div>
                                         </div>

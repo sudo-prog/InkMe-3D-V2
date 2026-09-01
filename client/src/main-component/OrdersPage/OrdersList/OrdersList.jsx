@@ -31,7 +31,7 @@ const OrdersList = () => {
             setOrders(response || []);
         } catch (error) {
             console.error('Error fetching orders:', error);
-            setError('Không thể tải danh sách đơn hàng');
+            setError('Unable to load order list');
         } finally {
             setLoading(false);
         }
@@ -39,13 +39,13 @@ const OrdersList = () => {
 
     const getStatusBadge = (status) => {
         const statusConfig = {
-            'Unpaid': { color: 'warning', text: 'Chờ thanh toán', icon: 'fas fa-clock' },
-            'Paid': { color: 'info', text: 'Đã thanh toán', icon: 'fas fa-credit-card' },
-            'Processing': { color: 'primary', text: 'Đang xử lý', icon: 'fas fa-cog' },
-            'Shipping': { color: 'secondary', text: 'Đang giao hàng', icon: 'fas fa-truck' },
-            'Delivered': { color: 'success', text: 'Đã giao hàng', icon: 'fas fa-check-circle' },
-            'Cancelled': { color: 'danger', text: 'Đã hủy', icon: 'fas fa-times-circle' },
-            'Refunded': { color: 'dark', text: 'Đã hoàn tiền', icon: 'fas fa-undo' }
+            'Unpaid': { color: 'warning', text: 'Pending payment', icon: 'fas fa-clock' },
+            'Paid': { color: 'info', text: 'Paid', icon: 'fas fa-credit-card' },
+            'Processing': { color: 'primary', text: 'Processing', icon: 'fas fa-cog' },
+            'Shipping': { color: 'secondary', text: 'Shipping', icon: 'fas fa-truck' },
+            'Delivered': { color: 'success', text: 'Delivered', icon: 'fas fa-check-circle' },
+            'Cancelled': { color: 'danger', text: 'Cancelled', icon: 'fas fa-times-circle' },
+            'Refunded': { color: 'dark', text: 'Refunded', icon: 'fas fa-undo' }
         };
 
         const config = statusConfig[status] || { color: 'secondary', text: status, icon: 'fas fa-question' };
@@ -99,12 +99,12 @@ const OrdersList = () => {
     // Handle cancel order
     const handleCancelOrder = async (order) => {
         if (!canCancelOrder(order)) {
-            alert('Không thể hủy đơn hàng này.');
+            alert('Cannot cancel this order.');
             return;
         }
 
         const confirmCancel = window.confirm(
-            'Bạn có chắc chắn muốn hủy đơn hàng này? Hành động này không thể hoàn tác.'
+            'Are you sure you want to cancel this order? This action cannot be undone.'
         );
 
         if (confirmCancel) {
@@ -115,10 +115,10 @@ const OrdersList = () => {
                 fetchOrders();
 
                 // Show success message
-                alert('Đơn hàng đã được hủy thành công!');
+                alert('Order has been canceled successfully!');
             } catch (error) {
                 console.error('Cancel error:', error);
-                alert('Có lỗi xảy ra khi hủy đơn hàng. Vui lòng thử lại.');
+                alert('An error occurred while canceling the order. Please try again.');
             }
         }
     };
@@ -246,7 +246,7 @@ const OrdersList = () => {
                 <div className="spinner-border text-primary" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </div>
-                <p className="mt-3">Đang tải danh sách đơn hàng...</p>
+                <p className="mt-3">Loading order list.</p>
             </div>
         );
     }
@@ -255,12 +255,10 @@ const OrdersList = () => {
         return (
             <div className="orders-error">
                 <i className="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
-                <h5>Có lỗi xảy ra</h5>
+                <h5>An error occurred</h5>
                 <p>{error}</p>
                 <button className="btn btn-primary" onClick={fetchOrders}>
-                    <i className="fas fa-redo me-2"></i>
-                    Thử lại
-                </button>
+                    <i className="fas fa-redo me-2"></i>Try again</button>
             </div>
         );
     }
@@ -269,12 +267,10 @@ const OrdersList = () => {
         return (
             <div className="orders-empty">
                 <i className="fas fa-shopping-bag fa-3x text-muted mb-3"></i>
-                <h5>Chưa có đơn hàng nào</h5>
-                <p className="text-muted">Bạn chưa thực hiện đơn hàng nào</p>
+                <h5>No orders yet</h5>
+                <p className="text-muted">You haven't placed any orders</p>
                 <Link to="/shop" className="btn btn-primary">
-                    <i className="fas fa-shopping-cart me-2"></i>
-                    Mua sắm ngay
-                </Link>
+                    <i className="fas fa-shopping-cart me-2"></i>Shop now</Link>
             </div>
         );
     }
@@ -283,14 +279,10 @@ const OrdersList = () => {
         <div className="orders-list-container container">
             <div className="orders-header">
                 <h5 className="orders-title">
-                    <i className="fas fa-shopping-bag me-2"></i>
-                    Lịch sử đơn hàng ({filteredOrders.length}/{orders.length})
-                </h5>
+                    <i className="fas fa-shopping-bag me-2"></i>Order history ({filteredOrders.length}/{orders.length})</h5>
                 <button className="btn btn-outline-primary btn-sm" onClick={fetchOrders}
                 style={{color: 'white', fontSize: '14px'}}>
-                    <i className="fas fa-sync-alt me-1"></i>
-                    Làm mới
-                </button>
+                    <i className="fas fa-sync-alt me-1"></i>Refresh</button>
             </div>
 
             {/* Filter Controls */}
@@ -302,12 +294,10 @@ const OrdersList = () => {
                             style={{color: 'white', fontSize: '14px'}}>
                                 <i className="fas fa-search"
                                 style={{color: 'white', fontSize: '14px'}}
-                                ></i>
-                                Tìm kiếm
-                            </label>
+                                ></i>Search</label>
                             <input
                                 type="text"
-                                placeholder="Mã đơn hàng, tên..."
+                                placeholder="Order code, name."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="filter-input"
@@ -319,21 +309,19 @@ const OrdersList = () => {
                             style={{color: 'white', fontSize: '14px'}}>
                                 <i className="fas fa-filter"
                                 style={{color: 'white', fontSize: '14px'}}
-                                ></i>
-                                Trạng thái
-                            </label>
+                                ></i>Status</label>
                             <select
                                 value={statusFilter}
                                 onChange={(e) => setStatusFilter(e.target.value)}
                                 className="filter-select"
                             >
-                                <option value="all">Tất cả</option>
-                                <option value="Unpaid">Chờ thanh toán</option>
-                                <option value="Paid">Đã thanh toán</option>
-                                <option value="processing">Đang xử lý</option>
-                                <option value="shipped">Đã giao hàng</option>
-                                <option value="failed">Thất bại</option>
-                                <option value="cancelled">Đã hủy</option>
+                                <option value="all">All</option>
+                                <option value="Unpaid">Pending payment</option>
+                                <option value="Paid">Paid</option>
+                                <option value="processing">Processing</option>
+                                <option value="shipped">Delivered</option>
+                                <option value="failed">Failed</option>
+                                <option value="cancelled">Cancelled</option>
                             </select>
                         </div>
 
@@ -342,25 +330,23 @@ const OrdersList = () => {
                             style={{color: 'white', fontSize: '14px'}}>
                                 <i className="fas fa-sort"
                                 style={{color: 'white', fontSize: '14px'}}
-                                ></i>
-                                Sắp xếp
-                            </label>
+                                ></i>Sort</label>
                             <select
                                 value={sortBy}
                                 onChange={(e) => setSortBy(e.target.value)}
                                 className="filter-select"
                             >
-                                <option value="dateCreated">Ngày tạo</option>
-                                <option value="orderId">Mã đơn hàng</option>
-                                <option value="amount">Tổng tiền</option>
-                                <option value="status">Trạng thái</option>
+                                <option value="dateCreated">Created date</option>
+                                <option value="orderId">Order code</option>
+                                <option value="amount">Total amount</option>
+                                <option value="status">Status</option>
                             </select>
                         </div>
 
                         <button
                             className="btn btn-outline-secondary btn-sm sort-btn"
                             onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-                            title={sortOrder === 'asc' ? 'Tăng dần' : 'Giảm dần'}
+                            title={sortOrder === 'asc' ? 'Ascending' : 'Descending'}
                         >
                             <i className={`fas fa-sort-${sortOrder === 'asc' ? 'up' : 'down'}`}></i>
                         </button>
@@ -372,9 +358,7 @@ const OrdersList = () => {
                             style={{color: 'white', fontSize: '14px'}}>
                                 <i className="fas fa-calendar"
                                 style={{color: 'white', fontSize: '14px'}}
-                                ></i>
-                                Từ ngày
-                            </label>
+                                ></i>From date</label>
                             <input
                                 type="date"
                                 value={dateRange.start}
@@ -388,9 +372,7 @@ const OrdersList = () => {
                             style={{color: 'white', fontSize: '14px'}}>
                                 <i className="fas fa-calendar"
                                 style={{color: 'white', fontSize: '14px'}}
-                                ></i>
-                                Đến ngày
-                            </label>
+                                ></i>To date</label>
                             <input
                                 type="date"
                                 value={dateRange.end}
@@ -402,11 +384,9 @@ const OrdersList = () => {
                         <button
                             className="btn btn-outline-danger btn-sm clear-btn"
                             onClick={clearFilters}
-                            title="Xóa tất cả bộ lọc"
+                            title="Clear all filters"
                             style={{color: 'white', fontSize: '14px'}}
-                        >
-                            Xóa bộ lọc
-                        </button>
+                        >Clear filter</button>
                     </div>
                 </div>
             </div>
@@ -435,7 +415,7 @@ const OrdersList = () => {
                                 <div
                                     className="summary-item clickable"
                                     onClick={() => handleProductClick(order)}
-                                    title="Xem chi tiết sản phẩm"
+                                    title="View product details"
                                 >
                                     <i className="fas fa-box"></i>
                                     <span>{getTotalProducts(order.products)} sản phẩm</span>
@@ -479,9 +459,7 @@ const OrdersList = () => {
                                         })}
 
                                         {order.products.length > 2 && (
-                                            <div className="preview-more">
-                                                +{order.products.length - 2} sản phẩm khác
-                                            </div>
+                                            <div className="preview-more">+{order.products.length - 2} other products</div>
                                         )}
                                     </div>
                                 </div>
@@ -504,15 +482,15 @@ const OrdersList = () => {
                                         <button
                                             className="btn btn-danger btn-xs"
                                             onClick={() => handleCancelOrder(order)}
-                                            title="Hủy đơn hàng"
+                                            title="Cancel order"
                                         >
-                                            <span style={{color: 'white', fontSize: '14px', marginRight: '5px'}}>Hủy đơn hàng</span>
+                                            <span style={{color: 'white', fontSize: '14px', marginRight: '5px'}}>Cancel order</span>
                                             <i className="fas fa-times"></i>
                                         </button>
                                     )}
 
                                     {order.status === 'Delivered' && (
-                                        <button className="btn btn-warning btn-xs" title="Đánh giá">
+                                        <button className="btn btn-warning btn-xs" title="Review">
                                             <i className="fas fa-star"></i>
                                         </button>
                                     )}
@@ -542,9 +520,7 @@ const OrdersList = () => {
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
                             <h5 className="modal-title">
-                                <i className="fas fa-box me-2"></i>
-                                Chi tiết sản phẩm - Đơn hàng #{selectedOrder.orderId}
-                            </h5>
+                                <i className="fas fa-box me-2"></i>Product details - Order #{selectedOrder.orderId}</h5>
                             <button
                                 type="button"
                                 className="btn-close"
@@ -555,24 +531,22 @@ const OrdersList = () => {
                         <div className="modal-body">
                             <div className="order-info-summary">
                                 <div className="info-row">
-                                    <span className="info-label">Ngày đặt:</span>
+                                    <span className="info-label">Order date:</span>
                                     <span className="info-value">{formatDate(selectedOrder.dateCreated)}</span>
                                 </div>
                                 <div className="info-row">
-                                    <span className="info-label">Tổng tiền:</span>
+                                    <span className="info-label">Total amount:</span>
                                     <span className="info-value amount">{formatCurrency(selectedOrder.amount)}</span>
                                 </div>
                                 <div className="info-row">
-                                    <span className="info-label">Trạng thái:</span>
+                                    <span className="info-label">Status:</span>
                                     <span className="info-value">{getStatusBadge(selectedOrder.status)}</span>
                                 </div>
                             </div>
 
                             <div className="products-list">
                                 <h6 className="products-title">
-                                    <i className="fas fa-list me-2"></i>
-                                    Danh sách sản phẩm ({selectedOrder.products.length})
-                                </h6>
+                                    <i className="fas fa-list me-2"></i>Product list ({selectedOrder.products.length})</h6>
                                 {selectedOrder.products.map((product, index) => (
                                     <div key={index} className="product-item">
                                         <div className="product-header">
@@ -609,9 +583,7 @@ const OrdersList = () => {
                                         {product.classifications && product.classifications.length > 0 && (
                                             <div className="classifications-details">
                                                 <h6 className="classifications-title">
-                                                    <i className="fas fa-tags me-2"></i>
-                                                    Phân loại
-                                                </h6>
+                                                    <i className="fas fa-tags me-2"></i>Category</h6>
                                                 <div className="classifications-list">
                                                     {product.classifications.map((cls, clsIndex) => (
                                                         <div key={clsIndex} className="classification-item">
@@ -634,9 +606,7 @@ const OrdersList = () => {
                                 className="btn btn-secondary"
                                 onClick={closeProductModal}
                             >
-                                <i className="fas fa-times me-2"></i>
-                                Đóng
-                            </button>
+                                <i className="fas fa-times me-2"></i>Close</button>
                         </div>
                     </div>
                 </div>

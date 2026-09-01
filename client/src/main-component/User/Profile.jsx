@@ -65,11 +65,11 @@ const Profile = () => {
         try {
             setUpdateLoading(true);
             await updateUser(userId, personalInfo);
-            alert('Thông tin cá nhân đã được cập nhật thành công!');
+            alert('Personal information has been updated successfully!');
             fetchUserData();
         } catch (error) {
             console.error('Error updating personal info:', error);
-            alert('Có lỗi xảy ra khi cập nhật thông tin!');
+            alert('An error occurred while updating information!');
         } finally {
             setUpdateLoading(false);
         }
@@ -78,13 +78,13 @@ const Profile = () => {
     const handlePasswordChange = async (e) => {
         e.preventDefault();
         if (passwordForm.newPassword !== passwordForm.confirmPassword) {
-            alert('Mật khẩu xác nhận không khớp!');
+            alert('Confirmation password does not match!');
             return;
         }
         try {
             setUpdateLoading(true);
             await changePassword(userId, passwordForm.currentPassword, passwordForm.newPassword);
-            alert('Mật khẩu đã được thay đổi thành công!');
+            alert('Password changed successfully!');
             setPasswordForm({
                 currentPassword: '',
                 newPassword: '',
@@ -92,7 +92,7 @@ const Profile = () => {
             });
         } catch (error) {
             console.error('Error changing password:', error);
-            alert('Có lỗi xảy ra khi thay đổi mật khẩu!');
+            alert('An error occurred while changing the password!');
         } finally {
             setUpdateLoading(false);
         }
@@ -142,7 +142,7 @@ const Profile = () => {
                                             />
                                         </div>
                                         <div className="col">
-                                            <h3 className="profile-name">{userInfo?.name || 'Người dùng'}</h3>
+                                            <h3 className="profile-name">{userInfo?.name || 'User'}</h3>
                                             <p className="profile-email mb-0">{userInfo?.email}</p>
                                         </div>
                                     </div>
@@ -167,9 +167,7 @@ const Profile = () => {
                                                 onClick={() => setActiveTab('password')}
                                                 type="button"
                                             >
-                                                <i className="fas fa-lock me-2"></i>
-                                                Đổi mật khẩu
-                                            </button>
+                                                <i className="fas fa-lock me-2"></i>Change password</button>
                                         </li>
                                         <li className="nav-item" role="presentation">
                                             <button
@@ -177,9 +175,7 @@ const Profile = () => {
                                                 onClick={() => setActiveTab('address')}
                                                 type="button"
                                             >
-                                                <i className="fas fa-map-marker-alt me-2"></i>
-                                                Địa chỉ
-                                            </button>
+                                                <i className="fas fa-map-marker-alt me-2"></i>Address</button>
                                         </li>
                                         <li className="nav-item" role="presentation">
                                             <button
@@ -187,9 +183,7 @@ const Profile = () => {
                                                 onClick={() => setActiveTab('orders')}
                                                 type="button"
                                             >
-                                                <i className="fas fa-shopping-bag me-2"></i>
-                                                Đơn hàng
-                                            </button>
+                                                <i className="fas fa-shopping-bag me-2"></i>Orders</button>
                                         </li>
                                         <li className="nav-item" role="presentation">
                                             <button
@@ -197,9 +191,7 @@ const Profile = () => {
                                                 onClick={() => setActiveTab('settings')}
                                                 type="button"
                                             >
-                                                <i className="fas fa-cog me-2"></i>
-                                                Cài đặt
-                                            </button>
+                                                <i className="fas fa-cog me-2"></i>Settings</button>
                                         </li>
                                     </ul>
 
@@ -216,7 +208,7 @@ const Profile = () => {
                                                     <div className="row">
                                                         <div className="col-md-6 mb-3">
                                                             <i className="fas fa-user me-2"></i>
-                                                            <label htmlFor="name" className="profile-form-label">Họ và tên *</label>
+                                                            <label htmlFor="name" className="profile-form-label">Full name *</label>
                                                             <input
                                                                 type="text"
                                                                 className="form-control profile-form-control"
@@ -240,7 +232,7 @@ const Profile = () => {
                                                         </div>
                                                         <div className="col-md-6 mb-3">
                                                             <i className="fas fa-phone me-2"></i>
-                                                            <label htmlFor="phone" className="profile-form-label">Số điện thoại</label>
+                                                            <label htmlFor="phone" className="profile-form-label">Phone number</label>
                                                             <input
                                                                 type="tel"
                                                                 className="form-control profile-form-control"
@@ -262,16 +254,16 @@ const Profile = () => {
                                                         </div>
                                                         <div className="col-md-6 mb-3">
                                                             <i className="fas fa-venus-mars me-2"></i>
-                                                            <label htmlFor="gender" className="profile-form-label">Giới tính</label>
+                                                            <label htmlFor="gender" className="profile-form-label">Gender</label>
                                                             <select
                                                                 className="form-select profile-form-control"
                                                                 id="gender"
                                                                 value={personalInfo.gender}
                                                                 onChange={(e) => setPersonalInfo({ ...personalInfo, gender: e.target.value })}
                                                             >
-                                                                <option value="">Chọn giới tính</option>
+                                                                <option value="">Select gender</option>
                                                                 <option value="male">Nam</option>
-                                                                <option value="female">Nữ</option>
+                                                                <option value="female">Female</option>
                                                                 <option value="other">Khác</option>
                                                             </select>
                                                         </div>
@@ -284,14 +276,10 @@ const Profile = () => {
                                                         >
                                                             {updateLoading ? (
                                                                 <>
-                                                                    <span className="spinner-border spinner-border-sm me-2" role="status"></span>
-                                                                    Đang cập nhật...
-                                                                </>
+                                                                    <span className="spinner-border spinner-border-sm me-2" role="status"></span>Updating.</>
                                                             ) : (
                                                                 <>
-                                                                    <i className="fas fa-save me-2"></i>
-                                                                    Cập nhật thông tin
-                                                                </>
+                                                                    <i className="fas fa-save me-2"></i>Update information</>
                                                             )}
                                                         </button>
                                                     </div>
@@ -303,14 +291,12 @@ const Profile = () => {
                                         {activeTab === 'password' && (
                                             <div className="tab-pane fade show active">
                                                 <h5 className="tab-title">
-                                                    <i className="fas fa-lock me-2"></i>
-                                                    Đổi mật khẩu
-                                                </h5>
+                                                    <i className="fas fa-lock me-2"></i>Change password</h5>
                                                 <form onSubmit={handlePasswordChange}>
                                                     <div className="row">
                                                         <div className="col-md-8 mx-auto">
                                                             <div className="mb-3">
-                                                                <label htmlFor="currentPassword" className="profile-form-label">Mật khẩu hiện tại *</label>
+                                                                <label htmlFor="currentPassword" className="profile-form-label">Current password *</label>
                                                                 <input
                                                                     type="password"
                                                                     className="form-control profile-form-control"
@@ -321,7 +307,7 @@ const Profile = () => {
                                                                 />
                                                             </div>
                                                             <div className="mb-3">
-                                                                <label htmlFor="newPassword" className="profile-form-label">Mật khẩu mới *</label>
+                                                                <label htmlFor="newPassword" className="profile-form-label">New password *</label>
                                                                 <input
                                                                     type="password"
                                                                     className="form-control profile-form-control"
@@ -331,10 +317,10 @@ const Profile = () => {
                                                                     required
                                                                     minLength="6"
                                                                 />
-                                                                <div className="form-text">Mật khẩu phải có ít nhất 6 ký tự</div>
+                                                                <div className="form-text">Password must be at least 6 characters</div>
                                                             </div>
                                                             <div className="mb-4">
-                                                                <label htmlFor="confirmPassword" className="profile-form-label">Xác nhận mật khẩu mới *</label>
+                                                                <label htmlFor="confirmPassword" className="profile-form-label">Confirm new password *</label>
                                                                 <input
                                                                     type="password"
                                                                     className="form-control profile-form-control"
@@ -352,14 +338,10 @@ const Profile = () => {
                                                                 >
                                                                     {updateLoading ? (
                                                                         <>
-                                                                            <span className="spinner-border spinner-border-sm me-2" role="status"></span>
-                                                                            Đang thay đổi...
-                                                                        </>
+                                                                            <span className="spinner-border spinner-border-sm me-2" role="status"></span>Changing...</>
                                                                     ) : (
                                                                         <>
-                                                                            <i className="fas fa-key me-2"></i>
-                                                                            Đổi mật khẩu
-                                                                        </>
+                                                                            <i className="fas fa-key me-2"></i>Change password</>
                                                                     )}
                                                                 </button>
                                                             </div>
@@ -391,9 +373,7 @@ const Profile = () => {
                                         {activeTab === 'settings' && (
                                             <div className="tab-pane fade show active">
                                                 <h5 className="tab-title">
-                                                    <i className="fas fa-cog me-2"></i>
-                                                    Cài đặt tài khoản
-                                                </h5>
+                                                    <i className="fas fa-cog me-2"></i>Account settings</h5>
                                                 <div className="row">
                                                     <div className="col-md-8">
                                                         <div className="card settings-card">
@@ -401,30 +381,22 @@ const Profile = () => {
                                                                 <h6 className="card-title">Thông báo</h6>
                                                                 <div className="form-check form-switch mb-3">
                                                                     <input className="form-check-input" type="checkbox" id="emailNotifications" defaultChecked />
-                                                                    <label className="form-check-label" htmlFor="emailNotifications">
-                                                                        Nhận thông báo qua email
-                                                                    </label>
+                                                                    <label className="form-check-label" htmlFor="emailNotifications">Receive notifications via email</label>
                                                                 </div>
                                                                 <div className="form-check form-switch mb-3">
                                                                     <input className="form-check-input" type="checkbox" id="smsNotifications" />
-                                                                    <label className="form-check-label" htmlFor="smsNotifications">
-                                                                        Nhận thông báo qua SMS
-                                                                    </label>
+                                                                    <label className="form-check-label" htmlFor="smsNotifications">Receive notifications via SMS</label>
                                                                 </div>
                                                                 <div className="form-check form-switch mb-3">
                                                                     <input className="form-check-input" type="checkbox" id="promotionNotifications" defaultChecked />
-                                                                    <label className="form-check-label" htmlFor="promotionNotifications">
-                                                                        Nhận thông báo khuyến mãi
-                                                                    </label>
+                                                                    <label className="form-check-label" htmlFor="promotionNotifications">Receive promotional notifications</label>
                                                                 </div>
 
                                                                 <div className="danger-zone">
-                                                                    <h6>Vùng nguy hiểm</h6>
-                                                                    <p className="text-muted small">Các hành động này không thể hoàn tác</p>
+                                                                    <h6>Danger Zone</h6>
+                                                                    <p className="text-muted small">These actions cannot be undone</p>
                                                                     <button className="btn btn-profile-danger">
-                                                                        <i className="fas fa-user-times me-2"></i>
-                                                                        Vô hiệu hóa tài khoản
-                                                                    </button>
+                                                                        <i className="fas fa-user-times me-2"></i>Disable account</button>
                                                                 </div>
                                                             </div>
                                                         </div>

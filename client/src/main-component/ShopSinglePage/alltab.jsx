@@ -25,9 +25,7 @@ const Alltab = (props) => {
                     </button>
                 </li> */}
                 <li className="nav-item">
-                    <button className={`nav-link ${activeTab === 'Tab2' ? 'active' : ''}`} onClick={() => openTab('Tab2')}>
-                        Thông tin sản phẩm
-                    </button>
+                    <button className={`nav-link ${activeTab === 'Tab2' ? 'active' : ''}`} onClick={() => openTab('Tab2')}>Product information</button>
                 </li>
                 {/* <li className="nav-item">
                     <button className={`nav-link ${activeTab === 'Tab3' ? 'active' : ''}`} onClick={() => openTab('Tab3')}>
@@ -95,11 +93,11 @@ const Alltab = (props) => {
                             <thead>
                                 <tr>
                                     <th>Size</th>
-                                    <th>Độ dài áo</th>
+                                    <th>Shirt length</th>
                                     <th>Ngang áo</th>
                                     <th>Dài tay</th>
-                                    <th>Chiều cao</th>
-                                    <th>Cân nặng</th>
+                                    <th>Height</th>
+                                    <th>Weight</th>
                                 </tr>
                             </thead>
                             <tbody>

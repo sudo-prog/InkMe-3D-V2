@@ -25,90 +25,90 @@ const Product = ({ product }) => {
 
     // Extended color mapping with variations
     const colorMap = {
-      // Tiếng Việt - Xanh dương variants
-      'xanh dương': '#3b82f6',
-      'xanh dương đậm': '#1d4ed8',
-      'xanh dương nhạt': '#60a5fa',
-      'xanh dương sáng': '#3b82f6',
-      'xanh dương tối': '#1e40af',
-      'xanh dương navy': '#1e3a8a',
-      'xanh dương royal': '#2563eb',
+      //Vietnamese - Blue variants
+      'Blue': '#3b82f6',
+      'Deep blue': '#1d4ed8',
+      'Light blue': '#60a5fa',
+      'Bright blue': '#3b82f6',
+      'Dark blue': '#1e40af',
+      'Navy blue': '#1e3a8a',
+      'Royal blue': '#2563eb',
 
-      // Tiếng Việt - Xanh lá variants  
+      //Vietnamese - Green variants
       'xanh lá': '#22c55e',
-      'xanh lá đậm': '#16a34a',
+      'Dark green': '#16a34a',
       'xanh lá nhạt': '#4ade80',
       'xanh lá sáng': '#22c55e',
       'xanh lá tối': '#166534',
       'xanh lá olive': '#84cc16',
       'xanh lá cây': '#22c55e',
 
-      // Tiếng Việt - Xanh lam variants
+      //Vietnamese - Blue variants
       'xanh lam': '#06b6d4',
-      'xanh lam đậm': '#0891b2',
+      'Dark blue': '#0891b2',
       'xanh lam nhạt': '#22d3ee',
       'xanh lam sáng': '#06b6d4',
       'xanh lam tối': '#164e63',
-      'xanh ngọc': '#14b8a6',
-      'xanh biển': '#0ea5e9',
+      'Turquoise': '#14b8a6',
+      'Sea blue': '#0ea5e9',
 
-      // Tiếng Việt - Đỏ variants
-      'đỏ': '#ef4444',
-      'đỏ đậm': '#dc2626',
-      'đỏ nhạt': '#f87171',
-      'đỏ sáng': '#ef4444',
-      'đỏ tối': '#991b1b',
-      'đỏ cherry': '#dc2626',
-      'đỏ hồng': '#f43f5e',
-      'đỏ cam': '#f97316',
+      //Vietnamese - Red variants
+      'red': '#ef4444',
+      'deep red': '#dc2626',
+      'light red': '#f87171',
+      'bright red': '#ef4444',
+      'dark red': '#991b1b',
+      'cherry red': '#dc2626',
+      'red pink': '#f43f5e',
+      'red orange': '#f97316',
 
-      // Tiếng Việt - Vàng variants
+      //Vietnamese - Gold variants
       'vàng': '#fbbf24',
-      'vàng đậm': '#f59e0b',
-      'vàng nhạt': '#fde047',
+      'Deep yellow': '#f59e0b',
+      'Light yellow': '#fde047',
       'vàng sáng': '#fbbf24',
-      'vàng tối': '#d97706',
+      'Dark yellow': '#d97706',
       'vàng chanh': '#eab308',
       'vàng cam': '#f59e0b',
       'vàng gold': '#fbbf24',
 
-      // Tiếng Việt - Tím variants
+      //Vietnamese - Purple variants
       'tím': '#a855f7',
-      'tím đậm': '#9333ea',
-      'tím nhạt': '#c084fc',
+      'Deep purple': '#9333ea',
+      'Light purple': '#c084fc',
       'tím sáng': '#a855f7',
-      'tím tối': '#7c3aed',
+      'Dark purple': '#7c3aed',
       'tím violet': '#8b5cf6',
       'tím lavender': '#c084fc',
 
-      // Tiếng Việt - Hồng variants
-      'hồng': '#ec4899',
-      'hồng đậm': '#db2777',
-      'hồng nhạt': '#f472b6',
-      'hồng sáng': '#ec4899',
-      'hồng tối': '#be185d',
-      'hồng rose': '#f43f5e',
+      //Vietnamese - Pink variants
+      'Pink': '#ec4899',
+      'Deep pink': '#db2777',
+      'Pale pink': '#f472b6',
+      'Light pink': '#ec4899',
+      'Dark pink': '#be185d',
+      'Rose pink': '#f43f5e',
       'hồng pastel': '#f9a8d4',
 
-      // Tiếng Việt - Cam variants
+      //Vietnamese - Orange variants
       'cam': '#f97316',
-      'cam đậm': '#ea580c',
-      'cam nhạt': '#fb923c',
+      'Deep orange': '#ea580c',
+      'Light orange': '#fb923c',
       'cam sáng': '#f97316',
-      'cam tối': '#c2410c',
-      'cam đỏ': '#dc2626',
+      'Dark orange': '#c2410c',
+      'Red-orange': '#dc2626',
 
-      // Tiếng Việt - Basic colors
-      'đen': '#1f2937',
-      'trắng': '#ffffff',
+      //Vietnamese - Basic colors
+      'Black': '#1f2937',
+      'White': '#ffffff',
       'xám': '#9ca3af',
-      'xám đậm': '#6b7280',
-      'xám nhạt': '#d1d5db',
-      'xám tối': '#374151',
+      'Dark grey': '#6b7280',
+      'Light grey': '#d1d5db',
+      'Dark grey': '#374151',
       'nâu': '#a3a3a3',
-      'nâu đậm': '#78716c',
-      'nâu nhạt': '#d6d3d1',
-      'bạc': '#e5e7eb',
+      'Dark brown': '#78716c',
+      'Light brown': '#d6d3d1',
+      'Silver': '#e5e7eb',
 
       // English variants
       'blue': '#3b82f6',
@@ -191,7 +191,7 @@ const Product = ({ product }) => {
       { pattern: /(xanh|green).*?(lá|lime|forest)/, color: '#22c55e' },
       { pattern: /(xanh|cyan|turquoise).*?(lam|biển)/, color: '#06b6d4' },
 
-      // Đỏ patterns  
+      //Red patterns
       { pattern: /(đỏ|red).*?(đậm|dark|cherry)/, color: '#dc2626' },
       { pattern: /(đỏ|red).*?(nhạt|light|pink)/, color: '#f87171' },
 
@@ -213,10 +213,10 @@ const Product = ({ product }) => {
         if (color) return color;
 
         // Apply modifier to base color
-        if (modifier && name.includes('xanh dương')) {
+        if (modifier && name.includes('Blue')) {
           return modifier === 'darken' ? '#1d4ed8' : '#60a5fa';
         }
-        if (modifier && name.includes('đỏ')) {
+        if (modifier && name.includes('Red')) {
           return modifier === 'darken' ? '#dc2626' : '#f87171';
         }
         // Add more modifier logic as needed
@@ -224,7 +224,7 @@ const Product = ({ product }) => {
     }
 
     // Color name extraction
-    const colorKeywords = ['xanh', 'đỏ', 'vàng', 'tím', 'hồng', 'cam', 'đen', 'trắng', 'xám', 'nâu',
+    const colorKeywords = ['xanh', 'Red', 'vàng', 'tím', 'Pink', 'cam', 'Black', 'White', 'xám', 'nâu',
       'blue', 'red', 'yellow', 'purple', 'pink', 'orange', 'black', 'white', 'gray', 'brown'];
 
     for (const keyword of colorKeywords) {
@@ -261,7 +261,7 @@ const Product = ({ product }) => {
       context.setAlterBox({
         open: true,
         error: true,
-        message: "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng",
+        message: "Please log in to add products to the cart",
       });
       setTimeout(() => {
         navigate('/login');
@@ -453,7 +453,7 @@ const Product = ({ product }) => {
                   backgroundColor: '#f8f9fa',
                   borderRadius: '8px'
                 }}>
-                <span>Không có ảnh</span>
+                <span>No image</span>
               </div>
             )}
           </div>
@@ -512,7 +512,7 @@ const Product = ({ product }) => {
           {/* Color Selection */}
           {product.color && product.color.length > 0 && (
             <div className="color-selection mb-3">
-              <span className="fw-bold">Màu sắc:</span>
+              <span className="fw-bold">Color:</span>
               {selectedColor && (
                 <span className="ms-2 text-muted">({selectedColor})</span>
               )}
@@ -541,7 +541,7 @@ const Product = ({ product }) => {
                     >
                       {/* White border for light colors */}
                       {(() => {
-                        const lightColors = ['trắng', 'white', 'vàng', 'yellow', 'vàng nhạt', 'light yellow', 'vàng sáng', 'cream', 'beige'];
+                        const lightColors = ['White', 'white', 'vàng', 'yellow', 'Light Yellow', 'light yellow', 'vàng sáng', 'cream', 'beige'];
                         const colorLower = color.toLowerCase();
                         const isLightColor = lightColors.some(lightColor => colorLower.includes(lightColor));
                         return isLightColor && (
@@ -568,7 +568,7 @@ const Product = ({ product }) => {
           {/* Size Selection */}
           {product.productSize && product.productSize.length > 0 && (
             <div className="size-selection mb-3">
-              <span className="fw-bold">Kích thước:</span>
+              <span className="fw-bold">Size:</span>
               <div className={`size-options mt-2 ${tabError && !selectedSize ? 'error' : ''}`}>
                 {product.productSize.map((size, index) => (
                   <button
@@ -588,7 +588,7 @@ const Product = ({ product }) => {
 
           {/* Quantity Selection */}
           <div className="quantity-selection mb-4">
-            <span className="fw-bold">Số lượng:</span>
+            <span className="fw-bold">Quantity:</span>
             <div className="quantity-controls d-flex align-items-center mt-2">
               <button
                 className="btn btn-outline-secondary"
@@ -618,9 +618,7 @@ const Product = ({ product }) => {
                   cursor: context.addingInCart ? 'not-allowed' : 'pointer'
                 }}
               >
-                <BsCartFill className="me-2" />
-                {context.addingInCart ? "Đang thêm..." : "Thêm vào giỏ hàng"}
-              </button>
+                <BsCartFill className="me-2" />{context.addingInCart? "Adding...": "Add to cart"}
               <Link to="#" className="star-icon">
                 <i className="fal fa-star"></i>
               </Link>

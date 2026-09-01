@@ -10,7 +10,7 @@ const OrdersPage = () => {
     return (
         <>
             <NavbarS2 hclass={'header-section-2 style-two'} />
-            <PageTitle pageTitle={'InkMe - 3D Printing'} pagesub={'Đơn hàng của tôi'} />
+            <PageTitle pageTitle={'InkMe - 3D Printing'} pagesub={'My order'} />
             <div className="orders-page-wrapper">
                 <div className="container-fluid">
                     <OrdersList />
