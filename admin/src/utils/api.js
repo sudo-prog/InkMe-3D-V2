@@ -1,14 +1,14 @@
 import axios from "axios";
 
-// Thiết lập base URL
+//Set up base URL
 const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || "http://localhost:4000";
 
-// Tạo axios instance với cấu hình mặc định
+//Create axios instance with default configuration
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
 });
 
-// Thêm interceptor để tự động gửi token
+//Add interceptor to automatically send token
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -22,12 +22,12 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// Interceptor để xử lý response errors
+//Interceptor to handle response errors
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token hết hạn hoặc không hợp lệ
+      //Token expired or invalid
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/login';
@@ -48,7 +48,7 @@ export const fetchDataFromApi = async (url) => {
 
 export const postData = async (url, formData) => {
   try {
-    // Sử dụng axios thay vì fetch để tận dụng interceptor
+    //Use axios instead of fetch to take advantage of interceptors
     const response = await axiosInstance.post(url, formData);
     return response.data;
   } catch (error) {
