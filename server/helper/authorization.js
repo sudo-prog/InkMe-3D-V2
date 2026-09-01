@@ -1,9 +1,9 @@
 const { User } = require("../models/user");
 
-// Middleware kiểm tra user có tồn tại và active không
+//Middleware checks if the user exists and is active
 const checkUserStatus = async (req, res, next) => {
     try {
-        const userId = req.auth.id; // req.auth được set bởi JWT middleware
+        const userId = req.auth.id; //Req.auth is set by the JWT middleware
 
         const user = await User.findById(userId);
 
@@ -28,7 +28,7 @@ const checkUserStatus = async (req, res, next) => {
             });
         }
 
-        // Gắn thông tin user vào request để sử dụng ở middleware tiếp theo
+        //Attach user information to the request for use in the next middleware
         req.user = user;
         next();
 
@@ -41,10 +41,10 @@ const checkUserStatus = async (req, res, next) => {
     }
 };
 
-// Middleware kiểm tra quyền admin
+//Middleware checks for admin privileges
 const requireAdmin = async (req, res, next) => {
     try {
-        // Kiểm tra user đã được set bởi checkUserStatus middleware
+        //Check if the user has been set by the checkUserStatus middleware
         if (!req.user) {
             return res.status(401).json({
                 error: true,
@@ -70,19 +70,19 @@ const requireAdmin = async (req, res, next) => {
     }
 };
 
-// Middleware kiểm tra ownership (user chỉ có thể truy cập data của chính mình)
+//Middleware checks ownership (user can only access their own data)
 const requireOwnership = (resourceField = 'userId') => {
     return async (req, res, next) => {
         try {
             const userId = req.auth.id;
             const resourceUserId = req.params[resourceField] || req.body[resourceField];
 
-            // Admin có thể truy cập tất cả
+            //Admin can access everything
             if (req.user && req.user.isAdmin) {
                 return next();
             }
 
-            // User chỉ có thể truy cập data của chính mình
+            //User can only access their own data
             if (userId !== resourceUserId) {
                 return res.status(403).json({
                     error: true,
@@ -102,19 +102,19 @@ const requireOwnership = (resourceField = 'userId') => {
     };
 };
 
-// Middleware cho phép cả admin và owner truy cập
+//Middleware allows both admin and owner access
 const requireAdminOrOwner = (resourceField = 'userId') => {
     return async (req, res, next) => {
         try {
             const userId = req.auth.id;
             const resourceUserId = req.params[resourceField] || req.body[resourceField];
 
-            // Admin có thể truy cập tất cả
+            //Admin can access everything
             if (req.user && req.user.isAdmin) {
                 return next();
             }
 
-            // Owner có thể truy cập data của mình
+            //Owner can access their own data
             if (userId === resourceUserId) {
                 return next();
             }
@@ -134,7 +134,7 @@ const requireAdminOrOwner = (resourceField = 'userId') => {
     };
 };
 
-// Middleware kiểm tra user đã login (chỉ cần JWT hợp lệ)
+//Middleware checks if the user is logged in (only requires a valid JWT)
 const requireAuth = (req, res, next) => {
     if (!req.auth || !req.auth.id) {
         return res.status(401).json({

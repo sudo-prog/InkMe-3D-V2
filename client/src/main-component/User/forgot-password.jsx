@@ -186,9 +186,9 @@ const ForgotPassword = () => {
     const newErrors = {};
 
     if (!emailOrPhone.trim()) {
-      newErrors.emailOrPhone = "Email hoặc số điện thoại không được để trống";
+      newErrors.emailOrPhone = "Email or phone number cannot be left blank";
     } else if (!validateEmail(emailOrPhone) && !validatePhone(emailOrPhone)) {
-      newErrors.emailOrPhone = "Vui lòng nhập email hoặc số điện thoại hợp lệ";
+      newErrors.emailOrPhone = "Please enter a valid email or phone number";
     }
 
     setErrors(newErrors);
@@ -225,13 +225,13 @@ const ForgotPassword = () => {
         context.setAlterBox({
           open: true,
           error: true,
-          message: response.message || "Xử lý yêu cầu thất bại",
+          message: response.message || "Request processing failed",
         });
       } else {
         context.setAlterBox({
           open: true,
           error: false,
-          message: response.message || "Link đặt lại mật khẩu đã được gửi về email của bạn",
+          message: response.message || "The password reset link has been sent to your email",
         });
         setEmailOrPhone("");
         setErrors({});
@@ -241,7 +241,7 @@ const ForgotPassword = () => {
       context.setAlterBox({
         open: true,
         error: true,
-        message: "Có lỗi xảy ra. Vui lòng thử lại sau.",
+        message: "An error occurred. Please try again later.",
       });
     } finally {
       setLoading(false);
@@ -262,8 +262,8 @@ const ForgotPassword = () => {
               <div className="forgot-password-box modern-card">
                 <div className="logo text-center mb-4">
                   <img src={Logo} alt="logo" width="150px" />
-                  <h2 className="forgot-title">Quên mật khẩu?</h2>
-                  <p className="forgot-subtitle">Nhập email hoặc số điện thoại để nhận link đặt lại mật khẩu</p>
+                  <h2 className="forgot-title">Forgot password?</h2>
+                  <p className="forgot-subtitle">Enter email or phone number to receive a password reset link</p>
                 </div>
 
                 <div className="wrapper">
@@ -278,7 +278,7 @@ const ForgotPassword = () => {
                       <input
                         type="text"
                         className={`form-control ${errors.emailOrPhone ? 'is-invalid' : ''}`}
-                        placeholder="Nhập email hoặc số điện thoại"
+                        placeholder="Enter email or phone number"
                         onFocus={() => focusInput(0)}
                         onBlur={() => setInputIndex(null)}
                         value={emailOrPhone}
@@ -294,17 +294,13 @@ const ForgotPassword = () => {
                           <>
                             <CircularProgress size={20} color="inherit" className="me-2" />
                             Đang xử lý...
-                          </>
-                        ) : (
-                          "Gửi yêu cầu"
-                        )}
-                      </Button>
+                          </>): (
+ "Send request"
+ )} </Button>
                     </div>
 
                     <div className="form-group text-center mt-3">
-                      <Link to="/login" className="back-link">
-                        ← Quay lại đăng nhập
-                      </Link>
+                      <Link to="/login" className="back-link">← Back to login</Link>
                     </div>
                   </form>
                 </div>
