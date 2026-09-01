@@ -42,13 +42,13 @@ const ShopPage = ({ addToCart }) => {
     return (
         <Fragment>
             <SocialMetaTags 
-                title="InkMe Shop - Sản phẩm in ấn chuyên nghiệp"
-                description="Khám phá bộ sưu tập sản phẩm in ấn của InkMe: áo thun, hoodie, túi xách và nhiều sản phẩm khác. Thiết kế 3D online, chất lượng cao, giá cả phù hợp."
+                title="InkMe Shop - Professional Printing Products"
+                description="Explore InkMe's collection of printed products: t-shirts, hoodies, bags, and more. Online 3D design, high quality, affordable prices."
                 image="/inkme_thumbnail.png"
                 url="/shop"
             />
             <NavbarS2 hclass={'header-section-2 style-two'} />
-            <PageTitle pageTitle={'InkMe - Dịch vụ in ấn 3D'} pagesub={'Cửa hàng'} />
+            <PageTitle pageTitle={'InkMe - 3D Printing Services'} pagesub={'Store'} />
             <ShopProduct
                 addToCartProduct={addToCartProduct}
                 products={products}

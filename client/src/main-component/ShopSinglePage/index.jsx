@@ -62,7 +62,7 @@ const ProductSinglePage = () => {
                                 <div className="spinner-border" role="status">
                                     <span className="visually-hidden">Loading...</span>
                                 </div>
-                                <p className="mt-3">Đang tải sản phẩm...</p>
+                                <p className="mt-3">Loading products.</p>
                             </div>
                         </div>
                     </div>
@@ -82,14 +82,12 @@ const ProductSinglePage = () => {
                     <div className="container">
                         <div className="product-details-wrapper">
                             <div className="text-center">
-                                <h4 className="text-danger">Lỗi</h4>
+                                <h4 className="text-danger">Error</h4>
                                 <p>{error}</p>
                                 <button
                                     className="btn btn-primary"
                                     onClick={() => window.location.reload()}
-                                >
-                                    Thử lại
-                                </button>
+                                >Try again</button>
                             </div>
                         </div>
                     </div>
@@ -103,7 +101,7 @@ const ProductSinglePage = () => {
     return (
         <Fragment>
             <NavbarS2 hclass={'header-section-2 style-two'} />
-            <PageTitle pageTitle={'InkMe3D'} pagesub={'Thông tin sản phẩm'} />
+            <PageTitle pageTitle={'InkMe3D'} pagesub={'Product information'} />
             <section className="product-details-section section-padding section-bg-2">
                 <div className="container">
                     <div className="product-details-wrapper">
