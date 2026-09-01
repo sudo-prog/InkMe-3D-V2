@@ -44,10 +44,10 @@ const MyProvider = ({ children }) => {
 
   // Fetch category data
   useEffect(() => {
-    // Chỉ fetch khi đã đăng nhập (có token và userId)
+    //Only fetch when logged in (token and userId are present)
     const token = localStorage.getItem('token');
     if (token && user?.userId) {
-      // Thêm delay nhỏ để đảm bảo context đã được update
+      //Add a small delay to ensure the context has been updated
       const timeoutId = setTimeout(async () => {
         const fetchData = async () => {
           try {
@@ -129,7 +129,7 @@ const MyProvider = ({ children }) => {
   const addToCart = async (cartItem) => {
     if (!user?.userId) {
       setAlterBox({
-        message: "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng",
+        message: "Please log in to add products to the cart",
         error: true,
         open: true,
       });
@@ -177,13 +177,13 @@ const MyProvider = ({ children }) => {
         });
 
         setAlterBox({
-          message: "Sản phẩm đã được thêm vào giỏ hàng",
+          message: "The product has been added to the cart",
           error: false,
           open: true,
         });
       } else {
         setAlterBox({
-          message: response.message || "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng",
+          message: response.message || "An error occurred while adding the product to the cart",
           error: true,
           open: true,
         });
@@ -191,7 +191,7 @@ const MyProvider = ({ children }) => {
     } catch (error) {
       console.error("Error adding to cart:", error);
       setAlterBox({
-        message: "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng",
+        message: "An error occurred while adding the product to the cart",
         error: true,
         open: true,
       });

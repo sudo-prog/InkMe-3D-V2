@@ -57,13 +57,13 @@ const ShopSidebar = ({
         <div className="shop-main-sidebar">
             <div className="single-sidebar-widget">
                 <div className="wid-title">
-                    <h4>Tìm kiếm sản phẩm</h4>
+                    <h4>Search products</h4>
                 </div>
                 <div className="search_widget">
                     <form action="#">
                         <input
                             type="text"
-                            placeholder="Tìm kiếm sản phẩm"
+                            placeholder="Search products"
                             value={searchTerm}
                             onChange={handleSearchChange}
                             className="search-input"
@@ -78,7 +78,7 @@ const ShopSidebar = ({
 
             <div className="single-sidebar-widget">
                 <div className="wid-title">
-                    <h4>Danh mục</h4>
+                    <h4>Category</h4>
                 </div>
                 <div className="shop-catagory-items">
                     <ul className="category-list">
@@ -92,9 +92,7 @@ const ShopSidebar = ({
                                 backgroundColor: selectedCategory === '' ? '#f0f0f0' : 'transparent'
                             }}
                         >
-                            <i className="fa-regular fa-chevron-left"></i>
-                            Tất cả danh mục
-                        </li>
+                            <i className="fa-regular fa-chevron-left"></i>All categories</li>
                         {categories.map((category, index) => (
                             <li
                                 key={index}
@@ -117,7 +115,7 @@ const ShopSidebar = ({
 
             <div className="single-sidebar-widget">
                 <div className="wid-title">
-                    <h4>Lọc theo giá</h4>
+                    <h4>Filter by price</h4>
                 </div>
                 <RangeBarCustom
                     setMinPrice={setMinPrice}
@@ -129,7 +127,7 @@ const ShopSidebar = ({
 
             <div className="single-sidebar-widget">
                 <div className="wid-title">
-                    <h4>Lọc theo kích thước</h4>
+                    <h4>Filter by size</h4>
                 </div>
                 <FilterSize
                     selectedSizes={selectedSizes}
@@ -139,7 +137,7 @@ const ShopSidebar = ({
 
             <div className="single-sidebar-widget">
                 <div className="wid-title">
-                    <h4>Lọc theo màu sắc</h4>
+                    <h4>Filter by color</h4>
                 </div>
                 <FilterColor
                     selectedColors={selectedColors}
@@ -160,9 +158,7 @@ const ShopSidebar = ({
                             color: 'white',
                             cursor: 'pointer'
                         }}
-                    >
-                        Xóa tất cả bộ lọc
-                    </button>
+                    >Clear all filters</button>
                 </div>
             </div>
         </div>

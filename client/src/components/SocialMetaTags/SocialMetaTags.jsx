@@ -2,8 +2,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 const SocialMetaTags = ({
-    title = "InkMe - Dịch vụ in ấn chuyên nghiệp",
-    description = "InkMe - Dịch vụ in ấn chuyên nghiệp, tùy chỉnh 3D online. In áo thun, hoodie, túi xách theo yêu cầu với chất lượng cao và giá cả phù hợp.",
+    title = "InkMe - Professional printing services",
+    description = "InkMe - Professional printing services, online 3D customization. Custom printing for t-shirts, hoodies, and bags with high quality and affordable prices.",
     image = "https://res.cloudinary.com/dz1i9npra/image/upload/v1752036274/inkme_thumbnail_fcz9ia.png",
     url = "https://inkme3d.com/",
     type = "website"

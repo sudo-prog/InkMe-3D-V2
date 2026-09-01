@@ -140,9 +140,7 @@ const RangeBarCustom = ({ setMinPrice, setMaxPrice, minPrice, maxPrice }) => {
                         margin: '5px 0',
                         transition: 'all 0.3s'
                     }}
-                >
-                    Dưới 100k
-                </li>
+                >Under 100k</li>
                 <li
                     onClick={() => handlePriceRangeSelect(100000, 300000)}
                     className="price-range-item"
