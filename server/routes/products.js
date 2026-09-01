@@ -34,7 +34,7 @@ const upload = multer({
     limits: { fileSize: 10 * 1024 * 1024 } // 10 MB
 });
 
-// Chỉ admin mới được upload images cho sản phẩm
+//Only admin can upload images for products
 router.post(`/upload`, requireAuth, checkUserStatus, requireAdmin, upload.array("images"), async (req, res) => {
 
     imagesArray = [];
@@ -201,37 +201,37 @@ router.get(`/`, async (req, res) => {
         const perPage = parseInt(req.query.perPage) || 10;
         const totalPosts = await Product.countDocuments();
         const totalPages = Math.ceil(totalPosts / perPage);
-        const sort = req.query.sort || 'menu_order'; // Mặc định sắp xếp theo menu_order
+        const sort = req.query.sort || 'menu_order'; //Default sort by menu_order
 
-        // Xác định tiêu chí sắp xếp
+        //Define sorting criteria
         let sortOption = {};
         switch (sort) {
             case 'menu_order':
-                sortOption = { _id: 1 }; // Sắp xếp mặc định theo _id
+                sortOption = { _id: 1 }; //Default sort by _id
                 break;
             case 'popularity':
-                sortOption = { quantitySold: -1 }; // Bán nhiều nhất trước
+                sortOption = { quantitySold: -1 }; //Best selling first
                 break;
             case 'rating':
-                sortOption = { rating: -1 }; // Đánh giá cao nhất trước
+                sortOption = { rating: -1 }; //Highest rated first
                 break;
             case 'date':
-                sortOption = { dateCreated: -1 }; // Mới nhất trước
+                sortOption = { dateCreated: -1 }; //Newest first
                 break;
             case 'price':
-                sortOption = { price: 1 }; // Giá thấp đến cao
+                sortOption = { price: 1 }; //Price low to high
                 break;
             case 'price-desc':
-                sortOption = { price: -1 }; // Giá cao đến thấp
+                sortOption = { price: -1 }; //Price high to low
                 break;
             case 'discount':
-                sortOption = { discount: -1 }; // Giảm giá cao nhất trước
+                sortOption = { discount: -1 }; //Highest discount first
                 break;
             case 'stock':
-                sortOption = { countInStock: -1 }; // Tồn kho nhiều nhất trước
+                sortOption = { countInStock: -1 }; //Highest stock first
                 break;
             default:
-                sortOption = { _id: 1 }; // Mặc định
+                sortOption = { _id: 1 }; //Default
         }
 
         if (page > totalPages) {
@@ -310,7 +310,7 @@ router.get(`/featured`, async (req, res) => {
 
 
 
-// Chỉ admin mới được tạo sản phẩm mới
+//Only admins can create new products
 router.post(`/create`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const category = await Category.findById(req.body.category);
@@ -328,7 +328,7 @@ router.post(`/create`, requireAuth, checkUserStatus, requireAdmin, async (req, r
     })
     images_Arr();
 
-    // Xử lý productClassify từ JSON string
+    //Handle productClassify from JSON string
     let productClassify = [];
     if (req.body.productClassify) {
         try {
@@ -339,7 +339,7 @@ router.post(`/create`, requireAuth, checkUserStatus, requireAdmin, async (req, r
         }
     }
 
-    // Xử lý productSize và productColor từ string hoặc array
+    //Handle productSize and productColor from string or array
     let productSize = [];
     if (req.body.productSize) {
         productSize = Array.isArray(req.body.productSize)
@@ -399,7 +399,7 @@ router.get(`/recentlyProducts`, async (req, res) => {
     return res.status(200).json(productList);
 });
 
-// User đã login có thể thêm sản phẩm vào recently viewed
+//Logged-in users can add products to recently viewed
 router.post(`/recentlyProducts`, requireAuth, checkUserStatus, async (req, res) => {
     try {
         let findProduct = await RecentlyProducts.findOne({ prodId: req.body.id });
@@ -446,10 +446,10 @@ router.get(`/:id`, async (req, res) => {
         const product = await Product.findById(productEditId).populate("category subCat");
 
         if (!product) {
-            return res.status(500).json({ message: "Product ID not found" });  // Dừng xử lý ngay tại đây
+            return res.status(500).json({ message: "Product ID not found" });  //Stop processing right here
         }
 
-        return res.status(200).send(product);  // Gửi phản hồi nếu tìm thấy sản phẩm
+        return res.status(200).send(product);  //Send response if product is found
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Server Error" });
@@ -457,7 +457,7 @@ router.get(`/:id`, async (req, res) => {
 });
 
 
-// Chỉ admin mới được xóa image
+//Only admins can delete images
 router.delete(`/deleteImage`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const imgUrl = req.query.img;
@@ -476,7 +476,7 @@ router.delete(`/deleteImage`, requireAuth, checkUserStatus, requireAdmin, async 
 
 });
 
-// Chỉ admin mới được xóa sản phẩm
+//Only admins can delete products
 router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const product = await Product.findById(req.params.id);
@@ -511,10 +511,10 @@ router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, re
 });
 
 
-// Chỉ admin mới được cập nhật sản phẩm
+//Only admins can update products
 router.put(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
-    // Xử lý productClassify từ JSON string
+    //Handle productClassify from JSON string
     let productClassify = [];
     if (req.body.productClassify) {
         try {
@@ -527,7 +527,7 @@ router.put(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) 
         }
     }
 
-    // Xử lý productSize và productColor từ string hoặc array
+    //Handle productSize and productColor from string or array
     let productSize = [];
     if (req.body.productSize) {
         productSize = Array.isArray(req.body.productSize)

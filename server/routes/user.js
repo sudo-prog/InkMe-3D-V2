@@ -50,7 +50,7 @@ const upload = multer({
   storage: storage,
 });
 
-// Chỉ admin hoặc user đã login mới được upload avatar
+//Only admins or logged-in users are allowed to upload an avatar
 router.post(`/upload`, requireAuth, checkUserStatus, upload.array("images"), async (req, res) => {
   imagesArray = [];
 
@@ -107,41 +107,41 @@ const validateSignupData = (data) => {
 
   // Name validation
   if (!name || !name.trim()) {
-    errors.name = "Họ và tên không được để trống";
+    errors.name = "Full name cannot be empty";
   } else if (name.trim().length < 2) {
-    errors.name = "Họ và tên phải có ít nhất 2 ký tự";
+    errors.name = "Full name must have at least 2 characters";
   } else if (name.trim().length > 50) {
-    errors.name = "Họ và tên không được vượt quá 50 ký tự";
+    errors.name = "Full name must not exceed 50 characters";
   }
 
   // Email validation
   if (!email || !email.trim()) {
-    errors.email = "Email không được để trống";
+    errors.email = "Email cannot be empty";
   } else if (!validateEmail(email)) {
-    errors.email = "Email không đúng định dạng";
+    errors.email = "Email is in an incorrect format";
   }
 
   // Phone validation
   if (!phone || !phone.trim()) {
-    errors.phone = "Số điện thoại không được để trống";
+    errors.phone = "Phone number cannot be left blank";
   } else if (!validatePhone(phone)) {
-    errors.phone = "Số điện thoại phải có 10-11 chữ số";
+    errors.phone = "Phone number must have 10-11 digits";
   }
 
   // Password validation
   if (!password) {
-    errors.password = "Mật khẩu không được để trống";
+    errors.password = "Password cannot be left blank";
   } else if (password.length < 8) {
-    errors.password = "Mật khẩu phải có ít nhất 8 ký tự";
+    errors.password = "Password must be at least 8 characters long";
   } else if (!validatePassword(password)) {
-    errors.password = "Mật khẩu phải có ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt";
+    errors.password = "Password must have at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character";
   }
 
   // Confirm password validation
   if (!confirmPassword) {
-    errors.confirmPassword = "Xác nhận mật khẩu không được để trống";
+    errors.confirmPassword = "Password confirmation cannot be left blank";
   } else if (password !== confirmPassword) {
-    errors.confirmPassword = "Xác nhận mật khẩu không khớp";
+    errors.confirmPassword = "Password confirmation does not match";
   }
 
   return {
@@ -159,7 +159,7 @@ router.post(`/signup`, async (req, res) => {
     if (!validation.isValid) {
       return res.status(400).json({
         error: true,
-        message: "Dữ liệu không hợp lệ",
+        message: "Invalid data",
         errors: validation.errors
       });
     }
@@ -169,7 +169,7 @@ router.post(`/signup`, async (req, res) => {
     if (existingUser) {
       return res.status(400).json({
         error: true,
-        message: "Email này đã được sử dụng"
+        message: "This email has already been used"
       });
     }
 
@@ -177,7 +177,7 @@ router.post(`/signup`, async (req, res) => {
     if (existingUserByPhone) {
       return res.status(400).json({
         error: true,
-        message: "Số điện thoại này đã được sử dụng, bạn có thể đăng nhập bằng số điện thoại này"
+        message: "This phone number has already been used, you can log in with this phone number"
       });
     }
 
@@ -220,7 +220,7 @@ router.post(`/signup`, async (req, res) => {
 
     res.status(200).json({
       error: false,
-      message: "Đăng ký tài khoản thành công! Vui lòng kiểm tra email để xác minh tài khoản.",
+      message: "Account registration successful! Please check your email to verify your account.",
       user: {
         id: result._id,
         name: result.name,
@@ -239,20 +239,20 @@ router.post(`/signup`, async (req, res) => {
       if (error.keyPattern && error.keyPattern.email) {
         return res.status(400).json({
           error: true,
-          message: "Email này đã được sử dụng"
+          message: "This email has already been used"
         });
       }
       if (error.keyPattern && error.keyPattern.phone) {
         return res.status(400).json({
           error: true,
-          message: "Số điện thoại này đã được sử dụng, bạn có thể đăng nhập bằng số điện thoại này"
+          message: "This phone number has already been used, you can log in with this phone number"
         });
       }
     }
 
     res.status(500).json({
       error: true,
-      message: "Có lỗi xảy ra trong quá trình đăng ký. Vui lòng thử lại sau.",
+      message: "An error occurred during registration. Please try again later.",
       notify: process.env.NODE_ENV === 'development' ? error.message : undefined,
     });
   }
@@ -275,7 +275,7 @@ router.get(`/signup/verify/:token`, async (req, res) => {
 
     await user.save();
     return res.json({
-      message: "Tài khoản đã được xác minh thành công, bạn có thể đăng nhập",
+      message: "Account verified successfully, you can now log in",
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -301,14 +301,14 @@ router.post(`/login`, async (req, res) => {
     if (!emailOrPhone || !emailOrPhone.trim()) {
       return res.status(400).json({
         error: true,
-        message: "Email hoặc số điện thoại không được để trống"
+        message: "Email or phone number cannot be empty"
       });
     }
 
     if (!password) {
       return res.status(400).json({
         error: true,
-        message: "Mật khẩu không được để trống"
+        message: "Password cannot be empty"
       });
     }
 
@@ -323,21 +323,21 @@ router.post(`/login`, async (req, res) => {
     } else {
       return res.status(400).json({
         error: true,
-        message: "Vui lòng nhập email hoặc số điện thoại hợp lệ"
+        message: "Please enter a valid email or phone number"
       });
     }
 
     if (!existingUser) {
       return res.status(400).json({
         error: true,
-        message: "Tài khoản không tồn tại"
+        message: "Account does not exist"
       });
     }
 
     if (existingUser.isVerified == false) {
       return res.status(400).json({
         error: true,
-        message: "Tài khoản chưa được xác minh. Vui lòng kiểm tra email để xác minh tài khoản.",
+        message: "Account not yet verified. Please check your email to verify your account.",
       });
     }
 
@@ -346,7 +346,7 @@ router.post(`/login`, async (req, res) => {
     if (!matchPassword) {
       return res.status(400).json({
         error: true,
-        message: "Mật khẩu không chính xác"
+        message: "Incorrect password"
       });
     }
 
@@ -367,13 +367,13 @@ router.post(`/login`, async (req, res) => {
         isVerified: existingUser.isVerified
       },
       token: token,
-      message: "Đăng nhập thành công",
+      message: "Login successful",
     });
   } catch (error) {
     console.error('Signin error:', error);
     res.status(500).json({
       error: true,
-      message: "Có lỗi xảy ra. Vui lòng thử lại sau.",
+      message: "An error occurred. Please try again later.",
       notify: process.env.NODE_ENV === 'development' ? error.message : undefined,
     });
   }
@@ -386,15 +386,15 @@ router.post(`/google-auth`, async (req, res) => {
       return res.status(400).json({ error: true, message: "Missing Google token" });
     }
 
-    const payload = await verify(token); // verify phải là hàm xác thực Google ID Token
+    const payload = await verify(token); //Verify must be a Google ID Token authentication function
     const { email, name, picture } = payload;
     let user = await User.findOne({ email });
 
-    // Nếu user đã đăng ký bằng email/password
+    //If the user has registered with email/password
     if (user && user.password) {
       return res.status(400).json({
         error: true,
-        message: "Email đã đăng ký bằng phương thức khác. Vui lòng đăng nhập bằng email & mật khẩu.",
+        message: "Email is already registered via another method. Please log in using email & password.",
       });
     }
 
@@ -411,7 +411,7 @@ router.post(`/google-auth`, async (req, res) => {
     } else {
       user.name = name;
       user.images = [picture];
-      user.isVerified = true; // ✅ Fix: Đảm bảo existing users cũng được verified
+      user.isVerified = true; //✅ Fix: Ensure existing users are also verified
       await user.save();
     }
 
@@ -486,7 +486,7 @@ router.post(`/forgot-password`, async (req, res) => {
     if (!emailOrPhone || !emailOrPhone.trim()) {
       return res.status(400).json({
         error: true,
-        message: "Email hoặc số điện thoại không được để trống"
+        message: "Email or phone number cannot be empty"
       });
     }
 
@@ -501,14 +501,14 @@ router.post(`/forgot-password`, async (req, res) => {
     } else {
       return res.status(400).json({
         error: true,
-        message: "Vui lòng nhập email hoặc số điện thoại hợp lệ"
+        message: "Please enter a valid email or phone number"
       });
     }
 
     if (!user) {
       return res.status(400).json({
         error: true,
-        message: "Không tìm thấy tài khoản với thông tin này"
+        message: "No account found with this information"
       });
     }
 
@@ -529,25 +529,25 @@ router.post(`/forgot-password`, async (req, res) => {
         console.error('Email sending failed:', emailError);
         return res.status(500).json({
           error: true,
-          message: "Không thể gửi email. Vui lòng thử lại sau.",
+          message: "Unable to send email. Please try again later.",
         });
       }
     } else {
       return res.status(400).json({
         error: true,
-        message: "Tài khoản này không có email để gửi link reset password",
+        message: "This account does not have an email to send the password reset link",
       });
     }
 
     res.status(200).json({
       error: false,
-      message: "Link đặt lại mật khẩu đã được gửi về email của bạn",
+      message: "The password reset link has been sent to your email",
     });
   } catch (error) {
     console.error('Forgot password error:', error);
     res.status(500).json({
       error: true,
-      message: "Có lỗi xảy ra. Vui lòng thử lại sau.",
+      message: "An error occurred. Please try again later.",
       notify: process.env.NODE_ENV === 'development' ? error.message : undefined,
     });
   }
@@ -561,14 +561,14 @@ router.post("/reset-password", async (req, res) => {
     if (!token) {
       return res.status(400).json({
         error: true,
-        message: "Token không hợp lệ"
+        message: "Invalid token"
       });
     }
 
     if (!password) {
       return res.status(400).json({
         error: true,
-        message: "Mật khẩu không được để trống"
+        message: "Password cannot be empty"
       });
     }
 
@@ -576,14 +576,14 @@ router.post("/reset-password", async (req, res) => {
     if (password.length < 8) {
       return res.status(400).json({
         error: true,
-        message: "Mật khẩu phải có ít nhất 8 ký tự"
+        message: "Password must be at least 8 characters long"
       });
     }
 
     if (!validatePassword(password)) {
       return res.status(400).json({
         error: true,
-        message: "Mật khẩu phải có ít nhất 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt"
+        message: "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
       });
     }
 
@@ -592,7 +592,7 @@ router.post("/reset-password", async (req, res) => {
     if (!user) {
       return res.status(400).json({
         error: true,
-        message: "Token không hợp lệ hoặc đã hết hạn"
+        message: "Token is invalid or has expired"
       });
     }
 
@@ -600,7 +600,7 @@ router.post("/reset-password", async (req, res) => {
     if (user.resetTokenExpires && user.resetTokenExpires < Date.now()) {
       return res.status(400).json({
         error: true,
-        message: "Token đã hết hạn. Vui lòng tạo yêu cầu mới."
+        message: "Token has expired. Please create a new request."
       });
     }
 
@@ -615,22 +615,22 @@ router.post("/reset-password", async (req, res) => {
 
     return res.status(200).json({
       error: false,
-      message: "Đặt lại mật khẩu thành công!",
+      message: "Password reset successfully!",
     });
   } catch (error) {
     console.error('Reset password error:', error);
     return res.status(500).json({
       error: true,
-      message: "Có lỗi xảy ra. Vui lòng thử lại sau.",
+      message: "An error occurred. Please try again later.",
       notify: process.env.NODE_ENV === 'development' ? error.message : undefined,
     });
   }
 });
 
-// Chỉ admin hoặc chính user đó mới được đổi password
+//Only the admin or the user themselves can change the password
 router.put(`/changePassword/:id`, requireAuth, checkUserStatus, async (req, res) => {
   try {
-    // Kiểm tra quyền truy cập
+    //Check access permissions
     if (!req.user.isAdmin && req.params.id !== req.auth.id) {
       return res.status(403).json({
         error: true,
@@ -682,7 +682,7 @@ router.put(`/changePassword/:id`, requireAuth, checkUserStatus, async (req, res)
   }
 });
 
-// Chỉ admin mới được xem tất cả users
+//Only admins can view all users
 router.get(`/`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
   try {
     const userList = await User.find();
@@ -697,10 +697,10 @@ router.get(`/`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => 
   }
 });
 
-// Admin hoặc chính user đó mới được xem thông tin
+//Only the Admin or the user themselves can view information
 router.get(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
   try {
-    // Kiểm tra quyền truy cập
+    //Check access permissions
     if (!req.user.isAdmin && req.params.id !== req.auth.id) {
       return res.status(403).json({
         error: true,
@@ -722,7 +722,7 @@ router.get(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
   }
 });
 
-// Chỉ admin mới được xóa user
+//Only admins can delete users
 router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
@@ -742,7 +742,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, re
   }
 });
 
-// Chỉ admin mới được xem thống kê user
+//Only admins can view user statistics
 router.get(`/get/count`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
   try {
     const userCount = await User.countDocuments();
@@ -753,10 +753,10 @@ router.get(`/get/count`, requireAuth, checkUserStatus, requireAdmin, async (req,
   }
 });
 
-// Admin hoặc chính user đó mới được cập nhật thông tin
+//Only the Admin or the user themselves can update information
 router.put(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
   try {
-    // Kiểm tra quyền truy cập
+    //Check access permissions
     if (!req.user.isAdmin && req.params.id !== req.auth.id) {
       return res.status(403).json({
         error: true,
@@ -781,12 +781,12 @@ router.put(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
       images: imagesArray.length > 0 ? imagesArray : userExist.images,
     };
 
-    // Nếu có address thì cập nhật
+    //If there is an address, update it
     if (address) {
       updateData.address = address;
     }
 
-    // Nếu có password thì hash và cập nhật
+    //If there is a password, hash and update it
     if (password) {
       updateData.password = await bcrypt.hash(password, 10);
     }
@@ -807,10 +807,10 @@ router.put(`/:id`, requireAuth, checkUserStatus, async (req, res) => {
 });
 
 // Routes for address management
-// Admin hoặc chính user đó mới được thêm address
+//Only the Admin or the user themselves can add the address
 router.post(`/:id/address`, requireAuth, checkUserStatus, async (req, res) => {
   try {
-    // Kiểm tra quyền truy cập
+    //Check access permissions
     if (!req.user.isAdmin && req.params.id !== req.auth.id) {
       return res.status(403).json({
         error: true,
@@ -846,10 +846,10 @@ router.post(`/:id/address`, requireAuth, checkUserStatus, async (req, res) => {
   }
 });
 
-// Admin hoặc chính user đó mới được cập nhật address
+//Only the Admin or the user themselves can update the address
 router.put(`/:id/address/:addressId`, requireAuth, checkUserStatus, async (req, res) => {
   try {
-    // Kiểm tra quyền truy cập
+    //Check access permissions
     if (!req.user.isAdmin && req.params.id !== req.auth.id) {
       return res.status(403).json({
         error: true,
@@ -888,10 +888,10 @@ router.put(`/:id/address/:addressId`, requireAuth, checkUserStatus, async (req, 
   }
 });
 
-// Admin hoặc chính user đó mới được xóa address
+//Only the Admin or the user themselves can delete the address
 router.delete(`/:id/address/:addressId`, requireAuth, checkUserStatus, async (req, res) => {
   try {
-    // Kiểm tra quyền truy cập
+    //Check access permissions
     if (!req.user.isAdmin && req.params.id !== req.auth.id) {
       return res.status(403).json({
         error: true,

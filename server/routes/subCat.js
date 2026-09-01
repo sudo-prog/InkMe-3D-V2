@@ -14,7 +14,7 @@ router.get(`/`, async (req, res) => {
         let subCategoryList = [];
 
         if (page > totalPages) {
-            return res.status(404).json({ message: "Không có dữ liệu" });
+            return res.status(404).json({ message: "No data available" });
         }
 
         if (req.query.page !== undefined && req.query.perPage !== undefined) {
@@ -50,7 +50,7 @@ router.get(`/:id`, async (req, res) => {
     return res.status(201).send(subCat);
 });
 
-// Chỉ admin mới được tạo sub category
+//Only admins are allowed to create sub categories
 router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     let subCat = new subCategory({
@@ -71,7 +71,7 @@ router.post('/create', requireAuth, checkUserStatus, requireAdmin, async (req, r
 
 });
 
-// Chỉ admin mới được xóa sub category
+//Only admins are allowed to delete sub categories
 router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const deletedSubCategory = await subCategory.findByIdAndDelete(req.params.id);
@@ -87,7 +87,7 @@ router.delete(`/:id`, requireAuth, checkUserStatus, requireAdmin, async (req, re
     });
 });
 
-// Chỉ admin mới được cập nhật sub category
+//Only admins are allowed to update sub categories
 router.put('/:id', requireAuth, checkUserStatus, requireAdmin, async (req, res) => {
 
     const subCat = await subCategory.findByIdAndUpdate(
