@@ -12,7 +12,7 @@ const ServicePage = () => {
     return (
         <Fragment>
             <NavbarS2 hclass={'header-section-2 style-two'} />
-            <PageTitle pageTitle={'Dịch vụ in ấn 3D'} pagesub={'Dịch vụ'} />
+            <PageTitle pageTitle={'3D printing services'} pagesub={'Services'} />
             <ServiceSection hclass={'service-section section-padding section-bg-2 fix pb-0'} />
             {/* <FunFact hclass={'counter-section fix section-padding'} /> */}
             <ServiceSectionS4 />

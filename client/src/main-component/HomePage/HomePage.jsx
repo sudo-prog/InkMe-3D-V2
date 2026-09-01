@@ -37,8 +37,8 @@ const HomePage = ({ addToCart }) => {
     return (
         <Fragment>
             <SocialMetaTags
-                title="InkMe - Dịch vụ in ấn chuyên nghiệp"
-                description="InkMe - Dịch vụ in ấn chuyên nghiệp, tùy chỉnh 3D online. In áo thun, hoodie, túi xách theo yêu cầu với chất lượng cao và giá cả phù hợp."
+                title="InkMe - Professional printing services"
+                description="InkMe - Professional printing services, online 3D customization. Custom T-shirts, hoodies, and bags with high quality and affordable prices."
                 image="/inkme_thumbnail.png"
                 url="/"
             />
