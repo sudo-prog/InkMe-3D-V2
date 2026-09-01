@@ -34,7 +34,7 @@ const Custom3D = () => {
 
         };
 
-        // Đợi iframe load xong rồi mới gửi
+        //Wait for the iframe to finish loading before sending
         const iframe = iframeRef.current;
         if (iframe) {
             iframe.addEventListener('load', sendMessage);
@@ -80,9 +80,7 @@ const Custom3D = () => {
                         borderTop: '2px solid transparent',
                         borderRadius: '50%',
                         animation: 'spin 1s linear infinite'
-                    }}></div>
-                    Đang xử lý...
-                </div>
+                    }}></div>Processing.</div>
             )}
             <iframe
                 ref={iframeRef}

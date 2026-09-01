@@ -11,7 +11,7 @@ const VideoGuidePopup = ({ isVisible, onClose, inkmeFile }) => {
         if (isVisible) {
             setMounted(true);
 
-            // Tạo shareable link từ inkmeFile.url
+            //Create shareable link from inkmeFile.url
             if (inkmeFile?.url) {
                 const baseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
                     ? CUSTOM_PAGE_DEVELOPMENT
@@ -36,10 +36,7 @@ const VideoGuidePopup = ({ isVisible, onClose, inkmeFile }) => {
 
 
                 <div className="popup-header">
-                    <h6 className="header-title">
-                        {shareableLink ? '🎨 Xem trước Model 3D' : '🎥 Hướng dẫn sử dụng file 3D'}
-                    </h6>
-                </div>
+                    <h6 className="header-title">{shareableLink? '🎨 Preview 3D Model': '🎥 3D file user guide'}             </div>
 
                 {shareableLink ? (
                     <div className="model-preview-container">
@@ -52,18 +49,14 @@ const VideoGuidePopup = ({ isVisible, onClose, inkmeFile }) => {
                         />
                         <div className="model-preview-overlay">
                             <div className="preview-info">
-                                <p className="preview-description">
-                                    ✨ Thiết kế 3D của bạn
-                                </p>
+                                <p className="preview-description">✨ Your 3D design</p>
                                 <div className="preview-buttons">
                                     <button
                                         className="download-file-button"
                                         onClick={() => window.open(inkmeFile.url, '_blank')}
-                                        title="Tải file .sav"
+                                        title="Download .sav file"
                                     >
-                                        <i className="fas fa-download"></i>
-                                        Tải file
-                                    </button>
+                                        <i className="fas fa-download"></i>Download file</button>
                                     <button
                                         className="open-full-button"
                                         onClick={() => window.open(shareableLink, '_blank')}
@@ -94,13 +87,8 @@ const VideoGuidePopup = ({ isVisible, onClose, inkmeFile }) => {
                         <div className="video-fallback">
                             <i className="fas fa-play-circle fallback-icon"></i>
                             <div className="fallback-content">
-                                <strong className="fallback-title">Hướng dẫn sử dụng:</strong><br />
-                                <div className="fallback-steps">
-                                    1. Nhấn nút "Tải Model 3D"<br />
-                                    2. File .sav sẽ được tải về<br />
-                                    3. Mở file bằng phần mềm 3D<br />
-                                    4. In hoặc chỉnh sửa theo ý muốn
-                                </div>
+                                <strong className="fallback-title">User guide:</strong><br />
+                                <div className="fallback-steps">1. Press the "Download 3D Model" buttonodel"<br />2. The .sav file will be downloaded<br />3. Open the file with 3D software<br />4. Print or edit as desired</div>
                             </div>
                         </div>
                     </div>

@@ -56,7 +56,7 @@ const CartPage = () => {
       context.setAlterBox({
         open: true,
         error: false,
-        message: "Xóa sản phẩm thành công"
+        message: "Product deleted successfully"
       });
       updateCartData();
     }).finally(() => {
@@ -113,7 +113,7 @@ const CartPage = () => {
       if (!user?.userId) return;
 
       // Create new classification name from size and color
-      const newName = `${options.size || ''} - ${options.color || ''}`.trim().replace(/^-\s*|-\s*$/g, '') || 'Không xác định';
+      const newName = `${options.size || ''} - ${options.color || ''}`.trim().replace(/^-\s*|-\s*$/g, '') || 'Undefined';
 
       const cartFields = {
         productTitle: item.productTitle,
@@ -142,14 +142,14 @@ const CartPage = () => {
       context.setAlterBox({
         open: true,
         error: false,
-        message: "Cập nhật thành công"
+        message: "Updated successfully"
       });
     } catch (error) {
       console.error('Error updating color/size:', error);
       context.setAlterBox({
         open: true,
         error: true,
-        message: "Có lỗi xảy ra khi cập nhật"
+        message: "An error occurred while updating"
       });
     } finally {
       setLoading(prev => ({ ...prev, [item._id]: false }));
@@ -159,7 +159,7 @@ const CartPage = () => {
   return (
     <Fragment>
       <NavbarS2 hclass={'header-section-2 style-two'} />
-      <PageTitle pageTitle={'ImkMe - 3D Printing'} pagesub={'Giỏ hàng'} />
+      <PageTitle pageTitle={'ImkMe - 3D Printing'} pagesub={'Shopping Cart'} />
 
       <section className="cart-section section-padding section-bg-2">
         <div className="container cart-page-container">
@@ -171,12 +171,12 @@ const CartPage = () => {
                     <table>
                       <thead>
                         <tr>
-                          <th>Sản phẩm</th>
-                          <th>Màu sắc</th>
-                          <th>Kích thước</th>
+                          <th>Product</th>
+                          <th>Color</th>
+                          <th>Size</th>
                           <th>Giá</th>
-                          <th>Số lượng</th>
-                          <th>Tổng cộng</th>
+                          <th>Quantity</th>
+                          <th>Total</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -267,10 +267,10 @@ const CartPage = () => {
                             <td colSpan="7" className="text-center py-4">
                               <div className="empty-cart">
                                 <i className="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
-                                <h5>Giỏ hàng trống</h5>
-                                <p className="text-muted">Hãy thêm sản phẩm vào giỏ hàng để bắt đầu mua sắm</p>
+                                <h5>Cart is empty</h5>
+                                <p className="text-muted">Please add products to the cart to start shopping</p>
                                 <Link to="/shop" className="theme-btn mt-3">
-                                  <span>Tiếp tục mua sắm</span>
+                                  <span>Continue shopping</span>
                                 </Link>
                               </div>
                             </td>
@@ -319,7 +319,7 @@ const CartPage = () => {
                             {!item.inkmeFile && (
                               <>
                                 <div className="cart-item-detail-group">
-                                  <span className="cart-item-detail-label">Màu sắc</span>
+                                  <span className="cart-item-detail-label">Color</span>
                                   <ColorSizeSelector
                                     item={item}
                                     onUpdate={updateColorSize}
@@ -328,7 +328,7 @@ const CartPage = () => {
                                   />
                                 </div>
                                 <div className="cart-item-detail-group">
-                                  <span className="cart-item-detail-label">Kích thước</span>
+                                  <span className="cart-item-detail-label">Size</span>
                                   <ColorSizeSelector
                                     item={item}
                                     onUpdate={updateColorSize}
@@ -342,7 +342,7 @@ const CartPage = () => {
 
                           <div className="cart-item-actions">
                             <div className="cart-item-quantity-wrapper">
-                              <span className="cart-item-detail-label">Số lượng</span>
+                              <span className="cart-item-detail-label">Quantity</span>
                               <QuantityBox
                                 item={item}
                                 value={selectedQuantity[item._id]}
@@ -351,7 +351,7 @@ const CartPage = () => {
                               />
                             </div>
                             <div className="cart-item-total">
-                              <span className="cart-item-total-label">Tổng cộng</span>
+                              <span className="cart-item-total-label">Total</span>
                               <span className="cart-item-total-price">{formatCurrency(item.subTotal)}</span>
                             </div>
                           </div>
@@ -360,10 +360,10 @@ const CartPage = () => {
                     ) : (
                       <div className="empty-cart">
                         <i className="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
-                        <h5>Giỏ hàng trống</h5>
-                        <p className="text-muted">Hãy thêm sản phẩm vào giỏ hàng để bắt đầu mua sắm</p>
+                        <h5>Empty cart</h5>
+                        <p className="text-muted">Please add products to the cart to start shopping</p>
                         <Link to="/shop" className="theme-btn mt-3">
-                          <span>Tiếp tục mua sắm</span>
+                          <span>Continue shopping</span>
                         </Link>
                       </div>
                     )}
@@ -371,9 +371,9 @@ const CartPage = () => {
 
                   <div className="cart-wrapper-footer">
                     <form>
-                      <input type="text" name="promo-code" id="promoCode" placeholder="Mã giảm giá" />
+                      <input type="text" name="promo-code" id="promoCode" placeholder="Discount code" />
                       <button type="submit" className="theme-btn">
-                        <span>Áp dụng</span>
+                        <span>Apply</span>
                       </button>
                     </form>
 
@@ -386,18 +386,18 @@ const CartPage = () => {
               <div className="col-xl-6">
                 <div className="cart-pragh-box">
                   <div className="cart-graph">
-                    <h4>Tổng giỏ hàng</h4>
+                    <h4>Cart total</h4>
                     <ul>
                       <li>
-                        <span>Tạm tính</span>
+                        <span>Subtotal</span>
                         <span>{formatCurrency(totalAmount)}</span>
                       </li>
                       <li>
-                        <span>Phí vận chuyển</span>
-                        <span>Miễn phí</span>
+                        <span>Shipping fee</span>
+                        <span>Free</span>
                       </li>
                       <li>
-                        <span>Tổng cộng</span>
+                        <span>Total</span>
                         <span>{formatCurrency(totalAmount)}</span>
                       </li>
                     </ul>
