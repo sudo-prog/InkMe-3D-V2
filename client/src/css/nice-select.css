@@ -83,7 +83,7 @@
       width: 4px; }
     .nice-select.small .option {
       line-height: 34px;
-      min-height: 34px; }
+      min-height: 44px; }
   .nice-select .list {
     background-color: #150145;
     border-radius: 5px;
@@ -117,7 +117,7 @@
     font-weight: 400;
     line-height: 40px;
     list-style: none;
-    min-height: 40px;
+    min-height: 44px;
     outline: none;
     z-index: 9999999;
     padding: 0px 10px;

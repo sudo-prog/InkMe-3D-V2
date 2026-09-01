@@ -792,9 +792,9 @@ figcaption {
   justify-content: center;
   align-items: center;
   width: 36px;
-  min-width: 36px;
+  min-width: 44px;
   height: 36px;
-  min-height: 36px;
+  min-height: 44px;
   text-decoration: none;
   transition: background-color .3s, color .3s;
   display: flex;
@@ -3099,7 +3099,7 @@ figcaption {
   border: 0 solid #b4b4b4;
   border-radius: 50px;
   width: 100px;
-  min-width: 10px;
+  min-width: 44px;
   height: 30px;
   margin-top: 0;
   margin-bottom: 10px;
@@ -5272,9 +5272,9 @@ figcaption {
   .social-icon-square {
     border-radius: 6px;
     width: 30px;
-    min-width: 30px;
+    min-width: 44px;
     height: 30px;
-    min-height: 30px;
+    min-height: 44px;
     font-size: 14px;
   }
 

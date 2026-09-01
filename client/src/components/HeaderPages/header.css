@@ -530,13 +530,13 @@
     /* User profile more compact */
     .header-main-wrapper .user-profile-toggle {
         padding: 4px 6px;
-        min-height: 40px;
+        min-height: 44px;
     }
 
     .header-main-wrapper .login-button {
         padding: 6px 8px;
         font-size: 11px;
-        min-height: 40px;
+        min-height: 44px;
     }
 
     /* Search button more compact */
