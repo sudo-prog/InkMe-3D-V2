@@ -29,7 +29,7 @@ const Hero = () => {
         e.preventDefault();
 
         // Google Analytics tracking - CTA Click
-        trackCTAClick('Tự tay thiết kế', 'Hero Section');
+        trackCTAClick('Design it yourself', 'Hero Section');
 
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('user');
@@ -38,7 +38,7 @@ const Hero = () => {
             setAlterBox({
                 open: true,
                 error: true,
-                message: "Bạn cần đăng nhập để sử dụng tính năng thiết kế 3D"
+                message: "You need to log in to use the 3D design feature"
             });
 
             setTimeout(() => {
@@ -79,23 +79,14 @@ const Hero = () => {
                     <div className="col-lg-6">
                         <div className="hero-content">
                             <h6 className="wow fadeInUp">Mô hình 3D</h6>
-                            <h1 className="wow fadeInUp" data-wow-delay=".3s">
-                                Thiết kế,
-                                <span>Theo phong cách của bạn! <img src={Shape6} alt="img" /></span>..
+                            <h1 className="wow fadeInUp" data-wow-delay=".3s">Design,<span>In your style!<img src={Shape6} alt="img" /></span>..
                             </h1>
-                            <p className="wow fadeInUp" data-wow-delay=".5s">
-                                Chúng tôi cung cấp dịch vụ in ấn với chất lượng cao. <br />
-                                Với đội ngũ nhân viên có kinh nghiệm và trang thiết bị hiện đại, chúng tôi đảm bảo sản phẩm đạt tiêu chuẩn cao nhất.
-                            </p>
+                            <p className="wow fadeInUp" data-wow-delay=".5s">We provide high-quality printing services.<br />With an experienced staff and modern equipment, we ensure the product meets the highest standards.</p>
                             <ul className="list wow fadeInUp" data-wow-delay=".7s">
                                 <li>
-                                    <i className="fa-sharp fa-solid fa-check"></i>
-                                    Chất lượng cao
-                                </li>
+                                    <i className="fa-sharp fa-solid fa-check"></i>High quality</li>
                                 <li>
-                                    <i className="fa-sharp fa-solid fa-check"></i>
-                                    Giá cả hợp lý
-                                </li>
+                                    <i className="fa-sharp fa-solid fa-check"></i>Reasonable price</li>
                             </ul>
                             <button onClick={handleCustom3D} className="theme-btn wow fadeInUp" data-wow-delay=".9s">Tự tay thiết kế</button>
                             {showPopup && (
