@@ -166,16 +166,16 @@ const ShopProduct = ({ products, addToCartProduct, searchTerm, setSearchTerm,
                     </div>
                     <div className="col-xl-9 col-lg-8 order-1 order-md-2">
                         <div className="woocommerce-notices-wrapper">
-                            <p>Hiển thị <span>{currentProducts.length}</span> trên {totalFilteredResults} kết quả</p>
+                            <p>Display<span>{currentProducts.length}</span> trên {totalFilteredResults} kết quả</p>
                             <div className="form-clt">
                                 <div className="nice-select" style={{ marginRight: '15px' }}>
                                     <select value={sortOption} onChange={handleSortChange} className="form-select">
-                                        <option value="1">Sắp xếp mặc định</option>
-                                        <option value="2">Giá: Thấp đến Cao</option>
-                                        <option value="3">Giá: Cao đến Thấp</option>
-                                        <option value="4">Tên: A đến Z</option>
-                                        <option value="5">Tên: Z đến A</option>
-                                        <option value="6">Mới nhất</option>
+                                        <option value="1">Default sorting</option>
+                                        <option value="2">Price: Low to High</option>
+                                        <option value="3">Price: High to Low</option>
+                                        <option value="4">Name: A to Z</option>
+                                        <option value="5">Name: Z to A</option>
+                                        <option value="6">Latest</option>
                                     </select>
                                 </div>
                                 <div className="icon">

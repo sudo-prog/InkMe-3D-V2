@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 const FilterColor = ({ selectedColors, setSelectedColors }) => {
     const colors = [
-        { value: 'red', label: 'Đỏ', hex: '#FF0000' },
-        { value: 'blue', label: 'Xanh dương', hex: '#0000FF' },
+        { value: 'red', label: 'Red', hex: '#FF0000' },
+        { value: 'blue', label: 'Blue', hex: '#0000FF' },
         { value: 'green', label: 'Xanh lá', hex: '#00FF00' },
         { value: 'yellow', label: 'Vàng', hex: '#FFFF00' },
-        { value: 'black', label: 'Đen', hex: '#000000' },
-        { value: 'white', label: 'Trắng', hex: '#FFFFFF' },
-        { value: 'pink', label: 'Hồng', hex: '#FFC0CB' },
+        { value: 'black', label: 'Black', hex: '#000000' },
+        { value: 'white', label: 'White', hex: '#FFFFFF' },
+        { value: 'pink', label: 'Pink', hex: '#FFC0CB' },
         { value: 'purple', label: 'Tím', hex: '#800080' },
         { value: 'orange', label: 'Cam', hex: '#FFA500' },
         { value: 'brown', label: 'Nâu', hex: '#8B4513' },
