@@ -182,35 +182,35 @@ const Header = (props) => {
                                                         <Link onClick={ClickHandler} to="/team" className="border-none">
                                                             Home
                                                         </Link>
-                                                        <ul className="submenu">
-                                                            <li><Link onClick={ClickHandler} to="/home">Home 01</Link></li>
-                                                            <li><Link onClick={ClickHandler} to="/home-2">Home 02</Link></li>
-                                                            <li><Link onClick={ClickHandler} to="/home-3">Home 03</Link></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <Link onClick={ClickHandler} to="/about">Về chúng tôi</Link>
+                                             <li>
+ <Link onClick={ClickHandler} to="">
+ Services
+ </Link>
+ <ul className="">
+ <li><Link onClick={ClickHandler} to="">Services</Link></li>
+ <li><Link onClick={ClickHandler} to="">Service details</Link></li>
+ </ul>
+ </li>r} to="/about">Về chúng tôi</Link>
                                                     </li>
                                                     <li>
                                                         <Link onClick={ClickHandler} to="/service-details/Sticker-printing">Dịch vụ</Link>
                                                     </li>
-                                                    {/* <li>
-                                                        <Link onClick={ClickHandler} to="#">
-                                                            Dịch vụ
-                                                        </Link>
-                                                        <ul className="submenu">
-                                                            <li><Link onClick={ClickHandler} to="/service">Dịch vụ</Link></li>
-                                                            <li><Link onClick={ClickHandler} to="/service-details/Sticker-printing">Chi tiết dịch vụ</Link></li>
-                                                        </ul>
-                                                    </li> */}
-                                                    <li className="has-dropdown">
-                                                        <Link onClick={ClickHandler} to="#">
-                                                            Dự án
-                                                        </Link>
-                                                        {/* <ul className="submenu">
-                                                            <li><Link onClick={ClickHandler} to="/project">Dự án</Link></li>
-                                                            <li><Link onClick={ClickHandler} to="/project-details/3d-Genareted-Cate">Chi tiết dự án</Link></li>
-                                                            <li><Link onClick={ClickHandler} to="/404">404 Page</Link></li>
+        <ul className="">
+ <li><Link onClick={ClickHandler} to="">Projects</Link></li>
+ <li><Link onClick={ClickHandler} to="">Project details</Link></li>
+ <li><Link onClick={ClickHandler} to="">404 Page</Link></li>
+ </ul>andler} to="/service">Dịch vụ</Link></li>
+                                                            <li><Link onCli<li>
+ <Link onClick={ClickHandler} to="">
+ Shop
+ </Link>
+ <ul className="">
+ <li><Link onClick={ClickHandler} to="">Shop</Link></li>
+ <li><Link onClick={ClickHandler} to="">Shop details</Link></li>
+ <li><Link onClick={ClickHandler} to="">Shopping cart</Link></li>
+ <li><Link onClick={ClickHandler} to="">Checkout</Link></li>
+ </ul>
+ </li>                             <li><Link onClick={ClickHandler} to="/404">404 Page</Link></li>
                                                         </ul> */}
                                                     </li>
                                                     {/* <li>
@@ -250,7 +250,7 @@ const Header = (props) => {
                                                         to={`/shop-cart/${user?.userId}`}
                                                     >
                                                         <i className="fas fa-shopping-cart cart-icon"></i>
-                                                        <span className="cart-text">Giỏ hàng</span>
+                                                        <span className="cart-text">Shopping cart</span>
                                                         <span className='cart-count'>{totalQuantity}</span>
                                                     </Link>
                                                 </h5>
@@ -313,17 +313,13 @@ const Header = (props) => {
                                                                         onClick={() => navigate(`/user/orders/${userId}`)}
                                                                         className="menu-item"
                                                                     >
-                                                                        <i className="fas fa-shopping-bag menu-icon"></i>
-                                                                        Đơn hàng của tôi
-                                                                    </div>
+                                                                        <i className="fas fa-shopping-bag menu-icon"></i>My orders</div>
 
                                                                     <div
                                                                         onClick={() => navigate("/user/address")}
                                                                         className="menu-item"
                                                                     >
-                                                                        <i className="fas fa-map-marker-alt menu-icon"></i>
-                                                                        Địa chỉ
-                                                                    </div>
+                                                                        <i className="fas fa-map-marker-alt menu-icon"></i>Address</div>
 
                                                                     <hr className="menu-separator" />
 
@@ -331,9 +327,7 @@ const Header = (props) => {
                                                                         onClick={handleLogout}
                                                                         className="menu-item logout"
                                                                     >
-                                                                        <i className="fas fa-sign-out-alt menu-icon"></i>
-                                                                        Đăng xuất
-                                                                    </div>
+                                                                        <i className="fas fa-sign-out-alt menu-icon"></i>Log out</div>
                                                                 </div>
                                                             </div>
                                                         )}
@@ -343,9 +337,7 @@ const Header = (props) => {
                                                         onClick={() => navigate("/login")}
                                                         className="login-button"
                                                     >
-                                                        <i className="fas fa-user login-icon"></i>
-                                                        Đăng nhập
-                                                    </div>
+                                                        <i className="fas fa-user login-icon"></i>Log in</div>
                                                 )}
                                             </div>
                                             <div className="header__hamburger d-xl-none my-auto">
