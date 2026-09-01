@@ -1,16 +1,15 @@
 # InkMe-3D 👕
 
-InkMe-3D là ứng dụng web cho phép người dùng **thiết kế và tùy chỉnh áo
-thun 3D trực tiếp trên trình duyệt** với trải nghiệm tương tác thời gian
-thực.
+InkMe-3D is a web application that allows users to **design and customize
+3D t-shirts directly in the browser** with a real-time interactive
+experience.
 
-Ứng dụng sử dụng **WebGL thông qua Three.js** để hiển thị mô hình 3D và
-cho phép người dùng thay đổi màu sắc, thêm hình ảnh hoặc họa tiết lên
-sản phẩm, đồng thời quan sát thiết kế từ nhiều góc nhìn khác nhau trước
-khi đặt hàng.
+The application uses **WebGL through Three.js** to render 3D models and
+allows users to change colors, upload images, or add designs to products,
+while viewing the design from multiple angles before ordering.
 
-Dự án tập trung vào việc xây dựng **trải nghiệm người dùng trực quan,
-hiệu năng cao và tương tác mượt mà trên nền tảng web**.
+The project focuses on building a **visual, high-performance, and smooth
+interactive experience on the web platform**.
 
 ------------------------------------------------------------------------
 
@@ -25,29 +24,29 @@ Preview:
 
 ------------------------------------------------------------------------
 
-# Tính năng chính
+# Key Features
 
-### Tùy chỉnh sản phẩm 3D
+### 3D Product Customization
 
--   Thay đổi màu sắc áo trực tiếp trên mô hình
--   Tải lên hình ảnh để in lên áo
--   Hiển thị kết quả theo thời gian thực
+-   Change shirt colors directly on the 3D model
+-   Upload images to print on the shirt
+-   Real-time result preview
 
-### Trình xem mô hình 3D tương tác
+### Interactive 3D Model Viewer
 
--   Xoay, phóng to và quan sát sản phẩm từ nhiều góc nhìn
--   Hệ thống ánh sáng và camera động
--   Tương tác mượt mà trên trình duyệt
+-   Rotate, zoom, and inspect products from multiple angles
+-   Dynamic lighting and camera system
+-   Smooth interaction on the browser
 
-### Tối ưu hiệu năng
+### Performance Optimization
 
--   Tối ưu mô hình 3D từ Blender
--   Giảm tải tài nguyên để đảm bảo tốc độ render
--   Duy trì trải nghiệm mượt khi thao tác với mô hình
+-   3D model optimization from Blender
+-   Resource reduction to ensure render speed
+-   Maintain smooth experience when interacting with models
 
 ------------------------------------------------------------------------
 
-# Công nghệ sử dụng
+# Technologies
 
 ## Frontend
 
@@ -56,13 +55,13 @@ Preview:
 -   React Three Fiber
 -   Tailwind CSS
 
-## Công nghệ 3D
+## 3D Technology
 
 -   WebGL
 -   Three.js
 -   Blender
 
-## Công cụ phát triển
+## Development Tools
 
 -   Vite
 -   Git / GitHub
@@ -70,75 +69,75 @@ Preview:
 
 ------------------------------------------------------------------------
 
-# Kiến trúc dự án
+# Project Structure
 
     src
      ├── components        # UI components
-     ├── canvas            # 3D scene và model rendering
-     ├── pages             # Các trang của ứng dụng
-     ├── assets            # Hình ảnh và mô hình 3D
+     ├── canvas            # 3D scene and model rendering
+     ├── pages             # Application pages
+     ├── assets            # Images and 3D models
      ├── utils             # Helper functions
      └── App.jsx
 
 ------------------------------------------------------------------------
 
-# Quy trình hiển thị 3D
+# 3D Rendering Pipeline
 
-1.  Người dùng tải lên hình ảnh hoặc thay đổi màu sắc\
-2.  Texture được xử lý và áp dụng lên mô hình\
-3.  Three.js render lại scene theo thời gian thực\
-4.  Người dùng có thể tương tác với model thông qua camera controls
+1.  User uploads an image or changes the color\
+2.  Texture is processed and applied to the model\
+3.  Three.js re-renders the scene in real-time\
+4.  User can interact with the model via camera controls
 
 ------------------------------------------------------------------------
 
-# Cài đặt và chạy dự án
+# Installation & Setup
 
 ## 1. Clone repository
 
     git clone https://github.com/InkMe-3D/InkMe-3D.git
 
-## 2. Di chuyển vào thư mục dự án
+## 2. Navigate to project directory
 
     cd InkMe-3D
 
-## 3. Cài đặt dependencies
+## 3. Install dependencies
 
     npm install
 
-## 4. Chạy ứng dụng
+## 4. Run the application
 
     npm run dev
 
-Ứng dụng sẽ chạy tại:
+The application will run at:
 
     http://localhost:5173
 
 ------------------------------------------------------------------------
 
-# Mục tiêu của dự án
+# Project Goals
 
-Dự án được xây dựng nhằm:
+This project was built to:
 
--   Khám phá khả năng của **3D trên nền tảng web**
--   Phát triển trải nghiệm **tùy chỉnh sản phẩm trực quan**
--   Nghiên cứu cách **tối ưu hiệu năng WebGL trong ứng dụng React**
--   Kết hợp **UI hiện đại với đồ họa 3D tương tác**
-
-------------------------------------------------------------------------
-
-# Hướng phát triển
-
-Các tính năng có thể phát triển thêm trong tương lai:
-
--   Lưu thiết kế của người dùng
--   Tích hợp hệ thống đặt hàng
--   Thêm nhiều loại sản phẩm (hoodie, mũ, túi)
--   Tối ưu thêm hiệu năng render cho mobile
--   Thêm hệ thống quản lý sản phẩm
+-   Explore the capabilities of **3D on the web platform**
+-   Develop **intuitive product customization experiences**
+-   Research **WebGL performance optimization in React apps**
+-   Combine **modern UI with interactive 3D graphics**
 
 ------------------------------------------------------------------------
 
-# Tác giả
+# Future Development
+
+Features that may be developed in the future:
+
+-   Save user designs
+-   Integrate an ordering system
+-   Add more product types (hoodies, hats, bags)
+-   Further optimize mobile render performance
+-   Add a product management system
+
+------------------------------------------------------------------------
+
+# Author
 
 **Nguyễn Tiến Đạt**
 
